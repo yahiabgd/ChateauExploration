@@ -1,0 +1,72 @@
+# depslib dependency file v1.0
+1701462316 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\adventuregame.cpp
+	"AdventureGame.h"
+
+1701462376 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\adventuregame.h
+
+1701370491 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\adventurier.cpp
+	"Adventurier.h"
+
+1701428680 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\adventurier.h
+
+1701462524 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\armure.cpp
+	"Armure.h"
+
+1701462524 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\armure.h
+
+1701447734 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\castlemap.cpp
+	"CastleMap.h"
+
+1701447734 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\castlemap.h
+
+1701447750 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\cell.cpp
+	"cell.h"
+
+1701447749 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\cell.h
+
+1701462486 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\epee.cpp
+	"Epee.h"
+
+1701462485 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\epee.h
+
+1702675808 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\main.cpp
+	<iostream>
+	"Position.h"
+
+1702674545 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstre.cpp
+	"Monstre.h"
+
+1702674541 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstre.h
+	"Personnage.h"
+	"Aventurier.h"
+
+1702673803 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\personnage.cpp
+	"Personnage.h"
+
+1702673738 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\personnage.h
+	"Position.h"
+
+1702675615 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\position.h
+	<cmath>
+
+1702675541 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\position.cpp
+	"Position.h"
+
+1702677857 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstrevoyant.cpp
+	"MonstreVoyant.h"
+
+1702664202 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstrevoyant.h
+	"Monstre.h"
+
+1702673572 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstreaveugle.cpp
+	"MonstreAveugle.h"
+
+1702673549 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstreaveugle.h
+	"Monstre.h"
+
+1702677876 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\aventurier.h
+	"Personnage.h"
+
+1702674362 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\aventurier.cpp
+	"Aventurier.h"
+

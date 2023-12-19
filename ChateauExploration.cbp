@@ -34,8 +34,28 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Adventurier.cpp" />
-		<Unit filename="Adventurier.h" />
+		<Unit filename="AdventureGame.cpp" />
+		<Unit filename="AdventureGame.h" />
+		<Unit filename="Armure.cpp" />
+		<Unit filename="Armure.h" />
+		<Unit filename="Aventurier.cpp" />
+		<Unit filename="Aventurier.h" />
+		<Unit filename="CastleMap.cpp" />
+		<Unit filename="CastleMap.h" />
+		<Unit filename="Epee.cpp" />
+		<Unit filename="Epee.h" />
+		<Unit filename="Monstre.cpp" />
+		<Unit filename="Monstre.h" />
+		<Unit filename="MonstreAveugle.cpp" />
+		<Unit filename="MonstreAveugle.h" />
+		<Unit filename="MonstreVoyant.cpp" />
+		<Unit filename="MonstreVoyant.h" />
+		<Unit filename="Personnage.cpp" />
+		<Unit filename="Personnage.h" />
+		<Unit filename="Position.cpp" />
+		<Unit filename="Position.h" />
+		<Unit filename="cell.cpp" />
+		<Unit filename="cell.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

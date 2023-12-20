@@ -1,11 +1,12 @@
 #include "Armure.h"
 
-Armure::Armure()
-{
-    //ctor
-}
+Armure::Armure(int pointSolidite) : Equipement{pointSolidite}
+{}
 
-Armure::~Armure()
+void Armure::reduireSolidite(int force)
 {
-    //dtor
+    int nb = ((3/4) * force);
+    d_pointSolidite -= nb;
+    if (d_pointSolidite < 0)
+            d_pointSolidite = 0;
 }

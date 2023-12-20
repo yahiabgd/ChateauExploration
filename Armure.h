@@ -1,16 +1,14 @@
 #ifndef ARMURE_H
 #define ARMURE_H
+#include "Equipement.h"
 
 
-class Armure
+class Armure : public Equipement
 {
     public:
-        Armure();
-        virtual ~Armure();
+        Armure(int pointSolidite);
+        void reduireSolidite(int force) override;
 
-    protected:
-
-    private:
 };
 
 #endif // ARMURE_H

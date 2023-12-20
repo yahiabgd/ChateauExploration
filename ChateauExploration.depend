@@ -70,3 +70,84 @@
 1702674362 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\aventurier.cpp
 	"Aventurier.h"
 
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\main.cpp
+	<iostream>
+	"Position.h"
+
+1703094537 c:\users\oussa\onedrive\bureau\chateauexploration\position.h
+	<cmath>
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\adventuregame.cpp
+	"AdventureGame.h"
+
+1703094537 c:\users\oussa\onedrive\bureau\chateauexploration\adventuregame.h
+
+1703098482 source:c:\users\oussa\onedrive\bureau\chateauexploration\armure.cpp
+	"Armure.h"
+
+1703098471 c:\users\oussa\onedrive\bureau\chateauexploration\armure.h
+	"Equipement.h"
+
+1703101886 source:c:\users\oussa\onedrive\bureau\chateauexploration\aventurier.cpp
+	"Aventurier.h"
+
+1703102158 c:\users\oussa\onedrive\bureau\chateauexploration\aventurier.h
+	"Personnage.h"
+	"Bourse.h"
+	"Epee.h"
+	"Armure.h"
+
+1703101461 c:\users\oussa\onedrive\bureau\chateauexploration\personnage.h
+	"Position.h"
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\castlemap.cpp
+	"CastleMap.h"
+
+1703094537 c:\users\oussa\onedrive\bureau\chateauexploration\castlemap.h
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\cell.cpp
+	"cell.h"
+
+1703094537 c:\users\oussa\onedrive\bureau\chateauexploration\cell.h
+
+1703098430 source:c:\users\oussa\onedrive\bureau\chateauexploration\epee.cpp
+	"Epee.h"
+
+1703099999 c:\users\oussa\onedrive\bureau\chateauexploration\epee.h
+	"Equipement.h"
+
+1703099399 source:c:\users\oussa\onedrive\bureau\chateauexploration\equipement.cpp
+	"Equipement.h"
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\monstre.cpp
+	"Monstre.h"
+
+1703101150 c:\users\oussa\onedrive\bureau\chateauexploration\monstre.h
+	"Personnage.h"
+	"Aventurier.h"
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\monstreaveugle.cpp
+	"MonstreAveugle.h"
+
+1703095377 c:\users\oussa\onedrive\bureau\chateauexploration\monstreaveugle.h
+	"Monstre.h"
+
+1703101330 source:c:\users\oussa\onedrive\bureau\chateauexploration\personnage.cpp
+	"Personnage.h"
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\position.cpp
+	"Position.h"
+
+1703102035 c:\users\oussa\onedrive\bureau\chateauexploration\equipement.h
+
+1703099886 source:c:\users\oussa\onedrive\bureau\chateauexploration\bourse.cpp
+	"Bourse.h"
+
+1703099887 c:\users\oussa\onedrive\bureau\chateauexploration\bourse.h
+
+1703100854 source:c:\users\oussa\onedrive\bureau\chateauexploration\monstrevoyant.cpp
+	"MonstreVoyant.h"
+
+1703095430 c:\users\oussa\onedrive\bureau\chateauexploration\monstrevoyant.h
+	"Monstre.h"
+

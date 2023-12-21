@@ -21,7 +21,7 @@ void Terrain::miseajourcellule(int x , int y , const Cellule::TypeCellule type)
 {
     d_terrain[x][y].changecontenu(type);
 }
-void Terrain::afficher()
+void Terrain::afficher() const
 {
     for(int i =0;i<d_lignes;i++)
     {
@@ -29,4 +29,16 @@ void Terrain::afficher()
             cout << static_cast<char>(cellule(i,j));
         cout << endl;
     }
+}
+void Terrain::changenbcolonnes(int colonnes)
+{
+     for (auto& row : d_terrain) {
+        row.resize(colonnes, Cellule::TypeCellule::VIDE);
+    }
+     d_colonnes = colonnes;
+}
+void Terrain::changenblignes(int lignes)
+{
+     d_terrain.resize(lignes, std::vector<Cellule>(d_colonnes, Cellule::TypeCellule::VIDE));
+      d_lignes = lignes;
 }

@@ -12,7 +12,9 @@ class Terrain
         int lignes() const;
         Cellule::TypeCellule cellule(int x,int y)const;
         void miseajourcellule(int x , int y , const Cellule::TypeCellule type);
-        void afficher();
+        void changenbcolonnes(int colonnes);
+        void changenblignes(int lignes);
+        void afficher() const;
     private:
         vector<vector<Cellule>> d_terrain;
         int d_colonnes;

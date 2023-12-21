@@ -13,6 +13,8 @@ void testterrain()
 {
     Terrain t{20,10};
     t.miseajourcellule(5,5,Cellule::TypeCellule::JOUEUR);
+    t.changenbcolonnes(6);
+    t.changenblignes(6);
     t.afficher();
 }
 int main()

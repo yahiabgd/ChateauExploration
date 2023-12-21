@@ -1,5 +1,6 @@
 #include <iostream>
 #include"Position.h"
+#include "Terrain.h"
 using namespace std;
 
 void testposition(){
@@ -8,13 +9,16 @@ void testposition(){
     cout<<p2.distance(p); // affiche 2
 
 }
-
+void testterrain()
+{
+    Terrain t{20,10};
+    t.miseajourcellule(5,5,Cellule::TypeCellule::JOUEUR);
+    t.afficher();
+}
 int main()
 {
     Position p{1,1};
     Position p2{2,2};
-
     cout << "Hello world!" << endl;
-
     return 0;
 }

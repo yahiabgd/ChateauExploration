@@ -9,10 +9,11 @@
 
 1701428680 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\adventurier.h
 
-1701462524 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\armure.cpp
+1703270956 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\armure.cpp
 	"Armure.h"
 
-1701462524 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\armure.h
+1703270956 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\armure.h
+	"Equipement.h"
 
 1701447734 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\castlemap.cpp
 	"CastleMap.h"
@@ -24,19 +25,21 @@
 
 1701447749 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\cell.h
 
-1701462486 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\epee.cpp
+1703270956 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\epee.cpp
 	"Epee.h"
 
-1701462485 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\epee.h
+1703270956 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\epee.h
+	"Equipement.h"
 
-1702675808 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\main.cpp
+1703271070 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\main.cpp
 	<iostream>
 	"Position.h"
+	"Terrain.h"
 
 1703098263 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstre.cpp
 	"Monstre.h"
 
-1702674541 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstre.h
+1703270956 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstre.h
 	"Personnage.h"
 	"Aventurier.h"
 
@@ -61,13 +64,220 @@
 1702679015 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstreaveugle.cpp
 	"MonstreAveugle.h"
 
-1702673549 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstreaveugle.h
+1703270956 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\monstreaveugle.h
 	"Monstre.h"
 
-1703101477 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\aventurier.h
+1703271043 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\aventurier.h
 	"Personnage.h"
+	"Bourse.h"
+	"Epee.h"
+	"Armure.h"
+
+1703270956 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\aventurier.cpp
+	"Aventurier.h"
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\main.cpp
+	<iostream>
+	"Position.h"
+
+1703094537 c:\users\oussa\onedrive\bureau\chateauexploration\position.h
+	<cmath>
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\adventuregame.cpp
+	"AdventureGame.h"
+
+1703094537 c:\users\oussa\onedrive\bureau\chateauexploration\adventuregame.h
+
+1703098482 source:c:\users\oussa\onedrive\bureau\chateauexploration\armure.cpp
+	"Armure.h"
+
+1703098471 c:\users\oussa\onedrive\bureau\chateauexploration\armure.h
+	"Equipement.h"
+
+1703101886 source:c:\users\oussa\onedrive\bureau\chateauexploration\aventurier.cpp
+	"Aventurier.h"
+
+1703102158 c:\users\oussa\onedrive\bureau\chateauexploration\aventurier.h
+	"Personnage.h"
+	"Bourse.h"
+	"Epee.h"
+	"Armure.h"
+
+1703101461 c:\users\oussa\onedrive\bureau\chateauexploration\personnage.h
+	"Position.h"
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\castlemap.cpp
+	"CastleMap.h"
+
+1703094537 c:\users\oussa\onedrive\bureau\chateauexploration\castlemap.h
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\cell.cpp
+	"cell.h"
+
+1703094537 c:\users\oussa\onedrive\bureau\chateauexploration\cell.h
+
+1703098430 source:c:\users\oussa\onedrive\bureau\chateauexploration\epee.cpp
+	"Epee.h"
+
+1703099999 c:\users\oussa\onedrive\bureau\chateauexploration\epee.h
+	"Equipement.h"
+
+1703099399 source:c:\users\oussa\onedrive\bureau\chateauexploration\equipement.cpp
+	"Equipement.h"
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\monstre.cpp
 	"Monstre.h"
 
-1702674362 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\aventurier.cpp
+1703101150 c:\users\oussa\onedrive\bureau\chateauexploration\monstre.h
+	"Personnage.h"
 	"Aventurier.h"
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\monstreaveugle.cpp
+	"MonstreAveugle.h"
+
+1703095377 c:\users\oussa\onedrive\bureau\chateauexploration\monstreaveugle.h
+	"Monstre.h"
+
+1703101330 source:c:\users\oussa\onedrive\bureau\chateauexploration\personnage.cpp
+	"Personnage.h"
+
+1703094537 source:c:\users\oussa\onedrive\bureau\chateauexploration\position.cpp
+	"Position.h"
+
+1703102035 c:\users\oussa\onedrive\bureau\chateauexploration\equipement.h
+
+1703099886 source:c:\users\oussa\onedrive\bureau\chateauexploration\bourse.cpp
+	"Bourse.h"
+
+1703099887 c:\users\oussa\onedrive\bureau\chateauexploration\bourse.h
+
+1703100854 source:c:\users\oussa\onedrive\bureau\chateauexploration\monstrevoyant.cpp
+	"MonstreVoyant.h"
+
+1703095430 c:\users\oussa\onedrive\bureau\chateauexploration\monstrevoyant.h
+	"Monstre.h"
+
+1703254046 source:c:\users\mme monjia\desktop\chateauexploration\main.cpp
+	<iostream>
+	"Position.h"
+	"Terrain.h"
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\position.h
+	<cmath>
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\adventuregame.cpp
+	"AdventureGame.h"
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\adventuregame.h
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\armure.cpp
+	"Armure.h"
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\armure.h
+	"Equipement.h"
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\equipement.h
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\aventurier.cpp
+	"Aventurier.h"
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\aventurier.h
+	"Personnage.h"
+	"Bourse.h"
+	"Epee.h"
+	"Armure.h"
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\personnage.h
+	"Position.h"
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\bourse.h
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\epee.h
+	"Equipement.h"
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\bourse.cpp
+	"Bourse.h"
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\castlemap.cpp
+	"CastleMap.h"
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\castlemap.h
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\cell.cpp
+	"cell.h"
+
+1703161358 c:\users\mme monjia\desktop\chateauexploration\cell.h
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\epee.cpp
+	"Epee.h"
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\equipement.cpp
+	"Equipement.h"
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\monstre.cpp
+	"Monstre.h"
+
+1703251691 c:\users\mme monjia\desktop\chateauexploration\monstre.h
+	"Personnage.h"
+	"Aventurier.h"
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\monstreaveugle.cpp
+	"MonstreAveugle.h"
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\monstreaveugle.h
+	"Monstre.h"
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\monstrevoyant.cpp
+	"MonstreVoyant.h"
+
+1703160131 c:\users\mme monjia\desktop\chateauexploration\monstrevoyant.h
+	"Monstre.h"
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\personnage.cpp
+	"Personnage.h"
+
+1703160131 source:c:\users\mme monjia\desktop\chateauexploration\position.cpp
+	"Position.h"
+
+1703253988 source:c:\users\mme monjia\desktop\chateauexploration\terrain.cpp
+	"Terrain.h"
+
+1703251691 c:\users\mme monjia\desktop\chateauexploration\terrain.h
+	"Cellule.h"
+	<vector>
+	<iostream>
+	<fstream>
+	<stdexcept>
+
+1703253740 source:c:\users\mme monjia\desktop\chateauexploration\cellule.cpp
+	"Cellule.h"
+
+1703253616 c:\users\mme monjia\desktop\chateauexploration\cellule.h
+
+1703165342 source:c:\users\mme monjia\desktop\chateauexploration\terrainutil.cpp
+
+1703270956 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\terrain.h
+	"Cellule.h"
+	<vector>
+	<iostream>
+	<fstream>
+	<stdexcept>
+
+1703270956 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\cellule.h
+
+1703270956 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\bourse.h
+
+1703270956 c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\equipement.h
+
+1703270956 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\bourse.cpp
+	"Bourse.h"
+
+1703270956 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\cellule.cpp
+	"Cellule.h"
+
+1703270956 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\equipement.cpp
+	"Equipement.h"
+
+1703270956 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\terrain.cpp
+	"Terrain.h"
 

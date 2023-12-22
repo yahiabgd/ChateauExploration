@@ -1,11 +1,9 @@
 #include "Epee.h"
 
-Epee::Epee()
-{
-    //ctor
-}
+Epee::Epee(int pointSolidite) : Equipement{pointSolidite}
+{}
 
-Epee::~Epee()
+void Epee::reduireSolidite(int force)
 {
-    //dtor
+    d_pointSolidite -= 1;
 }

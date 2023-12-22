@@ -4,7 +4,7 @@
 #include "Monstre.h"
 
 
-class MonstreAveugle : public Monstre
+class MonstreAveugle : public Monstre , public Personnage
 {
     public:
         MonstreAveugle();

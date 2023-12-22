@@ -11,16 +11,19 @@ void testposition(){
 }
 void testterrain()
 {
-    Terrain t{20,10};
-    t.miseajourcellule(5,5,Cellule::TypeCellule::JOUEUR);
-    t.changenbcolonnes(6);
-    t.changenblignes(6);
+    try{
+    Terrain t{"testmap1.txt"};
     t.afficher();
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
 }
 int main()
 {
     Position p{1,1};
     Position p2{2,2};
+    testterrain();
     cout << "Hello world!" << endl;
     return 0;
 }

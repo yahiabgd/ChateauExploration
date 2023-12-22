@@ -151,7 +151,7 @@
 1703095430 c:\users\oussa\onedrive\bureau\chateauexploration\monstrevoyant.h
 	"Monstre.h"
 
-1703166316 source:c:\users\mme monjia\desktop\chateauexploration\main.cpp
+1703247391 source:c:\users\mme monjia\desktop\chateauexploration\main.cpp
 	<iostream>
 	"Position.h"
 	"Terrain.h"
@@ -211,7 +211,7 @@
 1703160131 source:c:\users\mme monjia\desktop\chateauexploration\monstre.cpp
 	"Monstre.h"
 
-1703160131 c:\users\mme monjia\desktop\chateauexploration\monstre.h
+1703244126 c:\users\mme monjia\desktop\chateauexploration\monstre.h
 	"Personnage.h"
 	"Aventurier.h"
 
@@ -233,18 +233,20 @@
 1703160131 source:c:\users\mme monjia\desktop\chateauexploration\position.cpp
 	"Position.h"
 
-1703166153 source:c:\users\mme monjia\desktop\chateauexploration\terrain.cpp
+1703247365 source:c:\users\mme monjia\desktop\chateauexploration\terrain.cpp
 	"Terrain.h"
 
-1703165938 c:\users\mme monjia\desktop\chateauexploration\terrain.h
+1703244170 c:\users\mme monjia\desktop\chateauexploration\terrain.h
 	"Cellule.h"
 	<vector>
 	<iostream>
+	<fstream>
+	<stdexcept>
 
 1703162395 source:c:\users\mme monjia\desktop\chateauexploration\cellule.cpp
 	"Cellule.h"
 
-1703162559 c:\users\mme monjia\desktop\chateauexploration\cellule.h
+1703246578 c:\users\mme monjia\desktop\chateauexploration\cellule.h
 
 1703165342 source:c:\users\mme monjia\desktop\chateauexploration\terrainutil.cpp
 

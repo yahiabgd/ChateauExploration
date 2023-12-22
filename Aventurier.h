@@ -2,6 +2,7 @@
 #define ADVENTURIER_H
 #include"Personnage.h"
 
+
 class Aventurier : public Personnage
 {
     public:

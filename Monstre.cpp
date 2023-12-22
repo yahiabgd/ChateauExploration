@@ -13,7 +13,9 @@ Monstre::~Monstre()
 }
 
 void Monstre::attaque(Aventurier& ennemi){
-
+    // calculer la force de l'attaque;
+    int force=0;
+    ennemi.recoitAttaque(force);
 }
 
 void Monstre::recoitAttaque(int degats){

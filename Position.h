@@ -9,6 +9,8 @@ class Position
         virtual ~Position();
         Position();
         Position(int x, int y);
+        int x()const;
+        int y()const;
         void deplacerEn(int x,int y);
         void deplacerDe(int x,int y);
         double distance(Position p)const;

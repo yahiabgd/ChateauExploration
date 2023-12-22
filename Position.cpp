@@ -28,4 +28,9 @@ void Position::deplacerDe(int x,int y){
  double Position::distance(Position p)const{
     return std::sqrt(std::pow(p.d_x - d_x , 2 ) + pow(p.d_y - d_y , 2 ) );
  }
-
+int Position::x()const{
+    return d_x;
+}
+int Position::y()const{
+    return d_y;
+}

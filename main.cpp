@@ -11,11 +11,13 @@ void testposition(){
 }
 void testterrain()
 {
-    try{
-    Terrain t{"testmap1.txt"};
+    try
+    {
+    Terrain t{"hh.txt"};
     t.afficher();
     }
-    catch (const std::exception& e) {
+    catch (const std::exception& e)
+    {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
 }

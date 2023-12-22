@@ -13,9 +13,10 @@ class Cellule
         SMONSTRE = 'M',
         JOUEUR = 'P',
         PIECE = '$',
-        FIN = '-',
+        SORTIE = '-',
         HORS='*',
         };
+        static bool estType(char type);
         Cellule(const TypeCellule type);
         TypeCellule contenu() const;
         void changecontenu(const TypeCellule contenu);

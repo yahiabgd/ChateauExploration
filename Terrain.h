@@ -19,6 +19,7 @@ class Terrain
         void changenblignes(int lignes);
         void afficher() const;
         bool estvalide() const;
+        bool positionValide(int x, int y)const;
         bool sauvegarder(const string& nomfichier) const;
     private:
         vector<vector<Cellule>> d_terrain;

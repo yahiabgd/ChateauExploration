@@ -1,6 +1,9 @@
 #include "Personnage.h"
 
-Personnage::Personnage()
+Personnage::Personnage(int pointForce, int pointVie, Position position):
+    d_pointForce{pointForce},
+    d_pointVie{pointVie},
+    d_position{position}
 {
     //ctor
 }

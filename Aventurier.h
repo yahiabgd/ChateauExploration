@@ -10,7 +10,7 @@ class Monstre;
 class Aventurier : public Personnage
 {
     public:
-        Aventurier(const Armure& armure, const Epee& epee, const Bourse& bourse, bool amulette);
+        Aventurier(int pointForce, int pointVie, Position position,const Armure& armure, const Epee& epee, const Bourse& bourse, bool amulette);
 
     private:
         Armure d_armure;

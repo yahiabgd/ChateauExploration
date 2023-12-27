@@ -16,6 +16,7 @@ void testterrain()
     {
     Terrain t{"testmap.txt"};
     t.afficher();
+   // MonstreVoyant m;
     }
     catch (const std::exception& e)
     {

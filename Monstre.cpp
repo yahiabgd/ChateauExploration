@@ -2,9 +2,11 @@
 
 
 
-Monstre::Monstre()
+Monstre::Monstre(int pointForce, int pointVie, Position position, int habilete):
+    Personnage(pointForce, pointVie,position),
+    d_habilete{habilete}
 {
-    //ctor
+
 }
 
 Monstre::~Monstre()
@@ -24,5 +26,9 @@ void Monstre::recoitAttaque(int degats){
         d_pointVie=0;
 }
 
-void Monstre::deplacervers(const Aventurier& aventurier){
+void Monstre::deplacementAleatoire(Terrain& terrain){
+    //const int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+}
+
+void Monstre::deplacervers(const Aventurier& aventurier,Terrain& terrain){
 }

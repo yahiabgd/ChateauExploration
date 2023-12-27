@@ -20,7 +20,8 @@ Terrain::Terrain(const string& nomfichier)
     string sligne;
     getline(fichier, sligne);
     //calcul du nombre de lignes et colonnes dans le fichier
-    while (getline(fichier, sligne)) {
+    while (getline(fichier, sligne))
+    {
         nbLignes++;
         nbColonnes = (nbColonnes> sligne.size())? nbColonnes:  static_cast<int>(sligne.size()) ;
     }
@@ -35,16 +36,17 @@ Terrain::Terrain(const string& nomfichier)
     fichier.clear();
     fichier.seekg(0, ios::beg);
     getline(fichier, sligne);
-    for(int i =0; i<d_lignes;i++)
+    for(int i =0; i<d_lignes; i++)
     {
         getline(fichier,sligne);
-        for(int j=0; j < d_colonnes;j++)
+        for(int j=0; j < d_colonnes; j++)
         {
             char type = (j < static_cast<int>(sligne.size())) ? sligne[j] : ' ';
             if (Cellule::estType(type))
             {
                 d_terrain[i][j] = Cellule::TypeCellule(type);
-            } else
+            }
+            else
             {
                 fichier.close();
                 throw runtime_error("Type de cellule inconnu : " + string{type});
@@ -67,36 +69,39 @@ Cellule::TypeCellule Terrain::cellule(int x,int y)const
     return d_terrain[x][y].contenu();
 }
 
-void Terrain::miseajourcellule(int x , int y , const Cellule::TypeCellule type)
+void Terrain::miseajourcellule(int x, int y, const Cellule::TypeCellule type)
 {
     d_terrain[x][y].changecontenu(type);
 }
 void Terrain::afficher() const
 {
-    for(int i =0;i<d_lignes;i++)
+    for(int i =0; i<d_lignes; i++)
     {
-        for(int j=0;j<d_colonnes;j++)
+        for(int j=0; j<d_colonnes; j++)
             cout << static_cast<char>(cellule(i,j));
         cout << endl;
     }
 }
 void Terrain::changenbcolonnes(int colonnes)
 {
-     for (auto& row : d_terrain) {
+    for (auto& row : d_terrain)
+    {
         row.resize(colonnes, Cellule::TypeCellule::VIDE);
     }
-     d_colonnes = colonnes;
+    d_colonnes = colonnes;
 }
 void Terrain::changenblignes(int lignes)
 {
-     d_terrain.resize(lignes, std::vector<Cellule>(d_colonnes, Cellule::TypeCellule::VIDE));
-      d_lignes = lignes;
+    d_terrain.resize(lignes, std::vector<Cellule>(d_colonnes, Cellule::TypeCellule::VIDE));
+    d_lignes = lignes;
 }
-bool Terrain::sauvegarder(const std::string& nomfichier) const {
+bool Terrain::sauvegarder(const std::string& nomfichier) const
+{
 
 
     std::ofstream fichier(nomfichier);
-    if (!fichier.is_open()) {
+    if (!fichier.is_open())
+    {
         std::cerr << "Erreur d'ouverture du fichier : " << nomfichier << std::endl;
         return false;
     }
@@ -117,25 +122,29 @@ bool Terrain::sauvegarder(const std::string& nomfichier) const {
     return true;
 }
 
-bool Terrain::estvalide() const {
+bool Terrain::estvalide() const
+{
     int joueur = 0;
     int sortie = 0;
     int amulette = 0;
-    for (const auto& ligne : d_terrain) {
-        for (const auto& cellule : ligne) {
-            switch (cellule.contenu()) {
-                case Cellule::TypeCellule::JOUEUR:
-                    joueur++;
-                    break;
-                case Cellule::TypeCellule::SORTIE:
-                    sortie++;
-                    break;
-                case Cellule::TypeCellule::AMULETTE:
-                    amulette++;
-                    break;
-                default:
-                    // Ne rien faire pour les autres types de cellules
-                    break;
+    for (const auto& ligne : d_terrain)
+    {
+        for (const auto& cellule : ligne)
+        {
+            switch (cellule.contenu())
+            {
+            case Cellule::TypeCellule::JOUEUR:
+                joueur++;
+                break;
+            case Cellule::TypeCellule::SORTIE:
+                sortie++;
+                break;
+            case Cellule::TypeCellule::AMULETTE:
+                amulette++;
+                break;
+            default:
+                // Ne rien faire pour les autres types de cellules
+                break;
             }
         }
     }

@@ -281,3 +281,90 @@
 1703270956 source:c:\users\yahia\onedrive\bureau\uha\s5\qualité de programmation\chateauexploration\terrain.cpp
 	"Terrain.h"
 
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\main.cpp
+	<iostream>
+	"Position.h"
+	"Terrain.h"
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\position.h
+	<cmath>
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\terrain.h
+	"Cellule.h"
+	<vector>
+	<iostream>
+	<fstream>
+	<stdexcept>
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\cellule.h
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\adventuregame.cpp
+	"AdventureGame.h"
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\adventuregame.h
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\armure.cpp
+	"Armure.h"
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\armure.h
+	"Equipement.h"
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\equipement.h
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\aventurier.cpp
+	"Aventurier.h"
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\aventurier.h
+	"Personnage.h"
+	"Bourse.h"
+	"Epee.h"
+	"Armure.h"
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\personnage.h
+	"Position.h"
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\bourse.h
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\epee.h
+	"Equipement.h"
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\bourse.cpp
+	"Bourse.h"
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\cellule.cpp
+	"Cellule.h"
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\epee.cpp
+	"Epee.h"
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\equipement.cpp
+	"Equipement.h"
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\monstre.cpp
+	"Monstre.h"
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\monstre.h
+	"Personnage.h"
+	"Aventurier.h"
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\monstreaveugle.cpp
+	"MonstreAveugle.h"
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\monstreaveugle.h
+	"Monstre.h"
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\monstrevoyant.cpp
+	"MonstreVoyant.h"
+
+1703338024 c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\monstrevoyant.h
+	"Monstre.h"
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\personnage.cpp
+	"Personnage.h"
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\position.cpp
+	"Position.h"
+
+1703338024 source:c:\users\mehdi\onedrive\documents\code blocks\jeurechercheamulette\chateauexploration\terrain.cpp
+	"Terrain.h"
+

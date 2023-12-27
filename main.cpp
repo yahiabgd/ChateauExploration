@@ -14,7 +14,7 @@ void testterrain()
 {
     try
     {
-    Terrain t{"hh.txt"};
+    Terrain t{"testmap.txt"};
     t.afficher();
     }
     catch (const std::exception& e)
@@ -27,6 +27,5 @@ int main()
     Position p{1,1};
     Position p2{2,2};
     testterrain();
-    cout << "Hello world!" << endl;
     return 0;
 }

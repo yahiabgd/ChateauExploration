@@ -142,3 +142,6 @@ bool Terrain::estvalide() const {
     // Le terrain est considéré valide s'il contient un seul joueur, au moins une sortie et une seule amulette
     return (joueur == 1) && (sortie > 0) && (amulette == 1);
 }
+bool Terrain::positionValide(int x, int y)const{
+    x >= 0 && x < d_terrain.size() && y >= 0 && y < d_terrain[0].size() && d_terrain[x][y].contenu() == Cellule::TypeCellule::VIDE;
+}

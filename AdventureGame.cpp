@@ -11,7 +11,12 @@ AdventureGame::AdventureGame()
 }
 AdventureGame::~AdventureGame() {}
 
+
 void AdventureGame::commencerJeu(const afficheurJeu& afficheur)
+{
+
+}
+AdventureGame::~AdventureGame()
 {
     while( finJeu())
     {

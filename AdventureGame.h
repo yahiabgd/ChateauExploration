@@ -1,6 +1,5 @@
 #ifndef ADVENTUREGAME_H
 #define ADVENTUREGAME_H
-
 #include <vector>
 #include <memory>
 
@@ -17,6 +16,8 @@ class afficheurJeu;
 
 class AdventureGame
 {
+    private:
+    enum EtatJeu {DEBUT , FIN };
     public:
         AdventureGame();
         virtual ~AdventureGame();
@@ -30,9 +31,7 @@ class AdventureGame
     private:
         std::vector<std::unique_ptr<Monstre>> d_monstres;
         std::unique_ptr<Aventurier> d_aventurier;
-
         std::unique_ptr<Terrain> d_terrain;
-//        std::vector<std::unique_ptr<objetRamassable>> d_objets;
 };
 
 

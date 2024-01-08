@@ -64,23 +64,17 @@ int Terrain::lignes() const
 {
     return d_lignes;
 }
-Cellule::TypeCellule Terrain::cellule(int x,int y)const
+Cellule::TypeCellule Terrain::cellule(int i,int j)const
 {
-    return d_terrain[x][y].contenu();
+    return d_terrain[i][j].contenu();
 }
 
-void Terrain::miseajourcellule(int x, int y, const Cellule::TypeCellule type)
+void Terrain::miseajourcellule(int i, int j, const Cellule::TypeCellule type)
 {
-    d_terrain[x][y].changecontenu(type);
-}
-void Terrain::afficher() const
-{
-    for(int i =0; i<d_lignes; i++)
-    {
-        for(int j=0; j<d_colonnes; j++)
-            cout << static_cast<char>(cellule(i,j));
-        cout << endl;
-    }
+    if(i <d_lignes && j < d_colonnes)
+        d_terrain[i][j].changecontenu(type);
+    else
+        std::cerr << " Case hors des limites du terrain" << std::endl;
 }
 void Terrain::changenbcolonnes(int colonnes)
 {

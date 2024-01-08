@@ -1,6 +1,8 @@
 #include <iostream>
 #include"Position.h"
 #include "Terrain.h"
+#include "AdventureGame.h"
+#include "afficheurConsole.h"
 using namespace std;
 
 void testposition(){
@@ -15,7 +17,6 @@ void testterrain()
     try
     {
     Terrain t{"testmap.txt"};
-    t.afficher();
    // MonstreVoyant m;
     }
     catch (const std::exception& e)
@@ -23,10 +24,19 @@ void testterrain()
         std::cerr << "Exception: " << e.what() << std::endl;
     }
 }
+
+void testAdventureGame()
+{
+    AdventureGame ad;
+    afficheurJeuConsole aff;
+    ad.commencer(aff);
+}
+
 int main()
 {
     Position p{1,1};
     Position p2{2,2};
     testterrain();
+    testAdventureGame();
     return 0;
 }

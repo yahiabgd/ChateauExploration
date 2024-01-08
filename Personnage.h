@@ -17,8 +17,8 @@ class Personnage
 
     protected:
         int d_pointForce;
-        Position d_position;
         int d_pointVie;
+        Position d_position;
 
 };
 

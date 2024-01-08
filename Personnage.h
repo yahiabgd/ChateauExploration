@@ -10,13 +10,13 @@ class Personnage
         virtual ~Personnage();
         void deplacement(char direction);
         virtual void recoitAttaque(int degats);
-        bool estVivant();
+        bool estVivant()const;
         Position position()const;
 
     protected:
         int d_pointForce;
-        Position d_position;
         int d_pointVie;
+        Position d_position;
 
 };
 

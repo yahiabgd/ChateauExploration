@@ -73,15 +73,6 @@ void Terrain::miseajourcellule(int x, int y, const Cellule::TypeCellule type)
 {
     d_terrain[x][y].changecontenu(type);
 }
-void Terrain::afficher() const
-{
-    for(int i =0; i<d_lignes; i++)
-    {
-        for(int j=0; j<d_colonnes; j++)
-            cout << static_cast<char>(cellule(i,j));
-        cout << endl;
-    }
-}
 void Terrain::changenbcolonnes(int colonnes)
 {
     for (auto& row : d_terrain)

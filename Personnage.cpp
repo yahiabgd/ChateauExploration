@@ -24,3 +24,4 @@ void Personnage::deplacement(char direction){
 Position Personnage::position()const{
     return d_position;
 }
+

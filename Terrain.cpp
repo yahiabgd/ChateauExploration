@@ -76,15 +76,6 @@ void Terrain::miseajourcellule(int i, int j, const Cellule::TypeCellule type)
     else
         std::cerr << " Case hors des limites du terrain" << std::endl;
 }
-void Terrain::afficher() const
-{
-    for(int i =0; i<d_lignes; i++)
-    {
-        for(int j=0; j<d_colonnes; j++)
-            cout << static_cast<char>(cellule(i,j));
-        cout << endl;
-    }
-}
 void Terrain::changenbcolonnes(int colonnes)
 {
     for (auto& row : d_terrain)

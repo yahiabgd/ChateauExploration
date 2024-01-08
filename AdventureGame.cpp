@@ -1,11 +1,11 @@
 #include "AdventureGame.h"
 
-AdventureGame::AdventureGame()
+jeu::AdventureGame::AdventureGame()
 {
     //ctor
 }
 
-AdventureGame::~AdventureGame()
+jeu::AdventureGame::~AdventureGame()
 {
     //dtor
 }

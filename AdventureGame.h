@@ -29,7 +29,7 @@ class AdventureGame
         std::vector<std::unique_ptr<Monstre>> d_monstres;
         std::unique_ptr<Aventurier> d_aventurier;
         std::unique_ptr<Terrain> d_terrain;
-        std::vector<std::unique_ptr<objetRamassable>> d_objets;
+        //std::vector<std::unique_ptr<objetRamassable>> d_objets;
 
 
 };

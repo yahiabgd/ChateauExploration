@@ -1,5 +1,6 @@
 #include "MonstreVoyant.h"
 
+
 MonstreVoyant::MonstreVoyant(int pointForce, int pointVie, Position position, int habilete):
     Monstre{pointForce,pointVie, position,habilete}
 {

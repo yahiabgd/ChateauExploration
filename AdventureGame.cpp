@@ -25,18 +25,21 @@ void AdventureGame::commencerJeu(const afficheurJeu& afficheur)
             m->deplacervers(*d_aventurier,*d_terrain);
             m->attaque(*d_aventurier);
         }
-
     }
 }
-void AdventureGame::ModifierTerrain(const afficheurJeu& afficheu)
+void AdventureGame::ModifierTerrain(const afficheurJeu& afficheur)
 {
+    std::vector<string> menu ={"Modifier terrain","test","test"};
+    int choix = afficheur.afficherMenu(menu);
 
 }
 void AdventureGame::commencer(const afficheurJeu& afficheur)
 {
-    int choix=afficheur.afficherMenu();
-    while( choix != 3)
+    std::vector<string> menu ={"Modifier terrain","Commencer le jeu","Quitter"};
+
+    while( int choix=afficheur.afficherMenu(menu))
     {
+
         switch(choix)
         {
         case 1 :
@@ -48,14 +51,13 @@ void AdventureGame::commencer(const afficheurJeu& afficheur)
     }
 }
 
-
 bool AdventureGame::finJeu() const
 {
     //l'aventurier a pris l'amulette et passe par la sortie
     if(!d_aventurier->estVivant()) return true;
     else
     {
-        int i=0;
+        size_t i=0;
         while(i<d_monstres.size() && !d_monstres[i]->estVivant())
             ++i;
         return i == d_monstres.size();

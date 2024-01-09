@@ -8,7 +8,7 @@ class afficheurJeuConsole : public afficheurJeu
 public:
     ~afficheurJeuConsole();
     void affciherTerrain(const Terrain& t) const override;
-    int afficherMenu()const override;
+    int afficherMenu(const std::vector<std::string>& menu)const override;
 };
 
 #endif // AFFICHEURCONSOLE_H_INCLUDED

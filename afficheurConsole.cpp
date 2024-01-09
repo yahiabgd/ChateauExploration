@@ -8,14 +8,13 @@ afficheurJeuConsole::~afficheurJeuConsole()
 
 }
 
-int afficheurJeuConsole::afficherMenu() const
+int afficheurJeuConsole::afficherMenu(const std::vector<std::string>& menu) const
 {
     system("cls");
     int choix{0};
     std::cout<<std::setw(8)<<"MENU\n";
-    std::cout<<"1)Modifier le terrain\n";
-    std::cout<<"2)Commencer le jeu\n";
-    std::cout<<"3)Quitter\n";
+    for(size_t i = 0 ; i<menu.size() ; ++i)
+        std::cout<<i<<")"<<menu[i]<<"\n";
     std::cin>>choix;
     return choix;
 }

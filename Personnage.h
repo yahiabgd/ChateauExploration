@@ -8,15 +8,17 @@ class Personnage
 
         Personnage(int pointForce, int pointVie, Position position);
         virtual ~Personnage();
+        int pointForce() const;
+        int pointVie() const;
         void deplacement(char direction);
-        virtual void recoitAttaque(int degats);
-        bool estVivant();
+        virtual void recoitAttaque(int degats) = 0;
+        bool estVivant() const;
         Position position()const;
 
     protected:
         int d_pointForce;
-        Position d_position;
         int d_pointVie;
+        Position d_position;
 
 };
 

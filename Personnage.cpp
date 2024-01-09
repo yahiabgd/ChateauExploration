@@ -13,10 +13,11 @@ Personnage::~Personnage()
     //dtor
 }
 
+int Personnage::pointForce() const
+{ return d_pointForce; }
 
-void Personnage::recoitAttaque(int degats){
-
-}
+int Personnage::pointVie() const
+{ return d_pointVie; }
 
 void Personnage::deplacement(char direction){
     // à déclarer
@@ -24,3 +25,8 @@ void Personnage::deplacement(char direction){
 Position Personnage::position()const{
     return d_position;
 }
+
+bool Personnage::estVivant() const{
+    return d_pointVie>0 ? true : false;
+}
+

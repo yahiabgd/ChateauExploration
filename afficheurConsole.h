@@ -3,12 +3,17 @@
 
 #include "afficheur.h"
 
-class afficheurJeuConsole : public afficheurJeu
+class AfficheurJeuConsole : public AfficheurJeu
 {
 public:
-    ~afficheurJeuConsole();
-    void affciherTerrain(const Terrain& t) const override;
-    int afficherMenu(const std::vector<std::string>& menu)const override;
+    ~AfficheurJeuConsole();
+    void AffciherTerrain(const Terrain& t) const override;
+    int AfficherMenu(const std::vector<std::string>& menu)const override;
+    std::string Input(const std::string& str = "") const override;
+    void Print(const std::string& str) const override;
+    void PrintError(const std::string& str) const override;
+    void AttendAppuisSurBoutton(const char c)const ;
+
 };
 
 #endif // AFFICHEURCONSOLE_H_INCLUDED

@@ -5,13 +5,15 @@
 #include <string>
 class Terrain;
 
-class afficheurJeu
+class AfficheurJeu
 {
 public:
-    virtual ~afficheurJeu(){}
-    virtual void affciherTerrain(const Terrain& t) const =0 ;
-    virtual int afficherMenu(const std::vector<std::string>& menu)const =0;
-//    virtual void afficherString(const std::string& str) const =0;
+    virtual ~AfficheurJeu(){}
+    virtual void AffciherTerrain(const Terrain& t) const =0 ;
+    virtual int AfficherMenu(const std::vector<std::string>& menu)const =0;
+    virtual std::string Input(const std::string& str = "") const =0;
+    virtual void Print(const std::string& str) const =0;
+    virtual void PrintError(const std::string& str) const =0;
 };
 
 

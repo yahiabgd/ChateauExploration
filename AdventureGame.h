@@ -7,7 +7,7 @@
 #include "Aventurier.h"
 #include "Terrain.h"
 
-class afficheurJeu;
+class AfficheurJeu;
 
 
 /**
@@ -20,18 +20,22 @@ class AdventureGame
     enum EtatJeu {DEBUT , FIN };
     public:
         AdventureGame();
+        AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const std::string& fichierTerrain);
+        AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const Terrain& terrain);
+
         virtual ~AdventureGame();
-        void commencer(const afficheurJeu& afficheur);
+        void commencer(const AfficheurJeu& afficheur);
         bool finJeu() const;
 
     private:
-        void ModifierTerrain(const afficheurJeu& afficheur);
+        void ModifierTerrain(const AfficheurJeu& afficheur);
 
-        void commencerJeu(const afficheurJeu& afficheur);
+        void commencerJeu(const AfficheurJeu& afficheur);
     private:
-        std::vector<std::unique_ptr<Monstre>> d_monstres;
         std::unique_ptr<Aventurier> d_aventurier;
+        std::vector<std::unique_ptr<Monstre>> d_monstres;
         std::unique_ptr<Terrain> d_terrain;
+        static std::string DEFAUT_TERRAIN;
 };
 
 

@@ -28,7 +28,7 @@ void testterrain()
 void testAdventureGame()
 {
     AdventureGame ad;
-    afficheurJeuConsole aff;
+    AfficheurJeuConsole aff;
     ad.commencer(aff);
 }
 

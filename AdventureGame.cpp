@@ -5,21 +5,30 @@
 #include "afficheur.h"
 #include "Aventurier.h"
 
+std::string AdventureGame::DEFAUT_TERRAIN{"testmap.txt"};
+
 AdventureGame::AdventureGame()
+:d_aventurier{ std::make_unique<Aventurier>(20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false) }, d_monstres() , d_terrain{std::make_unique<Terrain>(DEFAUT_TERRAIN) }
 {
-    //ctor
 }
+AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const std::string& fichierTerrain)
+:d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres() , d_terrain{std::make_unique<Terrain>(fichierTerrain) }
+{
+    for(const auto& monstre : monstres)
+        d_monstres.push_back(std::make_unique<Monstre>(monstre));
+}
+AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const Terrain& terrain)
+:d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres(/*monstres.size()*/) , d_terrain{std::make_unique<Terrain>(terrain) }
+{}
 AdventureGame::~AdventureGame() {}
 
-void AdventureGame::commencerJeu(const afficheurJeu& afficheur)
+void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 {
-    while( finJeu())
+    while(!finJeu())
     {
-        /* Manque code aventurier
-        char c;
-        std::cin>>c;
+        //Acte d'aventurier
 
-        */
+        //Acte des monstres
         for(auto& m : d_monstres)
         {
             m->deplacervers(*d_aventurier,*d_terrain);
@@ -27,17 +36,40 @@ void AdventureGame::commencerJeu(const afficheurJeu& afficheur)
         }
     }
 }
-void AdventureGame::ModifierTerrain(const afficheurJeu& afficheur)
+void AdventureGame::ModifierTerrain(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu ={"Modifier terrain","test","test"};
-    int choix = afficheur.afficherMenu(menu);
+    std::vector<string> menu ={"Modifier le terrain","Importer un nouveau terrain","Quitter"};
+    int choix = afficheur.AfficherMenu(menu);
+    while(choix != menu.size() )
+    {
+        switch(choix)
+        {
+        case 1 :
+            //Modifier terrain cellule par cellule
+            break;
+        case 2 :
+            std::string fic;
+            fic = afficheur.Input("Entrer le nom du fichier qui contient le terrain : ");
+            try
+            {
+                d_terrain = std::make_unique<Terrain>(fic);
+
+            }catch(const std::exception& e)
+            {
+                afficheur.PrintError(e.what());
+            }
+            break;
+        }
+        choix = afficheur.AfficherMenu(menu);
+
+    }
 
 }
-void AdventureGame::commencer(const afficheurJeu& afficheur)
+void AdventureGame::commencer(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu ={"Modifier terrain","Commencer le jeu","Quitter"};
-
-    while( int choix=afficheur.afficherMenu(menu))
+    std::vector<string> menu ={"Modifier le terrain","Voir le terrain" ,"Commencer le jeu", "Quitter"};
+    int choix=afficheur.AfficherMenu(menu);
+    while( choix != menu.size())
     {
 
         switch(choix)
@@ -45,9 +77,15 @@ void AdventureGame::commencer(const afficheurJeu& afficheur)
         case 1 :
             ModifierTerrain(afficheur);
             break;
-        case 2 :
+        case 2:
+            afficheur.AffciherTerrain(*d_terrain);
+            break;
+        case 3 :
             commencerJeu(afficheur);
+            break;
+
         }
+        choix=afficheur.AfficherMenu(menu);
     }
 }
 

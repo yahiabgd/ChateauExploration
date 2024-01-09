@@ -16,8 +16,12 @@ Monstre::~Monstre()
 
 void Monstre::attaque(Aventurier& ennemi){
     // calculer la force de l'attaque;
-    int force=0;
-    ennemi.recoitAttaque(force);
+
+    int force = d_pointForce*0.9;
+    if(rand() % 100 < static_cast<int>(d_habilete) ){ // ?? not sure
+        ennemi.recoitAttaque(force);
+    }
+
 }
 
 void Monstre::recoitAttaque(int degats){
@@ -30,5 +34,6 @@ void Monstre::deplacementAleatoire(Terrain& terrain){
     //const int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 }
 
-void Monstre::deplacervers(const Aventurier& aventurier,Terrain& terrain){
+void Monstre::deplacervers( Aventurier& aventurier,Terrain& terrain){
+
 }

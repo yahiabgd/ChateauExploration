@@ -11,13 +11,13 @@ class Monstre : public Personnage
     public:
         Monstre(int pointForce, int pointVie, Position position, int habilete);
         virtual ~Monstre();
-        virtual void deplacervers(const Aventurier& aventurier,Terrain& terrain);
+        virtual void deplacervers(Aventurier& aventurier,Terrain& terrain);
         void attaque(Aventurier& ennemi);
         void recoitAttaque(int degats) override;
 
     private:
         virtual void deplacementAleatoire(Terrain& terrain);
-        int d_habilete; // un pourcentage
+        int d_habilete; // un pourcentage par exemple 100%
 };
 
 #endif // MONSTRE_H

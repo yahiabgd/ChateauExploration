@@ -12,20 +12,30 @@ MonstreVoyant::~MonstreVoyant()
 }
 
 
-void MonstreVoyant::deplacervers(const Aventurier& aventurier, Terrain& terrain){
+void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
     if(aventurier.position().distance(d_position)<=8){
-        // il faut savoir la direction
-        //puis on utilise la fonction +deplacement(direction : ) : void
+
         std::vector<Position> chemain = MonstreVoyant::cheminVersAventurier(aventurier, terrain);
         //cellules[d_position.x()][d_position.y()].changecontenu(Cellule::TypeCellule::VIDE);
         terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
         d_position = chemain[1];
         terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::MONSTRE);
     }
+    deplacementAleatoire(terrain);
 }
 
 void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
     //seulement vertical et horizontal
+    //                              up,     down,   left,    right
+    const int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    int i=0;
+    do{
+        i = rand() % 4;
+    }while(!terrain.positionValide(d_position.x()+directions[i][0],
+                                   d_position.y() + directions[i][1]));
+    terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
+    d_position.deplacerDe(directions[i][0],directions[i][1]);
+    terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::MONSTRE);
 }
 
  std::vector<Position> MonstreVoyant::cheminVersAventurier(const Aventurier& aventurier, Terrain& terrain){

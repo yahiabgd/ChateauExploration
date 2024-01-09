@@ -9,7 +9,7 @@ class MonstreAveugle : public Monstre
     public:
         MonstreAveugle(int pointForce, int pointVie, Position position, int habilete);
         virtual ~MonstreAveugle();
-        void deplacervers(const Aventurier& aventurier, Terrain& terrain) override;
+        void deplacervers( Aventurier& aventurier, Terrain& terrain) override;
     protected:
 
     private:

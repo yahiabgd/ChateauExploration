@@ -64,14 +64,17 @@ int Terrain::lignes() const
 {
     return d_lignes;
 }
-Cellule::TypeCellule Terrain::cellule(int x,int y)const
+Cellule::TypeCellule Terrain::cellule(int i,int j)const
 {
-    return d_terrain[x][y].contenu();
+    return d_terrain[i][j].contenu();
 }
 
-void Terrain::miseajourcellule(int x, int y, const Cellule::TypeCellule type)
+void Terrain::miseajourcellule(int i, int j, const Cellule::TypeCellule type)
 {
-    d_terrain[x][y].changecontenu(type);
+    if(i <d_lignes && j < d_colonnes)
+        d_terrain[i][j].changecontenu(type);
+    else
+        std::cerr << " Case hors des limites du terrain" << std::endl;
 }
 void Terrain::changenbcolonnes(int colonnes)
 {
@@ -143,5 +146,8 @@ bool Terrain::estvalide() const
     return (joueur == 1) && (sortie > 0) && (amulette == 1);
 }
 bool Terrain::positionValide(int x, int y)const{
-    x >= 0 && x < d_terrain.size() && y >= 0 && y < d_terrain[0].size() && d_terrain[x][y].contenu() == Cellule::TypeCellule::VIDE;
+     if (x < 0 || x >= d_terrain.size() || y < 0 || y >= d_terrain[0].size()) {
+        return false;
+    }
+    return d_terrain[x][y].contenu() == Cellule::TypeCellule::VIDE;
 }

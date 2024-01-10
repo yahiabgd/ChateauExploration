@@ -47,7 +47,7 @@ void AfficheurJeuConsole::Print(const std::string& str) const
 }
 void AfficheurJeuConsole::PrintError(const std::string& str) const
 {
-    std::cout<<"Ereur : "<<str<<std::endl;
+    std::cout<<"Erreur : "<<str<<std::endl;
     Print("q : quitter");
     while(getchar() != 'q')
     {

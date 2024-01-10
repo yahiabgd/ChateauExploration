@@ -28,7 +28,9 @@ class AdventureGame
         bool finJeu() const;
 
     private:
-        void ModifierTerrain(const AfficheurJeu& afficheur);
+        void ChangerTerrain(const AfficheurJeu& afficheur);
+        void ConfigurerTerrain(const AfficheurJeu& afficheur);
+
 
         void commencerJeu(const AfficheurJeu& afficheur);
     private:

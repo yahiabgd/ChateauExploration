@@ -57,7 +57,7 @@ TEST_SUITE("Test du terrain et cellule")
             REQUIRE(eq);
 
         }
-        SUBCASE("Terrain INValide")
+        SUBCASE("Terrain Invalide")
         {
             T.miseajourcellule( 4 ,9,Cellule::TypeCellule::JOUEUR);
             T.miseajourcellule( 4 ,5,Cellule::TypeCellule::AMULETTE);

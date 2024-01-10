@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <iomanip>
+#include <conio.h>
 
 #include "AdventureGame.h"
 #include "afficheur.h"
@@ -8,17 +9,17 @@
 std::string AdventureGame::DEFAUT_TERRAIN{"testmap.txt"};
 
 AdventureGame::AdventureGame()
-:d_aventurier{ std::make_unique<Aventurier>(20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false) }, d_monstres() , d_terrain{std::make_unique<Terrain>(DEFAUT_TERRAIN) }
+    :d_aventurier{ std::make_unique<Aventurier>(20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false) }, d_monstres(), d_terrain{std::make_unique<Terrain>(DEFAUT_TERRAIN) }
 {
 }
-AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const std::string& fichierTerrain)
-:d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres() , d_terrain{std::make_unique<Terrain>(fichierTerrain) }
+AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres, const std::string& fichierTerrain)
+    :d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres(), d_terrain{std::make_unique<Terrain>(fichierTerrain) }
 {
     for(const auto& monstre : monstres)
         d_monstres.push_back(std::make_unique<Monstre>(monstre));
 }
-AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const Terrain& terrain)
-:d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres(/*monstres.size()*/) , d_terrain{std::make_unique<Terrain>(terrain) }
+AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres, const Terrain& terrain)
+    :d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres(/*monstres.size()*/), d_terrain{std::make_unique<Terrain>(terrain) }
 {}
 AdventureGame::~AdventureGame() {}
 
@@ -26,19 +27,29 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 {
     while(!finJeu())
     {
-        //Acte d'aventurier
-
+//        using Aventurier::Direction;
+//        //Acte d'aventurier
+//        switch(std::tolower(_getch()))
+//        {
+//        case 'z' :
+//            d_aventurier->deplacer(HAUT);
+//        case 'q' :
+//            d_aventurier->deplacer(GAUCHE);
+//        case 'd' :
+//            d_aventurier->deplacer(DROITE);
+//        case 's' :
+//            d_aventurier->deplacer(BAS);
+//        }
         //Acte des monstres
         for(auto& m : d_monstres)
         {
             m->deplacervers(*d_aventurier,*d_terrain);
-            m->attaque(*d_aventurier);
         }
     }
 }
-void AdventureGame::ModifierTerrain(const AfficheurJeu& afficheur)
+void AdventureGame::ChangerTerrain(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu ={"Modifier le terrain","Importer un nouveau terrain","Quitter"};
+    std::vector<string> menu = {"Creer Terrain","Importer un nouveau terrain","Retour"};
     int choix = afficheur.AfficherMenu(menu);
     while(choix != menu.size() )
     {
@@ -54,7 +65,8 @@ void AdventureGame::ModifierTerrain(const AfficheurJeu& afficheur)
             {
                 d_terrain = std::make_unique<Terrain>(fic);
 
-            }catch(const std::exception& e)
+            }
+            catch(const std::exception& e)
             {
                 afficheur.PrintError(e.what());
             }
@@ -65,9 +77,14 @@ void AdventureGame::ModifierTerrain(const AfficheurJeu& afficheur)
     }
 
 }
+
+void AdventureGame::ConfigurerTerrain(const AfficheurJeu& afficheur)
+{
+    std::vector<string> menu = {"Changer de terrain","Configurer le terrain","Voir le terrain","Commencer le jeu", "Quitter"};
+}
 void AdventureGame::commencer(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu ={"Modifier le terrain","Voir le terrain" ,"Commencer le jeu", "Quitter"};
+    std::vector<string> menu = {"Changer de terrain","Configurer le terrain","Voir le terrain","Commencer le jeu", "Quitter"};
     int choix=afficheur.AfficherMenu(menu);
     while( choix != menu.size())
     {
@@ -75,12 +92,14 @@ void AdventureGame::commencer(const AfficheurJeu& afficheur)
         switch(choix)
         {
         case 1 :
-            ModifierTerrain(afficheur);
+            ChangerTerrain(afficheur);
             break;
         case 2:
+
+        case 3:
             afficheur.AffciherTerrain(*d_terrain);
             break;
-        case 3 :
+        case 4 :
             commencerJeu(afficheur);
             break;
 

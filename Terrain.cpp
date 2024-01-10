@@ -159,8 +159,9 @@ bool Terrain::estvalide() const
     return (joueur == 1) && (sortie > 0) && (amulette == 1);
 }
 bool Terrain::positionValide(int x, int y)const{
+    bool valide = true;
      if (x < 0 || x >= d_terrain.size() || y < 0 || y >= d_terrain[0].size()) {
-        return false;
+        valide=false;
     }
-    return d_terrain[x][y].contenu() == Cellule::TypeCellule::VIDE;
+    return valide;
 }

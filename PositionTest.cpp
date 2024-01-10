@@ -13,6 +13,11 @@ TEST_CASE("Position fonctionne correctment"){
         REQUIRE_EQ(p1.distance(p2),std::sqrt(2));
     }
     SUBCASE("Deplace En Deplace De "){
-        //caca
+        p1.deplacerDe(1,2);
+        REQUIRE_EQ(p1.x(),2);
+        REQUIRE_EQ(p1.y(),3);
+        p1.deplacerEn(0,0);
+        REQUIRE_EQ(p1.x(),0);
+        REQUIRE_EQ(p1.y(),0);
     }
 }

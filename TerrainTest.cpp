@@ -13,10 +13,12 @@ TEST_SUITE("Test du terrain et cellule")
     }
 
     TEST_CASE("Terrain fonctionne correctment"){
-        Terrain T{5,10};
+        int nblignes {10};
+        int nbcolonnes {5};
+        Terrain T{nbcolonnes,nblignes};
         SUBCASE("Constructeur et Getters correct"){
-            REQUIRE_EQ(T.lignes(),10);
-            REQUIRE_EQ(T.colonnes(),5);
+            REQUIRE_EQ(T.lignes(),nblignes);
+            REQUIRE_EQ(T.colonnes(),nbcolonnes);
             bool eq = true;
             for(int y=0;y<T.lignes();y++)
             {
@@ -32,9 +34,9 @@ TEST_SUITE("Test du terrain et cellule")
 
         SUBCASE("Import et export de terrain")
         {
-            T.miseajourcellule( 4 ,9,Cellule::TypeCellule::JOUEUR);
-            T.miseajourcellule( 4 ,5,Cellule::TypeCellule::AMULETTE);
-            T.miseajourcellule( 2 ,1,Cellule::TypeCellule::PIECE);
+            T.miseajourcellule( nbcolonnes-1 ,nblignes-1,Cellule::TypeCellule::JOUEUR);
+            T.miseajourcellule( nbcolonnes-1 ,nblignes-4,Cellule::TypeCellule::AMULETTE);
+            T.miseajourcellule( nbcolonnes-3 ,nblignes-7,Cellule::TypeCellule::PIECE);
             REQUIRE_EQ(T.sauvegarder("test.txt"),true);
             Terrain F{"test.txt"};
             F.sauvegarder("test2.txt");
@@ -43,34 +45,40 @@ TEST_SUITE("Test du terrain et cellule")
             {
                 for(int x=0;x<T.colonnes();x++)
                 {
-                    std::cout << F.cellule(x,y) << " ";
                     eq = eq * (T.cellule(x,y) == F.cellule(x,y));
                 }
             }
             REQUIRE_EQ(eq,true);
 
         }
-
-        SUBCASE("Terrain Valide")
+        SUBCASE("Terrain Valide et invalide")
         {
-            T.miseajourcellule( 4 ,9,Cellule::TypeCellule::JOUEUR);
-            T.miseajourcellule( 4 ,5,Cellule::TypeCellule::AMULETTE);
-            T.miseajourcellule( 2 ,1,Cellule::TypeCellule::PIECE);
-            T.miseajourcellule( 4 ,1,Cellule::TypeCellule::SORTIE);
-            bool eq = T.estvalide();
-            REQUIRE(eq);
+            SUBCASE("Terrain Valide ")
+            {
+                T.miseajourcellule( nbcolonnes-1 ,nblignes-1,Cellule::TypeCellule::JOUEUR);
+                T.miseajourcellule( nbcolonnes-1 ,nblignes-4,Cellule::TypeCellule::AMULETTE);
+                T.miseajourcellule( nbcolonnes-3 ,nblignes-9,Cellule::TypeCellule::PIECE);
+                T.miseajourcellule( nbcolonnes-1 ,nblignes-9,Cellule::TypeCellule::SORTIE);
+                bool eq = T.estvalide();
+                REQUIRE(eq);
 
+            }
+            SUBCASE("Terrain INValide")
+            {
+                T.miseajourcellule( nbcolonnes-1 ,nblignes-1,Cellule::TypeCellule::JOUEUR);
+                T.miseajourcellule( nbcolonnes-1 ,nblignes-4,Cellule::TypeCellule::AMULETTE);
+                T.miseajourcellule( nbcolonnes-3 ,nblignes-9,Cellule::TypeCellule::PIECE);
+                bool eq = T.estvalide();
+                REQUIRE_FALSE(eq);
+
+            }
         }
-        SUBCASE("Terrain INValide")
+
+        SUBCASE("Terrain test position Valide")
         {
-            T.miseajourcellule( 4 ,9,Cellule::TypeCellule::JOUEUR);
-            T.miseajourcellule( 4 ,5,Cellule::TypeCellule::AMULETTE);
-            T.miseajourcellule( 2 ,1,Cellule::TypeCellule::PIECE);
-            bool eq = T.estvalide();
-            REQUIRE_FALSE(eq);
-
+            REQUIRE_FALSE(T.positionValide(nbcolonnes,nblignes));
+            REQUIRE_FALSE(T.positionValide(nbcolonnes+1,nblignes+1));
         }
-
     }
 
 }

@@ -15,19 +15,21 @@ TEST_SUITE("Test du terrain et cellule")
     TEST_CASE("Terrain fonctionne correctment"){
         Terrain T{5,10};
         SUBCASE("Constructeur et Getters correct"){
-            REQUIRE_EQ(T.lignes(),5);
-            REQUIRE_EQ(T.colonnes(),10);
+            REQUIRE_EQ(T.lignes(),10);
+            REQUIRE_EQ(T.colonnes(),5);
             bool eq = true;
-            for(int i=0;i<T.lignes();i++)
+            for(int y=0;y<T.lignes();y++)
             {
-                for(int j=0;j<T.colonnes();j++)
+                for(int x=0;x<T.colonnes();x++)
                 {
-                    eq = eq * (T.cellule(i,j) == Cellule::TypeCellule::VIDE);
+                    eq = eq * (T.cellule(x,y) == Cellule::TypeCellule::VIDE);
+
                 }
             }
             REQUIRE_EQ(eq,true);
 
         }
+
         SUBCASE("Import et export de terrain")
         {
             T.miseajourcellule( 4 ,9,Cellule::TypeCellule::JOUEUR);
@@ -35,17 +37,20 @@ TEST_SUITE("Test du terrain et cellule")
             T.miseajourcellule( 2 ,1,Cellule::TypeCellule::PIECE);
             REQUIRE_EQ(T.sauvegarder("test.txt"),true);
             Terrain F{"test.txt"};
+            F.sauvegarder("test2.txt");
             bool eq = true;
-            for(int i=0;i<T.lignes();i++)
+            for(int y=0;y<T.lignes();y++)
             {
-                for(int j=0;j<T.colonnes();j++)
+                for(int x=0;x<T.colonnes();x++)
                 {
-                    eq = eq * (T.cellule(i,j) == F.cellule(i,j));
+                    std::cout << F.cellule(x,y) << " ";
+                    eq = eq * (T.cellule(x,y) == F.cellule(x,y));
                 }
             }
             REQUIRE_EQ(eq,true);
 
         }
+
         SUBCASE("Terrain Valide")
         {
             T.miseajourcellule( 4 ,9,Cellule::TypeCellule::JOUEUR);
@@ -67,4 +72,5 @@ TEST_SUITE("Test du terrain et cellule")
         }
 
     }
+
 }

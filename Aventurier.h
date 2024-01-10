@@ -1,5 +1,8 @@
 #ifndef AVENTURIER_H
 #define AVENTURIER_H
+
+#include <memory>
+
 #include "Personnage.h"
 #include "Bourse.h"
 #include "Epee.h"
@@ -8,14 +11,14 @@
 
 class Monstre;
 
+enum class Direction {HAUT , BAS , DROITE, GAUCHE, HAUTDROITE, HAUTGAUCHE, BASDROITE, BASGAUCHE};
 class Aventurier : public Personnage
 {
     public:
         Aventurier(int pointForce, int pointVie, Position position,const Armure& armure, const Epee& epee, const Bourse& bourse, bool amulette);
         void recoitAttaque(int degats) override;
         void attaque(Monstre &monstre);
-        enum class Direction {HAUT , BAS , DROITE, GAUCHE, HAUTDROITE, HAUTGAUCHE, BASDROITE, BASGAUCHE};
-        void deplacer(const Direction& Direction, const Terrain& terrain);
+        void deplacer(const Direction& Direction,Terrain& terrain);
 
     private:
         Armure d_armure;

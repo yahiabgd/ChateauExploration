@@ -25,14 +25,12 @@ int AfficheurJeuConsole::AfficherMenu(const std::vector<std::string>& menu) cons
 void AfficheurJeuConsole::AffciherTerrain(const Terrain& t) const
 {
     system("cls");
-    Print("TERRAIN\n");
     for(int i =0; i< t.lignes() ; i++)
     {
         for(int j=0; j<t.colonnes(); j++)
             std::cout << static_cast<char>(t.cellule(i,j));
         std::cout << std::endl;
     }
-    AttendAppuisSurBoutton('q');
 }
 std::string AfficheurJeuConsole::Input(const std::string& str ) const
 {
@@ -48,10 +46,7 @@ void AfficheurJeuConsole::Print(const std::string& str) const
 void AfficheurJeuConsole::PrintError(const std::string& str) const
 {
     std::cout<<"Erreur : "<<str<<std::endl;
-    Print("q : quitter");
-    while(getchar() != 'q')
-    {
-    }
+    AttendAppuisSurBoutton('q');
 }
 
 void AfficheurJeuConsole::AttendAppuisSurBoutton(const char c) const

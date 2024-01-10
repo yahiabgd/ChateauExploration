@@ -28,13 +28,13 @@ class AdventureGame
         bool finJeu() const;
 
 
+
     private:
         void ChangerTerrain(const AfficheurJeu& afficheur);
         void ConfigurerTerrain(const AfficheurJeu& afficheur);
-
+        int getMonstreIndiceParPosition(const Position& position);
 
         void commencerJeu(const AfficheurJeu& afficheur);
-    private:
         Aventurier d_aventurier;
         std::vector<std::unique_ptr<Monstre>> d_monstres;
         Terrain d_terrain;

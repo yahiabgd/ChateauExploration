@@ -25,6 +25,16 @@ AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Mon
 }
 AdventureGame::~AdventureGame() {}
 
+int AdventureGame::getMonstreIndiceParPosition(const Position& position)
+{
+    int i=0;
+    for (const auto& monstre : d_monstres){
+        if(monstre->position().x() == position.x() && monstre->position().y() == position.y())
+            break;
+        i++;
+    }
+    return i;
+}
 
 void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 {
@@ -63,9 +73,15 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
         }
         Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
         if(nouvelleCellule.contenu() != Cellule::TypeCellule::MUR && nouvelleCellule.contenu() != Cellule::TypeCellule::HORS )
-       {
+        {
+            if (nouvelleCellule.contenu() == Cellule::TypeCellule::MONSTRE || nouvelleCellule.contenu() == Cellule::TypeCellule::SMONSTRE){
 
+            } else if (nouvelleCellule.contenu() == Cellule::TypeCellule::PIECE || nouvelleCellule.contenu() == Cellule::TypeCellule::AMULETTE) {
 
+            } else if (nouvelleCellule.contenu() == Cellule::TypeCellule::SORTIE) {
+
+            } else { /* Case vide*/
+            }
         }
 
         //Acte des monstres

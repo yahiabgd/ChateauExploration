@@ -25,10 +25,10 @@ int AfficheurJeuConsole::AfficherMenu(const std::vector<std::string>& menu) cons
 void AfficheurJeuConsole::AffciherTerrain(const Terrain& t) const
 {
     system("cls");
-    for(int i =0; i< t.lignes() ; i++)
+    for(int y =0; y< t.lignes() ; y++)
     {
-        for(int j=0; j<t.colonnes(); j++)
-            std::cout << static_cast<char>(t.cellule(i,j));
+        for(int x=0; x<t.colonnes(); x++)
+            std::cout << static_cast<char>(t.cellule(x,y));
         std::cout << std::endl;
     }
 }

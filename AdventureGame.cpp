@@ -26,6 +26,7 @@ AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Mon
 }
 AdventureGame::~AdventureGame() {}
 
+
 void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 {
     while(true)
@@ -35,17 +36,18 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
         switch(std::tolower(_getch()))
         {
         case 'z' :
-            d_aventurier->deplacer(Direction::HAUT,*d_terrain);
+            d_aventurier->deplacer(Direction::HAUT);
             break;
         case 'q' :
-            d_aventurier->deplacer(Direction::GAUCHE,*d_terrain);
+            d_aventurier->deplacer(Direction::GAUCHE);
             break;
         case 'd' :
-            d_aventurier->deplacer(Direction::DROITE,*d_terrain);
+            d_aventurier->deplacer(Direction::DROITE);
             break;        case 's' :
-            d_aventurier->deplacer(Direction::BAS,*d_terrain);
+            d_aventurier->deplacer(Direction::BAS);
             break;
         }
+
         //Acte des monstres
 //        for(auto& m : d_monstres)
 //        {

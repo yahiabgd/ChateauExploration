@@ -13,6 +13,13 @@ Aventurier::Aventurier(int pointForce, int pointVie, Position position,
     d_armure{armure}, d_epee{epee}, d_bourse{bourse}, d_amulette{amulette}
 {}
 
+void Aventurier::RamasseAmulette()
+{ d_amulette = true; }
+
+void Aventurier::RamasseTasDePiece(int nombreDePiece) {
+    d_bourse.ajouter(nombreDePiece);
+}
+
 void Aventurier::recoitAttaque(int degats) {
     int nb = static_cast<int>(UNQUART * degats);
     if (nb <= d_armure.pointSolide())
@@ -57,4 +64,7 @@ void Aventurier::deplacer(const Direction& Direction,Terrain& terrain){
     }
 }
 
-
+bool Aventurier::Amulette() const
+{
+    return d_amulette;
+}

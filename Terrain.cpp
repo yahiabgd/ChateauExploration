@@ -1,50 +1,62 @@
 #include "Terrain.h"
 
-Terrain::Terrain(int lignes,int colonnes):d_lignes{lignes},d_colonnes{colonnes}
+Terrain::Terrain(int colonnes,int lignes):d_lignes{lignes},d_colonnes{colonnes}
 {
-    d_terrain = vector<vector<Cellule>>(d_lignes, vector<Cellule>(d_colonnes, Cellule::TypeCellule::VIDE));
+    d_terrain = vector<vector<Cellule>>(d_colonnes, vector<Cellule>(d_lignes, Cellule::TypeCellule::VIDE));
+
 }
 Terrain::Terrain(const string& nomfichier)
 {
     ifstream fichier(nomfichier);
     if (!fichier.is_open())
         throw runtime_error("Echec D'ouverture du fichier" + nomfichier);
-    int fLignes,fColonnes;
-    fichier>>fLignes>>fColonnes;
-    if(fLignes <= 0 || fColonnes<=0)
+
+    int fLignes, fColonnes;
+    fichier >> fColonnes >> fLignes;
+
+    if (fLignes <= 0 || fColonnes <= 0)
     {
         fichier.close();
         throw runtime_error("Dimensions invalide : " + nomfichier);
     }
-    int nbLignes =0,nbColonnes=0;
+
+    int nbLignes = 0, nbColonnes = 0;
     string sligne;
     getline(fichier, sligne);
-    //calcul du nombre de lignes et colonnes dans le fichier
+
+    // Calcul du nombre de lignes et colonnes dans le fichier
     while (getline(fichier, sligne))
     {
         nbLignes++;
-        nbColonnes = (nbColonnes> sligne.size())? nbColonnes:  static_cast<int>(sligne.size()) ;
+        nbColonnes = (nbColonnes > sligne.size()) ? nbColonnes : static_cast<int>(sligne.size());
     }
-    if(nbLignes != fLignes || nbColonnes != fColonnes)
+
+    if (nbLignes != fLignes || nbColonnes != fColonnes)
     {
         fichier.close();
         throw runtime_error("Dimensions invalide 2 : " + nomfichier);
     }
-    d_colonnes= nbColonnes;
-    d_lignes=nbLignes;
-    d_terrain.resize(d_lignes, std::vector<Cellule>(d_colonnes,Cellule(Cellule::TypeCellule::VIDE)));
+
+    d_colonnes = nbColonnes;
+    d_lignes = nbLignes;
+
+    // Resize and initialize the terrain with empty cells
+    d_terrain.resize(d_colonnes, std::vector<Cellule>(d_lignes, Cellule(Cellule::TypeCellule::VIDE)));
+
     fichier.clear();
     fichier.seekg(0, ios::beg);
     getline(fichier, sligne);
-    for(int i =0; i<d_lignes; i++)
+
+    for (int y = 0; y < d_lignes; y++)
     {
-        getline(fichier,sligne);
-        for(int j=0; j < d_colonnes; j++)
+        getline(fichier, sligne);
+
+        for (int x = 0; x < d_colonnes; x++)
         {
-            char type = (j < static_cast<int>(sligne.size())) ? sligne[j] : ' ';
+            char type = (x < static_cast<int>(sligne.size())) ? sligne[x] : ' ';
             if (Cellule::estType(type))
             {
-                d_terrain[i][j] = Cellule::TypeCellule(type);
+                d_terrain[x][y] = Cellule::TypeCellule(type);
             }
             else
             {
@@ -53,6 +65,7 @@ Terrain::Terrain(const string& nomfichier)
             }
         }
     }
+
     fichier.close();
 }
 
@@ -64,15 +77,15 @@ int Terrain::lignes() const
 {
     return d_lignes;
 }
-Cellule::TypeCellule Terrain::cellule(int i,int j)const
+Cellule::TypeCellule Terrain::cellule(int x,int y)const
 {
-    return d_terrain[i][j].contenu();
+    return d_terrain[x][y].contenu();
 }
 
-void Terrain::miseajourcellule(int i, int j, const Cellule::TypeCellule type)
+void Terrain::miseajourcellule(int x, int y, const Cellule::TypeCellule type)
 {
-    if(i <d_lignes && j < d_colonnes)
-        d_terrain[i][j].changecontenu(type);
+    if(y <d_lignes && x < d_colonnes)
+        d_terrain[x][y].changecontenu(type);
     else
         std::cerr << " Case hors des limites du terrain" << std::endl;
 }
@@ -99,16 +112,16 @@ bool Terrain::sauvegarder(const std::string& nomfichier) const
         std::cerr << "Erreur d'ouverture du fichier : " << nomfichier << std::endl;
         return false;
     }
-    fichier << d_lignes << " " << d_colonnes << "\n";
-    for (int i = 0; i < d_lignes; ++i)
+    fichier << d_colonnes << " " << d_lignes << "\n";
+    for (int y = 0; y < d_lignes; ++y)
     {
-        for (int j = 0; j < d_colonnes; ++j)
+        for (int x = 0; x < d_colonnes; ++x)
         {
-            Cellule::TypeCellule contenu = cellule(i, j);
+            Cellule::TypeCellule contenu = cellule(x, y);
             fichier << static_cast<char>(contenu);
         }
         //Si ce n'est pas la dernière ligne on ajoute un retour à la ligne
-        if (i < d_lignes - 1)
+        if (y < d_lignes - 1)
             fichier << "\n";
     }
 
@@ -146,8 +159,9 @@ bool Terrain::estvalide() const
     return (joueur == 1) && (sortie > 0) && (amulette == 1);
 }
 bool Terrain::positionValide(int x, int y)const{
+    bool valide = true;
      if (x < 0 || x >= d_terrain.size() || y < 0 || y >= d_terrain[0].size()) {
-        return false;
+        valide=false;
     }
-    return d_terrain[x][y].contenu() == Cellule::TypeCellule::VIDE;
+    return valide;
 }

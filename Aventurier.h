@@ -16,10 +16,12 @@ class Aventurier : public Personnage
 {
     public:
         Aventurier(int pointForce, int pointVie, Position position,const Armure& armure, const Epee& epee, const Bourse& bourse, bool amulette);
+        void RamasseAmulette();
+        void RamasseTasDePiece(int nombreDePiece);
         void recoitAttaque(int degats) override;
         void attaque(Monstre &monstre);
-        void deplacer(const Direction& Direction,Terrain& terrain);
-
+        void deplacer(const Direction& Direction, const Terrain& terrain);
+        bool Amulette() const;
     private:
         Armure d_armure;
         Epee d_epee;

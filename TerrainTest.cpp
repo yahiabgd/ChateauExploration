@@ -13,48 +13,55 @@ TEST_SUITE("Test du terrain et cellule")
     }
 
     TEST_CASE("Terrain fonctionne correctment"){
-        Terrain T{5,10};
+        int nblignes {10};
+        int nbcolonnes {5};
+        Terrain T{nbcolonnes,nblignes};
         SUBCASE("Constructeur et Getters correct"){
-            REQUIRE_EQ(T.lignes(),5);
-            REQUIRE_EQ(T.colonnes(),10);
+            REQUIRE_EQ(T.lignes(),nblignes);
+            REQUIRE_EQ(T.colonnes(),nbcolonnes);
             bool eq = true;
-            for(int i=0;i<T.lignes();i++)
+            for(int y=0;y<T.lignes();y++)
             {
-                for(int j=0;j<T.colonnes();j++)
+                for(int x=0;x<T.colonnes();x++)
                 {
-                    eq = eq * (T.cellule(i,j) == Cellule::TypeCellule::VIDE);
+                    eq = eq * (T.cellule(x,y) == Cellule::TypeCellule::VIDE);
+
                 }
             }
             REQUIRE_EQ(eq,true);
 
         }
+
         SUBCASE("Import et export de terrain")
         {
-            T.miseajourcellule( 4 ,9,Cellule::TypeCellule::JOUEUR);
-            T.miseajourcellule( 4 ,5,Cellule::TypeCellule::AMULETTE);
-            T.miseajourcellule( 2 ,1,Cellule::TypeCellule::PIECE);
-            REQUIRE_EQ(T.sauvegarder("test.txt"),true);
-            Terrain F{"test.txt"};
+            T.miseajourcellule( nbcolonnes-1 ,nblignes-1,Cellule::TypeCellule::JOUEUR);
+            T.miseajourcellule( nbcolonnes-1 ,nblignes-4,Cellule::TypeCellule::AMULETTE);
+            T.miseajourcellule( nbcolonnes-3 ,nblignes-7,Cellule::TypeCellule::PIECE);
+            std::string testfilename{"test.txt"};
+            REQUIRE_EQ(T.sauvegarder(testfilename),true);
+            Terrain F{testfilename};
             bool eq = true;
-            for(int i=0;i<T.lignes();i++)
+            for(int y=0;y<T.lignes();y++)
             {
-                for(int j=0;j<T.colonnes();j++)
+                for(int x=0;x<T.colonnes();x++)
                 {
-                    eq = eq * (T.cellule(i,j) == F.cellule(i,j));
+                    eq = eq * (T.cellule(x,y) == F.cellule(x,y));
                 }
             }
             REQUIRE_EQ(eq,true);
 
         }
-        SUBCASE("Terrain Valide")
+        SUBCASE("Terrain Valide et invalide")
         {
-            T.miseajourcellule( 4 ,9,Cellule::TypeCellule::JOUEUR);
-            T.miseajourcellule( 4 ,5,Cellule::TypeCellule::AMULETTE);
-            T.miseajourcellule( 2 ,1,Cellule::TypeCellule::PIECE);
-            T.miseajourcellule( 4 ,1,Cellule::TypeCellule::SORTIE);
-            bool eq = T.estvalide();
-            REQUIRE(eq);
+            SUBCASE("Terrain Valide ")
+            {
+                T.miseajourcellule( nbcolonnes-1 ,nblignes-1,Cellule::TypeCellule::JOUEUR);
+                T.miseajourcellule( nbcolonnes-1 ,nblignes-4,Cellule::TypeCellule::AMULETTE);
+                T.miseajourcellule( nbcolonnes-3 ,nblignes-9,Cellule::TypeCellule::PIECE);
+                T.miseajourcellule( nbcolonnes-1 ,nblignes-9,Cellule::TypeCellule::SORTIE);
+                REQUIRE(T.estvalide());
 
+<<<<<<< HEAD
         }
         SUBCASE("Terrain Invalide")
         {
@@ -63,8 +70,25 @@ TEST_SUITE("Test du terrain et cellule")
             T.miseajourcellule( 2 ,1,Cellule::TypeCellule::PIECE);
             bool eq = T.estvalide();
             REQUIRE_FALSE(eq);
+=======
+            }
+            SUBCASE("Terrain INValide")
+            {
+                T.miseajourcellule( nbcolonnes-1 ,nblignes-1,Cellule::TypeCellule::JOUEUR);
+                T.miseajourcellule( nbcolonnes-1 ,nblignes-4,Cellule::TypeCellule::AMULETTE);
+                T.miseajourcellule( nbcolonnes-3 ,nblignes-9,Cellule::TypeCellule::PIECE);
+                REQUIRE_FALSE(T.estvalide());
+>>>>>>> c4a42350071245ee493c53144c5184f2408241b1
 
+            }
         }
 
+        SUBCASE("Terrain test position Valide")
+        {
+            REQUIRE(T.positionValide(nbcolonnes-1,nblignes-1));
+            REQUIRE_FALSE(T.positionValide(nbcolonnes,nblignes));
+            REQUIRE_FALSE(T.positionValide(nbcolonnes+1,nblignes+1));
+        }
     }
+
 }

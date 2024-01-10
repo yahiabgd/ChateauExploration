@@ -43,7 +43,7 @@ void Aventurier::attaque(Monstre &monstre) {
     }
 }
 
-void Aventurier::deplacer(const Direction& Direction,Terrain& terrain){
+void Aventurier::deplacer(const Direction& Direction){
     Position New{d_position};
     switch(Direction) {
         case Direction::HAUT : New.deplacerDe(0,-1);
@@ -63,13 +63,6 @@ void Aventurier::deplacer(const Direction& Direction,Terrain& terrain){
         case Direction::BASGAUCHE : New.deplacerDe(-1,1);
             break;
     }
-
-        if(terrain.cellule(New.x(), New.y()) != Cellule::TypeCellule::MUR)
-        {
-            terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
-            d_position=New;
-            terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::JOUEUR);
-        }
     d_position = New;
 //        if(terrain->cellule(d_aventurier->position.x(), d_aventurier->d_position.y()) != Cellule::TypeCellule::MUR)
 //        {

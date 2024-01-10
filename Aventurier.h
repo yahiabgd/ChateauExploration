@@ -20,7 +20,6 @@ class Aventurier : public Personnage
         void RamasseTasDePiece(int nombreDePiece);
         void recoitAttaque(int degats) override;
         void attaque(Monstre &monstre);
-        void deplacer(const Direction& Direction,Terrain& terrain);
         bool amulette() const;
         void deplacer(const Direction& Direction);
         int pieces()const;

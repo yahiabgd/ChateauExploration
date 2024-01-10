@@ -70,6 +70,12 @@ void Aventurier::deplacer(const Direction& Direction,Terrain& terrain){
             d_position=New;
             terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::JOUEUR);
         }
+    d_position = New;
+//        if(terrain->cellule(d_aventurier->position.x(), d_aventurier->d_position.y()) != Cellule::TypeCellule::MUR)
+//        {
+//            d_terrain->miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
+//            d_terrain->miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::JOUEUR);
+//        }
 
 }
 int Aventurier::pieces()const

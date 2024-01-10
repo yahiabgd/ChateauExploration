@@ -74,5 +74,28 @@ TEST_SUITE("Test D'aventurier et les objets qui le compose (epée,bourse,armure)"
             REQUIRE_EQ(aventurier.epee().pointSolidite(),25);
             REQUIRE_FALSE(aventurier.amulette());
         }
+        SUBCASE("Ramasse Amulette et pieces")
+        {
+            int nbpieces = aventurier.pieces();
+            aventurier.RamasseTasDePiece(3);
+            REQUIRE_EQ(aventurier.pieces(),nbpieces+3);
+            aventurier.RamasseAmulette();
+            REQUIRE(aventurier.amulette());
+        }
+        SUBCASE("Deplacement de l'aventurier")
+        {
+            Position p = aventurier.position();
+            int p_x = p.x();
+            int p_y = p.y();
+            aventurier.deplacer(Direction::GAUCHE);
+            REQUIRE_EQ(p_x-1,aventurier.position().x());
+            /*
+            aventurier.deplacer(Direction::HAUT);
+            REQUIRE_EQ(p_y-1,p.y());
+            aventurier.deplacer(Direction::HAUTDROITE);
+            REQUIRE_EQ(p_x,p.x());
+            REQUIRE_EQ(p_y-2,p.y());
+            */
+        }
     }
 }

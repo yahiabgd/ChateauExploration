@@ -9,7 +9,7 @@ class Equipement
         virtual ~Equipement() = default;
         virtual void reduireSolidite(int force)=0;
         void reparer(int pieceMonnaie);
-        int pointSolide() const;
+        int pointSolidite() const;
 
     protected:
         int d_pointSolidite;

@@ -1,4 +1,5 @@
 #include "MonstreAveugle.h"
+#include "math.h"
 
 MonstreAveugle::MonstreAveugle(int pointForce, int pointVie, Position position, int habilete):
     Monstre{pointForce, pointVie, position, habilete}

@@ -17,7 +17,6 @@ TEST_SUITE("Test du terrain et cellule")
         SUBCASE("Constructeur et Getters correct"){
             REQUIRE_EQ(T.lignes(),5);
             REQUIRE_EQ(T.colonnes(),10);
-            //T.miseajourcellule( 4 ,9,Cellule::TypeCellule::JOUEUR);
             bool eq = true;
             for(int i=0;i<T.lignes();i++)
             {

@@ -60,4 +60,7 @@ void Aventurier::deplacer(const Direction& Direction, const Terrain& Terrain){
         d_position = New;
 }
 
-
+bool Aventurier::Amulette() const
+{
+    return d_amulette;
+}

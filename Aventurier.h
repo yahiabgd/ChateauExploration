@@ -18,7 +18,7 @@ class Aventurier : public Personnage
         void attaque(Monstre &monstre);
         enum class Direction {HAUT , BAS , DROITE, GAUCHE, HAUTDROITE, HAUTGAUCHE, BASDROITE, BASGAUCHE};
         void deplacer(const Direction& Direction, const Terrain& terrain);
-
+        bool Amulette() const;
     private:
         Armure d_armure;
         Epee d_epee;

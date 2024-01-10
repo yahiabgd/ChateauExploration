@@ -16,8 +16,6 @@ class AfficheurJeu;
 
 class AdventureGame
 {
-    private:
-    enum EtatJeu {DEBUT , FIN };
     public:
         AdventureGame();
         AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const std::string& fichierTerrain);
@@ -38,7 +36,7 @@ class AdventureGame
         Aventurier d_aventurier;
         std::vector<std::unique_ptr<Monstre>> d_monstres;
         Terrain d_terrain;
-        static std::string DEFAUT_TERRAIN;
+        const std::string DEFAUT_TERRAIN{"testmain.txt"};
 };
 
 

@@ -1,4 +1,5 @@
 #include "MonstreAveugle.h"
+#include "math.h"
 
 MonstreAveugle::MonstreAveugle(int pointForce, int pointVie, Position position, int habilete):
     Monstre{pointForce, pointVie, position, habilete}
@@ -12,7 +13,7 @@ MonstreAveugle::~MonstreAveugle()
 }
 
 void MonstreAveugle::deplacervers(Aventurier& aventurier,  Terrain& terrain) {
-    if( aventurier.position().distance(d_position)<=1.5 ) {
+    if( aventurier.position().distance(d_position)<=sqrt(2) ) {
         // il va attaqué l'Aventurier
         Monstre::attaque(aventurier); // il manque traiter le cas lorsque l'aventurier est entre deux mur
     }

@@ -1,5 +1,10 @@
 #include "Aventurier.h"
 #include "Monstre.h"
+#include "Position.h"
+
+constexpr double UNQUART {1/4};
+constexpr double TROISQUART {3/4};
+
 
 Aventurier::Aventurier(int pointForce, int pointVie, Position position,
                        const Armure& armure, const Epee& epee,
@@ -9,11 +14,11 @@ Aventurier::Aventurier(int pointForce, int pointVie, Position position,
 {}
 
 void Aventurier::recoitAttaque(int degats) {
-    int nb = static_cast<int>((3/4) * degats);
+    int nb = static_cast<int>(UNQUART * degats);
     if (nb <= d_armure.pointSolide())
         d_armure.reduireSolidite(nb);
     else {
-        int reste = ((1/4) * degats) + (nb - d_armure.pointSolide());
+        int reste = (UNQUART * degats) + (nb - d_armure.pointSolide());
         d_pointVie -= reste;
     }
 }
@@ -26,7 +31,26 @@ void Aventurier::attaque(Monstre &monstre) {
     d_epee.reduireSolidite(1);
     monstre.recoitAttaque(damage);
     if(! monstre.estVivant()){
-        d_pointForce += monstre.pointForce() * 1/4;
-        d_pointVie += monstre.pointForce() * 3/4;
+        d_pointForce += monstre.pointForce() * UNQUART;
+        d_pointVie += monstre.pointForce() * TROISQUART;
     }
 }
+
+void Aventurier::deplacer(const Direction& Direction, const Terrain& Terrain){
+    Position New{d_position.x(), d_position.y()};
+
+    switch(Direction) {
+        case Direction::HAUT : New.deplacerDe(0,-1);
+        case Direction::BAS : New.deplacerDe(0,1);
+        case Direction::DROITE : New.deplacerDe(1,0);
+        case Direction::GAUCHE : New.deplacerDe(-1,0);
+        case Direction::HAUTDROITE : New.deplacerDe(1,-1);
+        case Direction::HAUTGAUCHE : New.deplacerDe(-1,-1);
+        case Direction::BASDROITE : New.deplacerDe(1,1);
+        case Direction::BASGAUCHE : New.deplacerDe(-1,1);
+ }
+    if(Terrain.cellule(New.x(), New.y()) != Cellule::TypeCellule::MUR)
+        d_position = New;
+}
+
+

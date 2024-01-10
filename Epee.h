@@ -8,7 +8,6 @@ class Epee : public Equipement
     public:
         Epee(int pointSolidite);
         void reduireSolidite(int force) override;
-
 };
 
 #endif // EPEE_H

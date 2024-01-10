@@ -61,7 +61,6 @@ TEST_SUITE("Test du terrain et cellule")
                 T.miseajourcellule( nbcolonnes-1 ,nblignes-9,Cellule::TypeCellule::SORTIE);
                 REQUIRE(T.estvalide());
 
-<<<<<<< HEAD
         }
         SUBCASE("Terrain Invalide")
         {
@@ -70,7 +69,6 @@ TEST_SUITE("Test du terrain et cellule")
             T.miseajourcellule( 2 ,1,Cellule::TypeCellule::PIECE);
             bool eq = T.estvalide();
             REQUIRE_FALSE(eq);
-=======
             }
             SUBCASE("Terrain INValide")
             {
@@ -78,7 +76,6 @@ TEST_SUITE("Test du terrain et cellule")
                 T.miseajourcellule( nbcolonnes-1 ,nblignes-4,Cellule::TypeCellule::AMULETTE);
                 T.miseajourcellule( nbcolonnes-3 ,nblignes-9,Cellule::TypeCellule::PIECE);
                 REQUIRE_FALSE(T.estvalide());
->>>>>>> c4a42350071245ee493c53144c5184f2408241b1
 
             }
         }

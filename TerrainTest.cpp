@@ -37,9 +37,9 @@ TEST_SUITE("Test du terrain et cellule")
             T.miseajourcellule( nbcolonnes-1 ,nblignes-1,Cellule::TypeCellule::JOUEUR);
             T.miseajourcellule( nbcolonnes-1 ,nblignes-4,Cellule::TypeCellule::AMULETTE);
             T.miseajourcellule( nbcolonnes-3 ,nblignes-7,Cellule::TypeCellule::PIECE);
-            REQUIRE_EQ(T.sauvegarder("test.txt"),true);
-            Terrain F{"test.txt"};
-            F.sauvegarder("test2.txt");
+            std::string testfilename{"test.txt"};
+            REQUIRE_EQ(T.sauvegarder(testfilename),true);
+            Terrain F{testfilename};
             bool eq = true;
             for(int y=0;y<T.lignes();y++)
             {
@@ -59,8 +59,7 @@ TEST_SUITE("Test du terrain et cellule")
                 T.miseajourcellule( nbcolonnes-1 ,nblignes-4,Cellule::TypeCellule::AMULETTE);
                 T.miseajourcellule( nbcolonnes-3 ,nblignes-9,Cellule::TypeCellule::PIECE);
                 T.miseajourcellule( nbcolonnes-1 ,nblignes-9,Cellule::TypeCellule::SORTIE);
-                bool eq = T.estvalide();
-                REQUIRE(eq);
+                REQUIRE(T.estvalide());
 
             }
             SUBCASE("Terrain INValide")
@@ -68,14 +67,14 @@ TEST_SUITE("Test du terrain et cellule")
                 T.miseajourcellule( nbcolonnes-1 ,nblignes-1,Cellule::TypeCellule::JOUEUR);
                 T.miseajourcellule( nbcolonnes-1 ,nblignes-4,Cellule::TypeCellule::AMULETTE);
                 T.miseajourcellule( nbcolonnes-3 ,nblignes-9,Cellule::TypeCellule::PIECE);
-                bool eq = T.estvalide();
-                REQUIRE_FALSE(eq);
+                REQUIRE_FALSE(T.estvalide());
 
             }
         }
 
         SUBCASE("Terrain test position Valide")
         {
+            REQUIRE(T.positionValide(nbcolonnes-1,nblignes-1));
             REQUIRE_FALSE(T.positionValide(nbcolonnes,nblignes));
             REQUIRE_FALSE(T.positionValide(nbcolonnes+1,nblignes+1));
         }

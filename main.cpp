@@ -41,10 +41,10 @@ void testConstructorAG()
 
 void testAdventureGame()
 {
-    Aventurier av(100,100,Position{10,10},Armure{20},Epee{15},Bourse{0},false);
+    Aventurier av(100,100,Position{12,2},Armure{20},Epee{15},Bourse{0},false);
     std::vector<Monstre> monstres;
-    for(int i=0 ; i<3 ; ++i)
-        monstres.push_back(MonstreAveugle(10,100,Position{10,5},10));
+    for(int i=0 ; i<1 ; ++i)
+        monstres.push_back(MonstreAveugle(10,100,Position{13,3},10));
     Terrain t{"testmap.txt"};
     AdventureGame ad{av,monstres,t};
     AfficheurJeuConsole aff;

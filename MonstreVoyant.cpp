@@ -15,7 +15,10 @@ MonstreVoyant::~MonstreVoyant()
 
 void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
     if(aventurier.position().distance(d_position)<=8){
-
+        if(aventurier.position().distance(d_position)==1){
+            attaque(aventurier);
+            return;
+        }
         std::vector<Position> chemain = MonstreVoyant::cheminVersAventurier(aventurier, terrain);
         //cellules[d_position.x()][d_position.y()].changecontenu(Cellule::TypeCellule::VIDE);
         terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);

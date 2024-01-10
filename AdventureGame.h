@@ -37,7 +37,7 @@ class AdventureGame
     private:
         std::unique_ptr<Aventurier> d_aventurier;
         std::vector<std::unique_ptr<Monstre>> d_monstres;
-        std::unique_ptr<Terrain> d_terrain;
+        Terrain d_terrain;
         static std::string DEFAUT_TERRAIN;
 };
 

@@ -9,17 +9,17 @@
 std::string AdventureGame::DEFAUT_TERRAIN{"testmap.txt"};
 
 AdventureGame::AdventureGame()
-    :d_aventurier{ std::make_unique<Aventurier>(20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false) }, d_monstres(), d_terrain{std::make_unique<Terrain>(DEFAUT_TERRAIN) }
+    :d_aventurier{ std::make_unique<Aventurier>(20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false) }, d_monstres(),d_terrain{DEFAUT_TERRAIN}
 {
 }
 AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres, const std::string& fichierTerrain)
-    :d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres(), d_terrain{std::make_unique<Terrain>(fichierTerrain) }
+    :d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres(), d_terrain{fichierTerrain}
 {
     for(int i=0 ; i<monstres.size() ; ++i)
         d_monstres.push_back(std::make_unique<Monstre>(monstres[i]));
 }
 AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres, const Terrain& terrain)
-    :d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres(), d_terrain{std::make_unique<Terrain>(terrain) }
+    :d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres(), d_terrain{terrain}
 {
     for(int i=0 ; i<monstres.size() ; ++i)
         d_monstres.push_back(std::make_unique<Monstre>(monstres[i]));
@@ -31,20 +31,20 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 {
     while(true)
     {
-        afficheur.AffciherTerrain(*d_terrain);
+        afficheur.AffciherTerrain(d_terrain);
         //Acte d'aventurier
         switch(std::tolower(_getch()))
         {
         case 'z' :
-            d_aventurier->deplacer(Direction::HAUT);
+            d_aventurier->deplacer(Direction::HAUT,d_terrain);
             break;
         case 'q' :
-            d_aventurier->deplacer(Direction::GAUCHE);
+            d_aventurier->deplacer(Direction::GAUCHE,d_terrain);
             break;
         case 'd' :
-            d_aventurier->deplacer(Direction::DROITE);
+            d_aventurier->deplacer(Direction::DROITE,d_terrain);
             break;        case 's' :
-            d_aventurier->deplacer(Direction::BAS);
+            d_aventurier->deplacer(Direction::BAS,d_terrain);
             break;
         }
 
@@ -72,7 +72,7 @@ void AdventureGame::ChangerTerrain(const AfficheurJeu& afficheur)
             fic = afficheur.Input("Entrer le nom du fichier qui contient le terrain : ");
             try
             {
-                d_terrain = std::make_unique<Terrain>(fic);
+                d_terrain = Terrain{fic};
 
             }
             catch(const std::exception& e)
@@ -107,7 +107,7 @@ void AdventureGame::commencer(const AfficheurJeu& afficheur)
             ConfigurerTerrain(afficheur);
             break;
         case 3:
-            afficheur.AffciherTerrain(*d_terrain);
+            afficheur.AffciherTerrain(d_terrain);
             break;
         case 4 :
             commencerJeu(afficheur);

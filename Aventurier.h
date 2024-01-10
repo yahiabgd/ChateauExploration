@@ -12,6 +12,8 @@ class Aventurier : public Personnage
 {
     public:
         Aventurier(int pointForce, int pointVie, Position position,const Armure& armure, const Epee& epee, const Bourse& bourse, bool amulette);
+        void RamasseAmulette();
+        void RamasseTasDePiece(int nombreDePiece);
         void recoitAttaque(int degats) override;
         void attaque(Monstre &monstre);
         enum class Direction {HAUT , BAS , DROITE, GAUCHE, HAUTDROITE, HAUTGAUCHE, BASDROITE, BASGAUCHE};

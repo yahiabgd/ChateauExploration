@@ -3,7 +3,7 @@
 Equipement::Equipement(int pointSolidite) : d_pointSolidite{pointSolidite}
 {}
 
-int Equipement::pointSolide() const
+int Equipement::pointSolidite() const
 { return d_pointSolidite; }
 
 void Equipement::reparer(int pieceMonnaie)

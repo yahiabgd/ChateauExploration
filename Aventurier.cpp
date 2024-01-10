@@ -22,17 +22,17 @@ void Aventurier::RamasseTasDePiece(int nombreDePiece) {
 
 void Aventurier::recoitAttaque(int degats) {
     int nb = static_cast<int>(UNQUART * degats);
-    if (nb <= d_armure.pointSolide())
+    if (nb <= d_armure.pointSolidite())
         d_armure.reduireSolidite(nb);
     else {
-        int reste = (UNQUART * degats) + (nb - d_armure.pointSolide());
+        int reste = (UNQUART * degats) + (nb - d_armure.pointSolidite());
         d_pointVie -= reste;
     }
 }
 
 
 void Aventurier::attaque(Monstre &monstre) {
-    int damage = d_pointForce + d_epee.pointSolide();
+    int damage = d_pointForce + d_epee.pointSolidite();
     if ( rand() % 100  <  80)
         damage *=  0.9 ;
     d_epee.reduireSolidite(1);
@@ -62,8 +62,21 @@ void Aventurier::deplacer(const Direction& Direction){
 //        }
 
 }
+int Aventurier::pieces()const
+{
+    return d_bourse.pieceMonnaie();
+}
 
-bool Aventurier::Amulette() const
+bool Aventurier::amulette() const
 {
     return d_amulette;
+}
+Armure Aventurier::armure()const
+{
+    return d_armure;
+}
+
+Epee Aventurier::epee() const
+{
+    return d_epee;
 }

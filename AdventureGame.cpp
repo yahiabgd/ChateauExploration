@@ -122,7 +122,7 @@ int AdventureGame::getObjetIndiceParPosition(const Position& position)
 void AdventureGame::DeplacerAventurier(const Position& position)
 {
     //Mise � jour du terrain
-    d_terrain.miseajourcellule(d_aventurier.position().x(),d_aventurier.position().y(),Cellule::TypeCellule::VIDE);
+    d_terrain.miseajourcellule(d_aventurier.position().x(),d_aventurier.position().y(),d_aventurier.estSur());
     d_terrain.miseajourcellule(position.x(),position.y(),Cellule::TypeCellule::JOUEUR);
     //Mise � jour la position de l'objet aventurier
     d_aventurier.deplacer(position);
@@ -159,22 +159,24 @@ void AdventureGame::ActeAventurier()
             break;
         }
         Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
-        if(nouvelleCellule.contenu() != Cellule::TypeCellule::MUR && nouvelleCellule.contenu() != Cellule::TypeCellule::HORS )
+        Cellule::TypeCellule typenouvelleCellule =nouvelleCellule.contenu();
+        if(typenouvelleCellule != Cellule::TypeCellule::MUR && typenouvelleCellule != Cellule::TypeCellule::HORS )
         {
-            if (nouvelleCellule.contenu() == Cellule::TypeCellule::MONSTRE || nouvelleCellule.contenu() == Cellule::TypeCellule::SMONSTRE)
+            if (typenouvelleCellule == Cellule::TypeCellule::MONSTRE || typenouvelleCellule == Cellule::TypeCellule::SMONSTRE)
             {
 
             }
             else
             {
 
-                if (nouvelleCellule.contenu() == Cellule::TypeCellule::PIECE || nouvelleCellule.contenu() == Cellule::TypeCellule::AMULETTE)
+                if (typenouvelleCellule == Cellule::TypeCellule::PIECE || typenouvelleCellule == Cellule::TypeCellule::AMULETTE)
                     {
                         int idxObj = getObjetIndiceParPosition(New);
                         d_objets[idxObj]->ramasser(d_aventurier);
+                        typenouvelleCellule = Cellule::TypeCellule::VIDE;
                     }
 
-                if(nouvelleCellule.contenu() == Cellule::TypeCellule::SORTIE)
+                if(typenouvelleCellule == Cellule::TypeCellule::SORTIE)
                     {
                         if(d_aventurier.amulette())
                             d_finjeu = true;
@@ -183,6 +185,7 @@ void AdventureGame::ActeAventurier()
                     {
                     }
             DeplacerAventurier(New);
+            d_aventurier.modifieEstSur(typenouvelleCellule);
             }
 
         }

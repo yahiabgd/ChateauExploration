@@ -3,7 +3,8 @@
 Personnage::Personnage(int pointForce, int pointVie, Position position):
     d_pointForce{pointForce},
     d_pointVie{pointVie},
-    d_position{position}
+    d_position{position},
+    d_estSur{Cellule::TypeCellule::VIDE}
 {}
 
 Personnage::~Personnage()
@@ -14,6 +15,15 @@ int Personnage::pointForce() const
 
 int Personnage::pointVie() const
 { return d_pointVie; }
+
+Cellule::TypeCellule Personnage::estSur() const
+{
+    return d_estSur;
+}
+Cellule::TypeCellule Personnage::modifieEstSur(Cellule::TypeCellule type)
+{
+    d_estSur = type;
+}
 
 void Personnage::reduirePointVie(int points)
 { d_pointVie -= points ;}

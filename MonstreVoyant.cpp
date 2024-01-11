@@ -28,7 +28,7 @@ void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
 
         d_position.deplacerEn( chemain[1].x(),chemain[1].y()) ;
         std::cout<<" updated"<<d_position.x()<<"  "<<d_position.y();
-        terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::MONSTRE);
+        terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::SMONSTRE);
         return;
     }
      //std::cout<<"deplcer fd";

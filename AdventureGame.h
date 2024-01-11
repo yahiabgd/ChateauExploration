@@ -2,11 +2,11 @@
 #define ADVENTUREGAME_H
 #include <vector>
 #include <memory>
-#include "ObjetRamassable.h"
+
 #include "Monstre.h"
 #include "Aventurier.h"
 #include "Terrain.h"
-
+#include "ObjetRamassable.h"
 class AfficheurJeu;
 
 
@@ -22,11 +22,12 @@ class AdventureGame
                       ,std::vector<std::shared_ptr<ObjetRamassable>>&objets, const std::string& fichierTerrain);
         AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres ,
                       std::vector<std::shared_ptr<ObjetRamassable>>&objets, const Terrain& terrain);
+        AdventureGame( const Terrain& terrain);
 
         virtual ~AdventureGame();
         void commencer(const AfficheurJeu& afficheur);
         bool finJeu() const;
-
+        void Initialiserlejeu();
 
 
     private:

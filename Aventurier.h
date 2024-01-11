@@ -15,7 +15,8 @@ enum class Direction {HAUT , BAS , DROITE, GAUCHE, HAUTDROITE, HAUTGAUCHE, BASDR
 class Aventurier : public Personnage
 {
     public:
-        Aventurier(int pointForce, int pointVie, Position position,const Armure& armure, const Epee& epee, const Bourse& bourse, bool amulette);
+        Aventurier(int pointForce, int pointVie, const Position& position,const Armure& armure, const Epee& epee, const Bourse& bourse, bool amulette);
+        Aventurier( const Position& position);
         void RamasseAmulette();
         void RamasseTasDePiece(int nombreDePiece);
         void recoitAttaque(int degats) override;

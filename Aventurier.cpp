@@ -6,13 +6,17 @@ constexpr double UNQUART {1.0/4.0};
 constexpr double TROISQUART {3.0/4.0};
 
 
-Aventurier::Aventurier(int pointForce, int pointVie, Position position,
+Aventurier::Aventurier(int pointForce, int pointVie, const Position& position,
                        const Armure& armure, const Epee& epee,
                        const Bourse& bourse, bool amulette=false) :
     Personnage{pointForce, pointVie, position},
     d_armure{armure}, d_epee{epee}, d_bourse{bourse}, d_amulette{amulette}
 {}
+Aventurier::Aventurier( const Position& position):Personnage{100, 100, position},
+    d_armure{20}, d_epee{15}, d_bourse{0}, d_amulette{false}
+{
 
+}
 void Aventurier::RamasseAmulette()
 { d_amulette = true; }
 

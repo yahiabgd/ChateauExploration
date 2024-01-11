@@ -61,7 +61,13 @@ void testAdventureGame()
     AfficheurJeuConsole aff;
     ad.commencer(aff);
 }
-
+void testAdventureGame2()
+{
+    Terrain t{"testmap.txt"};
+    AdventureGame ad{t};
+    AfficheurJeuConsole aff;
+    ad.commencer(aff);
+}
 void test_getch()
 {
     while(char choix = _getch())
@@ -86,7 +92,7 @@ void test_getch()
 int main()
 {
 //    testterrain();
-    testAdventureGame();
+    testAdventureGame2();
     //testType();
 //    test_getch();
     return 0;

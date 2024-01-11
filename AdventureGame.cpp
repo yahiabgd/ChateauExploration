@@ -5,9 +5,11 @@
 #include "AdventureGame.h"
 #include "afficheur.h"
 #include "Aventurier.h"
+#include "TasDeMonnaie.h"
+#include "Amulette.h"
 #include "Cellule.h"
-
-
+#include "MonstreAveugle.h"
+#include "MonstreVoyant.h"
 AdventureGame::AdventureGame()
     :d_aventurier{ Aventurier{20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false} }, d_monstres(),d_terrain{DEFAUT_TERRAIN}
 {
@@ -16,7 +18,15 @@ AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std
                              std::vector<std::shared_ptr<ObjetRamassable>>&objets,const std::string& fichierTerrain)
     :d_aventurier{ aventurier }, d_monstres(monstres), d_terrain{fichierTerrain},d_objets{objets}
 {
-    inisialiserMap();
+
+}
+AdventureGame::AdventureGame(const Terrain& terrain)
+        :d_monstres{}, d_terrain{terrain},d_objets{},d_aventurier{Position{0,0}}
+{
+    Initialiserlejeu();
+//    for(int i=0 ; i<monstres.size() ; ++i)
+//        d_monstres.push_back(std::move(monstres[i]));
+    //inisialiserMap();
 }
 AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres,
                              std::vector<std::shared_ptr<ObjetRamassable>>&objets, const Terrain& terrain)
@@ -26,9 +36,54 @@ AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std
 //    for(int i=0 ; i<monstres.size() ; ++i)
 //        d_monstres.push_back(std::move(monstres[i]));
 }
+
 AdventureGame::~AdventureGame() {}
 
-void AdventureGame::inisialiserMap(){
+void AdventureGame::Initialiserlejeu()
+{
+    for(int y=0;y<d_terrain.lignes();y++)
+    {
+        for(int x = 0; x<d_terrain.colonnes();x++)
+        {
+            Cellule cellule= d_terrain.cellule(x,y);
+            switch (cellule.contenu())
+            {
+                case Cellule::TypeCellule::JOUEUR:
+                {
+                    Aventurier av{Position{x, y}};
+                    d_aventurier = av; // Assuming there is an appropriate assignment operator or copy constructor
+                    break;
+                }
+                case Cellule::TypeCellule::PIECE:
+                {
+                    d_objets.push_back(std::make_shared<TasDeMonnaie>(Position{x, y}, 3));
+                    break;
+                }
+                case Cellule::TypeCellule::AMULETTE:
+                {
+                    d_objets.push_back(std::make_shared<Amulette>(Position{x, y}));
+                    break;
+                }
+                case Cellule::TypeCellule::MONSTRE:
+                {
+                    d_monstres.push_back(std::make_shared<MonstreAveugle>(10, 100, Position{x, y}, 10));
+                    break;
+                }
+                case Cellule::TypeCellule::SMONSTRE:
+                {
+                    d_monstres.push_back(std::make_shared<MonstreVoyant>(25, 100, Position{x, y}, 10));
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+void AdventureGame::inisialiserMap()
+{
+
     d_terrain.miseajourcellule(d_aventurier.position().x(),d_aventurier.position().y(),Cellule::TypeCellule::JOUEUR);
     for(const auto& monstre : d_monstres){
         d_terrain.miseajourcellule(monstre->position().x(),monstre->position().y(),Cellule::TypeCellule::MONSTRE);
@@ -64,10 +119,10 @@ int AdventureGame::getObjetIndiceParPosition(const Position& position)
 }
 void AdventureGame::DeplacerAventurier(const Position& position)
 {
-    //Mise à jour du terrain
+    //Mise ï¿½ jour du terrain
     d_terrain.miseajourcellule(d_aventurier.position().x(),d_aventurier.position().y(),Cellule::TypeCellule::VIDE);
     d_terrain.miseajourcellule(position.x(),position.y(),Cellule::TypeCellule::JOUEUR);
-    //Mise à jour la position de l'objet aventurier
+    //Mise ï¿½ jour la position de l'objet aventurier
     d_aventurier.deplacer(position);
 }
 void AdventureGame::ActeAventurier()

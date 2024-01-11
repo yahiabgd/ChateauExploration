@@ -5,6 +5,7 @@
 #include "AdventureGame.h"
 #include "afficheur.h"
 #include "Aventurier.h"
+#include "Cellule.h"
 
 
 AdventureGame::AdventureGame()
@@ -99,10 +100,44 @@ void AdventureGame::ChangerTerrain(const AfficheurJeu& afficheur)
     while(choix != menu.size() )
     {
         switch(choix)
-        {
-        case 1 :
-            //Modifier terrain cellule par cellule
-            break;
+            {
+            case 1 :
+                {
+                    try{
+                //Creer Terrain
+                Terrain tmp=d_terrain;
+                int ligne = std::stoi(afficheur.Input("Entrer le nouveau nombre nombre de ligne : "));
+                int colonne= std::stoi(afficheur.Input("Entrer le nouveau nombre nombre de colenne : "));
+                tmp.changenbcolonnes(colonne);
+                tmp.changenblignes(ligne);
+                for(int x=0 ; x<ligne ; ++x)
+                {
+                    for(int y=0; y<colonne ; ++y)
+                    {
+        //            Cellule contenu= afficheur.Input("Entrer le nouveau contenu:");
+    //                tmp.miseajourcellule(x,y,contenu));
+                    }
+                }
+                if(tmp.estvalide())
+                {
+                    d_terrain=tmp;
+//                    try
+//                    {
+                        d_terrain.sauvegarder("terrain.txt");
+
+//                    }catch(const std::exception& e)
+//                    {
+//                        afficheur.PrintError(e.what());
+//                    }
+                }
+                else
+                    afficheur.PrintError("Terrain n'est pas valide");
+                break;
+                    }catch(const std::exception& e)
+                {
+                    afficheur.PrintError(e.what());
+                }
+            }
         case 2 :
             std::string fic;
             fic = afficheur.Input("Entrer le nom du fichier qui contient le terrain : ");
@@ -125,15 +160,50 @@ void AdventureGame::ChangerTerrain(const AfficheurJeu& afficheur)
 
 void AdventureGame::ConfigurerTerrain(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu = {"Changer de terrain","Configurer le terrain","Voir le terrain","Commencer le jeu", "Quitter"};
+    std::vector<string> menu = {"Changer contenu", "Retoure"};
+    int choix = afficheur.AfficherMenu(menu);
+    while(choix != menu.size())
+    {
+        switch(choix)
+        {
+        case 1:
+            {
+                try
+                {
+
+                //changement de contenu
+                int x= std::stoi(afficheur.Input("Entrer l'indice de ligne: "));
+                int y= std::stoi(afficheur.Input("Entrer l'indice de colonne: "));
+    //            Cellule contenu= afficheur.Input("Entrer le nouveau contenu:");
+                Terrain tmp = d_terrain;
+                if(tmp.positionValide(x,y))
+                {
+    //                tmp.miseajourcellule(x,y,contenu));
+                }
+                else{
+                    afficheur.PrintError("Position non valide");
+                }
+                if(tmp.estvalide())
+                    d_terrain = tmp;
+                else{
+                    afficheur.PrintError("Terrain n'est pas valide");
+                }
+                }catch(const std::exception& e)
+                {
+                    afficheur.PrintError(e.what());
+                }
+                break;
+            }
+        }
+        choix = afficheur.AfficherMenu(menu);
+    }
 }
 void AdventureGame::commencer(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu = {"Changer de terrain","Configurer le terrain","Voir le terrain","Commencer le jeu", "Quitter"};
+    std::vector<string> menu = {"Changer le terrain","Configurer le terrain","Commencer le jeu","Info de jeu", "Quitter"};
     int choix=afficheur.AfficherMenu(menu);
     while( choix != menu.size())
     {
-
         switch(choix)
         {
         case 1 :
@@ -142,11 +212,13 @@ void AdventureGame::commencer(const AfficheurJeu& afficheur)
         case 2:
             ConfigurerTerrain(afficheur);
             break;
-        case 3:
-            afficheur.AffciherTerrain(d_terrain);
+        case 3 :
+            commencerJeu(afficheur);
             break;
         case 4 :
-            commencerJeu(afficheur);
+            afficheur.Print("Infos : \nz: Haut, s: Bas, q:Gauche, d:Droite\n");
+            break;
+        default:
             break;
 
         }
@@ -161,7 +233,7 @@ bool AdventureGame::finJeu() const
     else
     {
         Position positionAventurier{d_aventurier.position()};
-        if(d_aventurier.Amulette() && d_terrain.cellule(positionAventurier.x(),positionAventurier.y())
+        if( d_aventurier.amulette() && d_terrain.cellule(positionAventurier.x(),positionAventurier.y()) )
         {
             return true;
         }

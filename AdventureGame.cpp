@@ -65,13 +65,13 @@ void AdventureGame::ActeAventurier()
             New.deplacerDe(-1,-1);
             break;
         case 'e' :
-            New.deplacerDe(-1,1);
-            break;
-        case 'w' :
             New.deplacerDe(1,-1);
             break;
-        case 'c' :
+        case 'w' :
             New.deplacerDe(-1,1);
+            break;
+        case 'c' :
+            New.deplacerDe(1,1);
             break;
         }
         Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};

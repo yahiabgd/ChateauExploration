@@ -52,7 +52,7 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
         NewCellule = terrain.cellule(newX,newY);
     }while(!terrain.positionValide(newX,
                                    newY)
-           &&NewCellule.contenu() == Cellule::TypeCellule::MUR);
+           || NewCellule.contenu() == Cellule::TypeCellule::MUR || NewCellule.contenu() == Cellule::TypeCellule::MONSTRE || NewCellule.contenu() == Cellule::TypeCellule::SMONSTRE);
 
     terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
     d_position.deplacerDe(directions[i][0],directions[i][1]);

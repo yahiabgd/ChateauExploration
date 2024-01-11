@@ -34,5 +34,5 @@ void Monstre::deplacementAleatoire(Terrain& terrain){
 }
 
 void Monstre::deplacervers( Aventurier& aventurier,Terrain& terrain){
-
+    std::cout<<"ffff"<<endl;
 }

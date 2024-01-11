@@ -11,17 +11,17 @@ AdventureGame::AdventureGame()
     :d_aventurier{ Aventurier{20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false} }, d_monstres(),d_terrain{DEFAUT_TERRAIN}
 {
 }
-AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres, const std::string& fichierTerrain)
-    :d_aventurier{ aventurier }, d_monstres(), d_terrain{fichierTerrain}
+AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres, const std::string& fichierTerrain)
+    :d_aventurier{ aventurier }, d_monstres(monstres), d_terrain{fichierTerrain}
 {
-    for(int i=0 ; i<monstres.size() ; ++i)
-        d_monstres.push_back(std::make_unique<Monstre>(monstres[i]));
+//    for(int i=0 ; i<monstres.size() ; ++i)
+//        d_monstres.push_back(std::move(monstres[i]));
 }
-AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres, const Terrain& terrain)
-    :d_aventurier{ aventurier}, d_monstres(), d_terrain{terrain}
+AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres, const Terrain& terrain)
+    :d_aventurier{ aventurier}, d_monstres(monstres), d_terrain{terrain}
 {
-    for(int i=0 ; i<monstres.size() ; ++i)
-        d_monstres.push_back(std::make_unique<Monstre>(monstres[i]));
+//    for(int i=0 ; i<monstres.size() ; ++i)
+//        d_monstres.push_back(std::move(monstres[i]));
 }
 AdventureGame::~AdventureGame() {}
 
@@ -110,10 +110,12 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
         ActeAventurier();
 
         //Acte des monstres
-//        for(auto& m : d_monstres)
-//        {
-//            m->deplacervers(*d_aventurier,*d_terrain);
-//        }
+        for(auto& m : d_monstres)
+        {
+            m->deplacervers(d_aventurier,d_terrain);
+
+
+        }
     }
 }
 

@@ -180,45 +180,48 @@ void AdventureGame::ActeAventurier()
             break;
 
         }
-        Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
-        Cellule::TypeCellule typenouvelleCellule =nouvelleCellule.contenu();
-
-        if(typenouvelleCellule != Cellule::TypeCellule::MUR && typenouvelleCellule != Cellule::TypeCellule::HORS )
+        if (New.x() != d_aventurier.position().x() || New.y() != d_aventurier.position().y())
         {
-            //Le joueur reste dans la meme case
-            if (typenouvelleCellule == Cellule::TypeCellule::MONSTRE || typenouvelleCellule == Cellule::TypeCellule::SMONSTRE)
+            Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
+            Cellule::TypeCellule typenouvelleCellule =nouvelleCellule.contenu();
+
+            if(typenouvelleCellule != Cellule::TypeCellule::MUR && typenouvelleCellule != Cellule::TypeCellule::HORS )
             {
-                int indiceMonstre = getMonstreIndiceParPosition(New);
-                d_aventurier.attaque(*d_monstres[indiceMonstre]);
-                if(!d_monstres[indiceMonstre]->estVivant())
+                //Le joueur reste dans la meme case
+                if (typenouvelleCellule == Cellule::TypeCellule::MONSTRE || typenouvelleCellule == Cellule::TypeCellule::SMONSTRE)
                 {
-                    d_terrain.miseajourcellule(New.x(),New.y(),d_monstres[indiceMonstre]->estSur());
-                    d_monstres.erase(d_monstres.begin() + indiceMonstre);
+                    int indiceMonstre = getMonstreIndiceParPosition(New);
+                    d_aventurier.attaque(*d_monstres[indiceMonstre]);
+                    if(!d_monstres[indiceMonstre]->estVivant())
+                    {
+                        d_terrain.miseajourcellule(New.x(),New.y(),d_monstres[indiceMonstre]->estSur());
+                        d_monstres.erase(d_monstres.begin() + indiceMonstre);
+                    }
+
+                }
+                else//Le joueur se deplace vers la case
+                {
+
+                    if (typenouvelleCellule == Cellule::TypeCellule::PIECE || typenouvelleCellule == Cellule::TypeCellule::AMULETTE)
+                        {
+                            int idxObj = getObjetIndiceParPosition(New);
+                            d_objets[idxObj]->ramasser(d_aventurier);
+                            typenouvelleCellule = Cellule::TypeCellule::VIDE;
+                        }
+
+                    if(typenouvelleCellule == Cellule::TypeCellule::SORTIE)
+                        {
+                            if(d_aventurier.amulette())
+                                d_finjeu = true;
+                        }
+                    else//case vide
+                        {
+                        }
+                DeplacerAventurier(New);
+                d_aventurier.modifieEstSur(typenouvelleCellule);
                 }
 
             }
-            else//Le joueur se deplace vers la case
-            {
-
-                if (typenouvelleCellule == Cellule::TypeCellule::PIECE || typenouvelleCellule == Cellule::TypeCellule::AMULETTE)
-                    {
-                        int idxObj = getObjetIndiceParPosition(New);
-                        d_objets[idxObj]->ramasser(d_aventurier);
-                        typenouvelleCellule = Cellule::TypeCellule::VIDE;
-                    }
-
-                if(typenouvelleCellule == Cellule::TypeCellule::SORTIE)
-                    {
-                        if(d_aventurier.amulette())
-                            d_finjeu = true;
-                    }
-                else//case vide
-                    {
-                    }
-            DeplacerAventurier(New);
-            d_aventurier.modifieEstSur(typenouvelleCellule);
-            }
-
         }
 
 }

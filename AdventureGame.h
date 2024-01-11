@@ -31,6 +31,7 @@ class AdventureGame
 
 
     private:
+        char InputLettre();
         bool d_finjeu;
         void ActeAventurier();
         void ActeMonstre();

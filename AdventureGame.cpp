@@ -127,11 +127,23 @@ void AdventureGame::DeplacerAventurier(const Position& position)
     //Mise � jour la position de l'objet aventurier
     d_aventurier.deplacer(position);
 }
+char AdventureGame::InputLettre()
+{
+    char lettre;
+    const std::string lettresvalide = "zqdsaewc";
+
+    do {
+        lettre = std::tolower(_getch());
+    } while (lettresvalide.find(lettre) == std::string::npos);
+
+    return lettre;
+}
+
 void AdventureGame::ActeAventurier()
 {
-     Direction d;
+        Direction d;
         Position New = d_aventurier.position();
-        switch(std::tolower(_getch()))
+        switch(InputLettre())
         {
         case 'z' :
             New.deplacerDe(0,-1);
@@ -157,6 +169,9 @@ void AdventureGame::ActeAventurier()
         case 'c' :
             New.deplacerDe(1,1);
             break;
+        default:
+            break;
+
         }
         Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
         Cellule::TypeCellule typenouvelleCellule =nouvelleCellule.contenu();

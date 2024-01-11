@@ -16,6 +16,7 @@ class Cellule
         SORTIE = '-',
         HORS='*',
         };
+
         static bool estType(char type);
         Cellule(const TypeCellule type);
         TypeCellule contenu() const;

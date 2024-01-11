@@ -2,7 +2,7 @@
 #define ADVENTUREGAME_H
 #include <vector>
 #include <memory>
-
+#include "ObjetRamassable.h"
 #include "Monstre.h"
 #include "Aventurier.h"
 #include "Terrain.h"
@@ -33,11 +33,11 @@ class AdventureGame
         void ChangerTerrain(const AfficheurJeu& afficheur);
         void ConfigurerTerrain(const AfficheurJeu& afficheur);
         int getMonstreIndiceParPosition(const Position& position);
-
         void commencerJeu(const AfficheurJeu& afficheur);
-
+        int getObjetIndiceParPosition(const Position& position);
         Aventurier d_aventurier;
         std::vector<std::shared_ptr<Monstre>> d_monstres;
+        std::vector<std::unique_ptr<ObjetRamassable>> d_objets;
         Terrain d_terrain;
         const std::string DEFAUT_TERRAIN{"testmain.txt"};
 };

@@ -30,6 +30,7 @@ void testterrain()
     }
 }
 
+
 //void testConstructorAG()
 //{
 //    Aventurier av(100,100,Position{10,10},Armure{20},Epee{15},Bourse{0},false);

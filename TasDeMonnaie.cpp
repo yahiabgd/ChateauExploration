@@ -6,6 +6,6 @@ TasDeMonnaie::TasDeMonnaie(const Position& position, int nombrePiece) : ObjetRam
 int TasDeMonnaie::nombrePiece() const
 { return d_nombrePiece; }
 
-void TasDeMonnaie::ramasser(Aventurier& aventurier){
+void TasDeMonnaie::ramasser(Aventurier& aventurier) {
     aventurier.RamasseTasDePiece(nombrePiece());
 }

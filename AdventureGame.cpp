@@ -26,7 +26,7 @@ AdventureGame::AdventureGame(const Terrain& terrain)
     Initialiserlejeu();
 //    for(int i=0 ; i<monstres.size() ; ++i)
 //        d_monstres.push_back(std::move(monstres[i]));
-    inisialiserMap();
+    //inisialiserMap();
 }
 AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres,
                              std::vector<std::shared_ptr<ObjetRamassable>>&objets, const Terrain& terrain)
@@ -61,7 +61,7 @@ void AdventureGame::Initialiserlejeu()
                 }
                 case Cellule::TypeCellule::AMULETTE:
                 {
-                    d_objets.push_back(std::make_shared<Amulette>(Position{10, 1}));
+                    d_objets.push_back(std::make_shared<Amulette>(Position{x, y}));
                     break;
                 }
                 case Cellule::TypeCellule::MONSTRE:
@@ -77,8 +77,13 @@ void AdventureGame::Initialiserlejeu()
                 default:
                     break;
             }
+        }
+    }
+}
 
-void AdventureGame::inisialiserMap(){
+void AdventureGame::inisialiserMap()
+{
+
     d_terrain.miseajourcellule(d_aventurier.position().x(),d_aventurier.position().y(),Cellule::TypeCellule::JOUEUR);
     for(const auto& monstre : d_monstres){
         d_terrain.miseajourcellule(monstre->position().x(),monstre->position().y(),Cellule::TypeCellule::MONSTRE);

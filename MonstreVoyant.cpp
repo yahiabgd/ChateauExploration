@@ -52,7 +52,7 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
         NewCellule = terrain.cellule(newX,newY);
     }while(!terrain.positionValide(newX,
                                    newY)
-           || NewCellule.contenu() == Cellule::TypeCellule::MUR || NewCellule.contenu() == Cellule::TypeCellule::MONSTRE || NewCellule.contenu() == Cellule::TypeCellule::SMONSTRE);
+           || NewCellule.contenu() == Cellule::TypeCellule::MUR || NewCellule.contenu() == Cellule::TypeCellule::MONSTRE || NewCellule.contenu() == Cellule::TypeCellule::SMONSTRE|| NewCellule.contenu() == Cellule::TypeCellule::HORS);
 
     terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
     d_position.deplacerDe(directions[i][0],directions[i][1]);
@@ -104,7 +104,7 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
 
             // Check if the new position is valid and has not been visited
             Cellule NewCellule = terrain.cellule(newX,newY);
-            if (terrain.positionValide(newX, newY)&& NewCellule.contenu() != Cellule::TypeCellule::MUR && !visited[newX][newY]) {
+            if (terrain.positionValide(newX, newY)&& NewCellule.contenu() != Cellule::TypeCellule::MUR &&NewCellule.contenu() != Cellule::TypeCellule::MONSTRE &&NewCellule.contenu() != Cellule::TypeCellule::SMONSTRE && NewCellule.contenu() != Cellule::TypeCellule::HORS  && !visited[newX][newY]) {
                 // Mark the neighbor as visited and enqueue it
                 q.push({newX, newY});
                 visited[newX][newY] = true;

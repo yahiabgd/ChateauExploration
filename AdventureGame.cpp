@@ -309,6 +309,7 @@ void AdventureGame::ChangerTerrain(const AfficheurJeu& afficheur)
             try
             {
                 d_terrain = Terrain{fic};
+                d_finjeu = false;
 
             }
             catch(const std::exception& e)

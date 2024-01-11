@@ -5,5 +5,6 @@ Epee::Epee(int pointSolidite) : Equipement{pointSolidite}
 
 void Epee::reduireSolidite(int force)
 {
-    d_pointSolidite -= force;
+    if(d_pointSolidite > 0)
+        d_pointSolidite -= force;
 }

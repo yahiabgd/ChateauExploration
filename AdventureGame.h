@@ -31,7 +31,9 @@ class AdventureGame
 
 
     private:
+        bool d_finjeu;
         void ActeAventurier();
+        void ActeMonstre();
         void inisialiserMap();
         void DeplacerAventurier(const Position& position);
         void ChangerTerrain(const AfficheurJeu& afficheur);
@@ -43,7 +45,7 @@ class AdventureGame
         std::vector<std::shared_ptr<Monstre>> d_monstres;
         std::vector<std::shared_ptr<ObjetRamassable>> d_objets;
         Terrain d_terrain;
-        const std::string DEFAUT_TERRAIN{"testmain.txt"};
+        const std::string DEFAUT_TERRAIN{"testmap.txt"};
 };
 
 

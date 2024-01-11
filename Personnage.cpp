@@ -26,6 +26,6 @@ Position Personnage::position()const{
 }
 
 bool Personnage::estVivant() const{
-    return d_pointVie>0 ? true : false;
+    return d_pointVie>0;
 }
 

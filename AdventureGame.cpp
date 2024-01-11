@@ -16,21 +16,20 @@ AdventureGame::AdventureGame()
 }
 AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres,
                              std::vector<std::shared_ptr<ObjetRamassable>>&objets,const std::string& fichierTerrain)
-    :d_aventurier{ aventurier }, d_monstres(monstres), d_terrain{fichierTerrain},d_objets{objets}
+    :d_aventurier{ aventurier }, d_monstres(monstres), d_terrain{fichierTerrain},d_objets{objets},d_finjeu{false}
 {
 
 }
 AdventureGame::AdventureGame(const Terrain& terrain)
-        :d_monstres{}, d_terrain{terrain},d_objets{},d_aventurier{Position{0,0}}
+        :d_monstres{}, d_terrain{terrain},d_objets{},d_aventurier{Position{0,0}},d_finjeu{false}
 {
-    Initialiserlejeu();
 //    for(int i=0 ; i<monstres.size() ; ++i)
 //        d_monstres.push_back(std::move(monstres[i]));
     //inisialiserMap();
 }
 AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres,
                              std::vector<std::shared_ptr<ObjetRamassable>>&objets, const Terrain& terrain)
-    :d_aventurier{aventurier}, d_monstres(monstres), d_terrain{terrain},d_objets{objets}
+    :d_aventurier{aventurier}, d_monstres(monstres), d_terrain{terrain},d_objets{objets},d_finjeu{false}
 {
      inisialiserMap();
 //    for(int i=0 ; i<monstres.size() ; ++i)
@@ -41,6 +40,9 @@ AdventureGame::~AdventureGame() {}
 
 void AdventureGame::Initialiserlejeu()
 {
+    d_objets.clear();
+    d_monstres.clear();
+    d_finjeu=false;
     for(int y=0;y<d_terrain.lignes();y++)
     {
         for(int x = 0; x<d_terrain.colonnes();x++)
@@ -51,7 +53,7 @@ void AdventureGame::Initialiserlejeu()
                 case Cellule::TypeCellule::JOUEUR:
                 {
                     Aventurier av{Position{x, y}};
-                    d_aventurier = av; // Assuming there is an appropriate assignment operator or copy constructor
+                    d_aventurier = av;
                     break;
                 }
                 case Cellule::TypeCellule::PIECE:
@@ -165,43 +167,53 @@ void AdventureGame::ActeAventurier()
             }
             else
             {
-                DeplacerAventurier(New);
+
                 if (nouvelleCellule.contenu() == Cellule::TypeCellule::PIECE || nouvelleCellule.contenu() == Cellule::TypeCellule::AMULETTE)
                     {
                         int idxObj = getObjetIndiceParPosition(New);
                         d_objets[idxObj]->ramasser(d_aventurier);
                     }
 
-                if (nouvelleCellule.contenu() == Cellule::TypeCellule::SORTIE)
+                if(nouvelleCellule.contenu() == Cellule::TypeCellule::SORTIE)
                     {
-
+                        if(d_aventurier.amulette())
+                            d_finjeu = true;
                     }
                 else//case vide
                     {
                     }
-                }
+            DeplacerAventurier(New);
+            }
 
         }
 
 }
+void AdventureGame::ActeMonstre()
+{
+    for(auto& m : d_monstres)
+    {
+        m->deplacervers(d_aventurier,d_terrain);
+    }
+}
 void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 {
-    while(true)
+    if(finJeu())
+    {
+        d_terrain=DEFAUT_TERRAIN;
+    }
+
+    Initialiserlejeu();
+    while(!finJeu() )
     {
         afficheur.AffciherTitre();
         afficheur.AffciherInfoAventurier(d_aventurier);
         afficheur.AffciherTerrain(d_terrain);
 
-        //Acte d'aventurier
+            //Acte d'aventurier
         ActeAventurier();
 
-        //Acte des monstres
-        for(auto& m : d_monstres)
-        {
-            m->deplacervers(d_aventurier,d_terrain);
-
-
-        }
+            //Acte des monstres
+        ActeMonstre();
     }
 }
 
@@ -340,15 +352,7 @@ void AdventureGame::commencer(const AfficheurJeu& afficheur)
 
 bool AdventureGame::finJeu() const
 {
-    //l'aventurier a pris l'amulette et passe par la sortie
-    if(!d_aventurier.estVivant()) return true;
-    else
-    {
-        Position positionAventurier{d_aventurier.position()};
-        if( d_aventurier.amulette() && d_terrain.cellule(positionAventurier.x(),positionAventurier.y()) )
-        {
-            return true;
-        }
-        return false;
-    }
+    if(!d_aventurier.estVivant())
+        return true;
+    return d_finjeu;
 }

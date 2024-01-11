@@ -28,9 +28,6 @@ Cellule::TypeCellule Personnage::modifieEstSur(Cellule::TypeCellule type)
 void Personnage::reduirePointVie(int points)
 { d_pointVie -= points ;}
 
-void Personnage::deplacement(char direction){
-    // à déclarer
-}
 Position Personnage::position()const{
     return d_position;
 }

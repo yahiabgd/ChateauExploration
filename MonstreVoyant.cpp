@@ -91,7 +91,8 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
             int newY = current.y() + dir[1];
 
             // Check if the new position is valid and has not been visited
-            if (terrain.positionValide(newX, newY) && !visited[newX][newY]) {
+            Cellule NewCellule = terrain.cellule(newX,newY);
+            if (terrain.positionValide(newX, newY)&& NewCellule.contenu() != Cellule::TypeCellule::MUR && !visited[newX][newY]) {
                 // Mark the neighbor as visited and enqueue it
                 q.push({newX, newY});
                 visited[newX][newY] = true;

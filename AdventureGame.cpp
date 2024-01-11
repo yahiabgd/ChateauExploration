@@ -68,12 +68,12 @@ void AdventureGame::Initialiserlejeu()
                 }
                 case Cellule::TypeCellule::MONSTRE:
                 {
-                    d_monstres.push_back(std::make_shared<MonstreAveugle>(10, 100, Position{x, y}, 10));
+                    d_monstres.push_back(std::make_shared<MonstreAveugle>(10, 100, Position{x, y}, 80));
                     break;
                 }
                 case Cellule::TypeCellule::SMONSTRE:
                 {
-                    d_monstres.push_back(std::make_shared<MonstreVoyant>(25, 100, Position{x, y}, 10));
+                    d_monstres.push_back(std::make_shared<MonstreVoyant>(25, 100, Position{x, y}, 80));
                     break;
                 }
                 default:

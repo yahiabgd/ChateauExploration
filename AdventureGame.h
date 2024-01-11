@@ -30,6 +30,8 @@ class AdventureGame
 
 
     private:
+        void ActeAventurier();
+        void DeplacerAventurier(const Position& position);
         void ChangerTerrain(const AfficheurJeu& afficheur);
         void ConfigurerTerrain(const AfficheurJeu& afficheur);
         int getMonstreIndiceParPosition(const Position& position);

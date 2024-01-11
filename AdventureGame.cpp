@@ -36,15 +36,17 @@ int AdventureGame::getMonstreIndiceParPosition(const Position& position)
     }
     return i;
 }
-
-void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
+void AdventureGame::DeplacerAventurier(const Position& position)
 {
-    while(true)
-    {
-
-        afficheur.AffciherTerrain(d_terrain);
-        //Acte d'aventurier
-        Direction d;
+    //Mise à jour du terrain
+    d_terrain->miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
+    d_terrain->miseajourcellule(position.x(),position.y(),Cellule::TypeCellule::JOUEUR);
+    //Mise à jour la position de l'objet aventurier
+    d_aventurier.deplacer(position);
+}
+void AdventureGame::ActeAventurier()
+{
+     Direction d;
         Position New = d_aventurier.position();
         switch(std::tolower(_getch()))
         {
@@ -56,7 +58,8 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
             break;
         case 'd' :
             New.deplacerDe(1,0);
-            break;        case 's' :
+            break;
+        case 's' :
             New.deplacerDe(0,1);
             break;
         case 'a' :
@@ -75,15 +78,35 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
         Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
         if(nouvelleCellule.contenu() != Cellule::TypeCellule::MUR && nouvelleCellule.contenu() != Cellule::TypeCellule::HORS )
         {
-            if (nouvelleCellule.contenu() == Cellule::TypeCellule::MONSTRE || nouvelleCellule.contenu() == Cellule::TypeCellule::SMONSTRE){
+            if (nouvelleCellule.contenu() == Cellule::TypeCellule::MONSTRE || nouvelleCellule.contenu() == Cellule::TypeCellule::SMONSTRE)
+            {
 
-            } else if (nouvelleCellule.contenu() == Cellule::TypeCellule::PIECE || nouvelleCellule.contenu() == Cellule::TypeCellule::AMULETTE) {
+            } else
+                {
+                DeplacerAventurier(New);
+                if (nouvelleCellule.contenu() == Cellule::TypeCellule::PIECE || nouvelleCellule.contenu() == Cellule::TypeCellule::AMULETTE)
+                    {
 
-            } else if (nouvelleCellule.contenu() == Cellule::TypeCellule::SORTIE) {
+                    }
 
-            } else { /* Case vide*/
-            }
+                if (nouvelleCellule.contenu() == Cellule::TypeCellule::SORTIE)
+                    {
+                    }
+                else//case vide
+                    {
+                    }
+                }
         }
+
+}
+void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
+{
+    while(true)
+    {
+
+        afficheur.AffciherTerrain(d_terrain);
+        //Acte d'aventurier
+        DeplacerAventurier();
 
         //Acte des monstres
 //        for(auto& m : d_monstres)

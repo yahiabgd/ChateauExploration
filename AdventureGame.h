@@ -18,8 +18,8 @@ class AdventureGame
 {
     public:
         AdventureGame();
-        AdventureGame(const Aventurier& aventurier, const std::vector<std::unique_ptr<Monstre>>& monstres , const std::string& fichierTerrain);
-        AdventureGame(const Aventurier& aventurier, const std::vector<std::unique_ptr<Monstre>>& monstres , const Terrain& terrain);
+        AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const std::string& fichierTerrain);
+        AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const Terrain& terrain);
 
         virtual ~AdventureGame();
         void commencer(const AfficheurJeu& afficheur);

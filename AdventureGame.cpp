@@ -294,7 +294,7 @@ void AdventureGame::ChangerTerrain(const AfficheurJeu& afficheur)
 
 void AdventureGame::ConfigurerTerrain(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu = {"Changer contenu", "Retoure"};
+    std::vector<string> menu = {"Changer contenu","Creer Terrain","Importer un nouveau terrain", "Retoure"};
     int choix = afficheur.AfficherMenu(menu);
     while(choix != menu.size())
     {
@@ -328,28 +328,75 @@ void AdventureGame::ConfigurerTerrain(const AfficheurJeu& afficheur)
                 }
                 break;
             }
+            case 2 :
+                {
+                    try{
+                //Creer Terrain
+                Terrain tmp=d_terrain;
+                int ligne = std::stoi(afficheur.Input("Entrer le nouveau nombre nombre de ligne : "));
+                int colonne= std::stoi(afficheur.Input("Entrer le nouveau nombre nombre de colenne : "));
+                tmp.changenbcolonnes(colonne);
+                tmp.changenblignes(ligne);
+                for(int x=0 ; x<ligne ; ++x)
+                {
+                    for(int y=0; y<colonne ; ++y)
+                    {
+        //            Cellule contenu= afficheur.Input("Entrer le nouveau contenu:");
+    //                tmp.miseajourcellule(x,y,contenu));
+                    }
+                }
+                if(tmp.estvalide())
+                {
+                    d_terrain=tmp;
+//                    try
+//                    {
+                        d_terrain.sauvegarder("terrain.txt");
+
+//                    }catch(const std::exception& e)
+//                    {
+//                        afficheur.PrintError(e.what());
+//                    }
+                }
+                else
+                    afficheur.PrintError("Terrain n'est pas valide");
+                break;
+                    }catch(const std::exception& e)
+                {
+                    afficheur.PrintError(e.what());
+                }
+            }
+        case 3 :
+            std::string fic;
+            fic = afficheur.Input("Entrer le nom du fichier qui contient le terrain : ");
+            try
+            {
+                d_terrain = Terrain{fic};
+
+            }
+            catch(const std::exception& e)
+            {
+                afficheur.PrintError(e.what());
+            }
+            break;
         }
         choix = afficheur.AfficherMenu(menu);
     }
 }
 void AdventureGame::commencer(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu = {"Changer le terrain","Configurer le terrain","Commencer le jeu","Info de jeu", "Quitter"};
+    std::vector<string> menu = {"Configurer le terrain","Commencer le jeu","Info de jeu", "Quitter"};
     int choix=afficheur.AfficherMenu(menu);
     while( choix != menu.size())
     {
         switch(choix)
         {
         case 1 :
-            ChangerTerrain(afficheur);
-            break;
-        case 2:
             ConfigurerTerrain(afficheur);
             break;
-        case 3 :
+        case 2 :
             commencerJeu(afficheur);
             break;
-        case 4 :
+        case 3 :
             afficheur.Print("Infos : \nz: Haut, s: Bas, q:Gauche, d:Droite\n");
             break;
         default:

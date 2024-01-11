@@ -14,24 +14,32 @@ MonstreVoyant::~MonstreVoyant()
 
 
 void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
+    std::cout<<"deplcer vers";
     if(aventurier.position().distance(d_position)<=8){
+        std::cout<<aventurier.position().distance(d_position);
         if(aventurier.position().distance(d_position)==1){
             attaque(aventurier);
             return;
         }
+
         std::vector<Position> chemain = MonstreVoyant::cheminVersAventurier(aventurier, terrain);
+        std::cout<<chemain[1].x()<<"  "<<chemain[1].y();
         //cellules[d_position.x()][d_position.y()].changecontenu(Cellule::TypeCellule::VIDE);
         terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
-        d_position = chemain[1];
+
+        d_position.deplacerEn( chemain[1].x(),chemain[1].y()) ;
+        std::cout<<" updated"<<d_position.x()<<"  "<<d_position.y();
         terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::MONSTRE);
+        return;
     }
+     std::cout<<"deplcer fd";
     deplacementAleatoire(terrain);
 }
 
 void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
     //seulement vertical et horizontal
     //                              up,     down,   left,    right
-    const int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+     const int directions[4][2] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
     int i=0;
     do{
         i = rand() % 4;
@@ -43,18 +51,19 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
 }
 
  std::vector<Position> MonstreVoyant::cheminVersAventurier(const Aventurier& aventurier, Terrain& terrain){
+     std::cout<<"chemain vers";
     // Possible movement directions (4 directions: up, down, left, right)
-    const int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    const int directions[4][2] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
     // Position start = d_position;
     // Position goal = aventurier.position();
     // Create a queue for BFS
     std::queue<Position> q;
 
     // Create a 2D vector to track whether a Point has been visited
-    std::vector<std::vector<bool>> visited(terrain.lignes(), std::vector<bool>(terrain.colonnes(), false));
+    std::vector<std::vector<bool>> visited(terrain.colonnes(), std::vector<bool>(terrain.lignes(), false));
 
     // Create a 2D vector to store parent information for backtracking
-    std::vector<std::vector<Position>> parent(terrain.lignes(), std::vector<Position>(terrain.colonnes(), {-1, -1}));
+    std::vector<std::vector<Position>> parent(terrain.colonnes(), std::vector<Position>(terrain.lignes(), {-1, -1}));
 
     // Add the starting point to the queue and mark it as visited
     q.push(d_position);

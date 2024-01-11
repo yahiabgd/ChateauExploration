@@ -193,3 +193,4 @@ bool AdventureGame::finJeu() const
         return false;
     }
 }
+

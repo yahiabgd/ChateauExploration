@@ -67,7 +67,7 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
     const int directions[4][2] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
     // Position start = d_position;
     // Position goal = aventurier.position();
-    // Create a queue for BFS
+
     std::queue<Position> q;
 
     // Create a 2D vector to track whether a Point has been visited

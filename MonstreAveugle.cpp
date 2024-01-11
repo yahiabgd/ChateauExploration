@@ -52,7 +52,7 @@ void MonstreAveugle::deplacementAleatoire(Terrain& terrain){
     terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
     d_position.deplacerDe(directions[i][0],directions[i][1]);
     Cellule NewCellule = terrain.cellule(d_position.x(),d_position.y());
-    modifieEstSur(NewCellule.contenu());;
+    modifieEstSur(NewCellule.contenu());
     terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::MONSTRE);
 
     //std::cout<<d_position.x()<<"  "<<d_position.y();

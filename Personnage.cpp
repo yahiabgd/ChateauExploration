@@ -15,6 +15,9 @@ int Personnage::pointForce() const
 int Personnage::pointVie() const
 { return d_pointVie; }
 
+void Personnage::reduirePointVie(int points)
+{ d_pointVie -= points ;}
+
 void Personnage::deplacement(char direction){
     // à déclarer
 }

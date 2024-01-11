@@ -25,14 +25,23 @@ void Aventurier::RamasseTasDePiece(int nombreDePiece) {
 }
 
 void Aventurier::recoitAttaque(int degats) {
-    int nb = static_cast<int>(UNQUART * degats);
-    std::cout<<nb;
-    if (nb <= d_armure.pointSolidite()&& d_armure.pointSolidite()>0)
-        d_armure.reduireSolidite(nb);
-    else {
-        int reste =  (nb - d_armure.pointSolidite());
-        std::cout<<reste;
-        d_pointVie -= reste;
+    int nb = static_cast<int>(TROISQUART * degats);
+    int resteattaque=degats -nb;
+    if(d_armure.pointSolidite() > 0 )
+    {
+        int restearmure =  d_armure.pointSolidite() - (nb/2);
+        if(restearmure >= 0)
+            d_armure.reduireSolidite(nb/2 );
+        else
+        {
+            resteattaque+=(-restearmure);
+            d_armure.reduireSolidite(d_armure.pointSolidite());
+        }
+        reduirePointVie(resteattaque);
+    }
+    else
+    {
+        reduirePointVie(degats);
     }
 }
 

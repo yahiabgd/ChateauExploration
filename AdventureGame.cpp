@@ -9,20 +9,20 @@
 std::string AdventureGame::DEFAUT_TERRAIN{"testmap.txt"};
 
 AdventureGame::AdventureGame()
-    :d_aventurier{ std::make_unique<Aventurier>(20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false) }, d_monstres(),d_terrain{DEFAUT_TERRAIN}
+    :d_aventurier{ Aventurier(20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false) }, d_monstres{},d_terrain{DEFAUT_TERRAIN}
 {
 }
-AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres, const std::string& fichierTerrain)
-    :d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres(), d_terrain{fichierTerrain}
+AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::unique_ptr<Monstre>>& monstres, const std::string& fichierTerrain)
+    :d_aventurier{aventurier}, d_monstres(), d_terrain{fichierTerrain}
 {
-    for(int i=0 ; i<monstres.size() ; ++i)
-        d_monstres.push_back(std::make_unique<Monstre>(monstres[i]));
+//    for(int i=0 ; i<monstres.size() ; ++i)
+//        d_monstres.push_back(std::make_unique<Monstre>(monstres[i]));
 }
-AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres, const Terrain& terrain)
-    :d_aventurier{ std::make_unique<Aventurier>(aventurier) }, d_monstres(), d_terrain{terrain}
+AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::unique_ptr<Monstre>>& monstres, const Terrain& terrain)
+    :d_aventurier{ aventurier }, d_monstres(), d_terrain{terrain}
 {
-    for(int i=0 ; i<monstres.size() ; ++i)
-        d_monstres.push_back(std::make_unique<Monstre>(monstres[i]));
+//    for(int i=0 ; i<monstres.size() ; ++i)
+//        d_monstres.push_back(std::make_unique<Monstre>(monstres[i]));
 }
 AdventureGame::~AdventureGame() {}
 
@@ -33,26 +33,28 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
     {
         afficheur.AffciherTerrain(d_terrain);
         //Acte d'aventurier
+
         switch(std::tolower(_getch()))
         {
         case 'z' :
-            d_aventurier->deplacer(Direction::HAUT,d_terrain);
+            d_aventurier.deplacer(Direction::HAUT,d_terrain);
             break;
         case 'q' :
-            d_aventurier->deplacer(Direction::GAUCHE,d_terrain);
+            d_aventurier.deplacer(Direction::GAUCHE,d_terrain);
             break;
         case 'd' :
-            d_aventurier->deplacer(Direction::DROITE,d_terrain);
+            d_aventurier.deplacer(Direction::DROITE,d_terrain);
             break;        case 's' :
-            d_aventurier->deplacer(Direction::BAS,d_terrain);
+            d_aventurier.deplacer(Direction::BAS,d_terrain);
             break;
         }
 
-        //Acte des monstres
-//        for(auto& m : d_monstres)
-//        {
-//            m->deplacervers(*d_aventurier,*d_terrain);
-//        }
+       // Acte des monstres
+       for(auto& m : d_monstres)
+        {
+            m->deplacervers(d_aventurier,d_terrain);
+        }
+
     }
 }
 
@@ -121,7 +123,7 @@ void AdventureGame::commencer(const AfficheurJeu& afficheur)
 bool AdventureGame::finJeu() const
 {
     //l'aventurier a pris l'amulette et passe par la sortie
-    if(!d_aventurier->estVivant()) return true;
+    if(!d_aventurier.estVivant()) return true;
     else
     {
         size_t i=0;

@@ -20,8 +20,8 @@ class AdventureGame
     enum EtatJeu {DEBUT , FIN };
     public:
         AdventureGame();
-        AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const std::string& fichierTerrain);
-        AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const Terrain& terrain);
+        AdventureGame(const Aventurier& aventurier, const std::vector<std::unique_ptr<Monstre>>& monstres , const std::string& fichierTerrain);
+        AdventureGame(const Aventurier& aventurier, const std::vector<std::unique_ptr<Monstre>>& monstres , const Terrain& terrain);
 
         virtual ~AdventureGame();
         void commencer(const AfficheurJeu& afficheur);
@@ -35,7 +35,7 @@ class AdventureGame
 
         void commencerJeu(const AfficheurJeu& afficheur);
     private:
-        std::unique_ptr<Aventurier> d_aventurier;
+        Aventurier d_aventurier;
         std::vector<std::unique_ptr<Monstre>> d_monstres;
         Terrain d_terrain;
         static std::string DEFAUT_TERRAIN;

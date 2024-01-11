@@ -29,7 +29,7 @@ void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
         d_position.deplacerEn( chemain[1].x(),chemain[1].y()) ;
         //std::cout<<" updated"<<d_position.x()<<"  "<<d_position.y();
         Cellule NewCellule = terrain.cellule(d_position.x(),d_position.y());
-        modifieEstSur(NewCellule.contenu());;
+        modifieEstSur(NewCellule.contenu());
         terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::SMONSTRE);
         return;
     }
@@ -42,8 +42,8 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
     //                              up,     down,   left,    right
      const int directions[4][2] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
     int i=0;
-    int newX;
-    int newY;
+    int newX = 0;
+    int newY = 0;
     Cellule NewCellule = terrain.cellule(newX,newY);
     do{
         i = rand() % 4;

@@ -46,12 +46,15 @@ void MonstreAveugle::deplacementAleatoire(Terrain& terrain){
                }
         }
      }while(!terrain.positionValide(NewX,NewY)
-            ||terrain.cellule( NewX , NewY ) != Cellule::TypeCellule::VIDE
+            ||terrain.cellule( NewX , NewY ) == Cellule::TypeCellule::MUR
             || entreDeuxMur);
 
-    terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
+    terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
     d_position.deplacerDe(directions[i][0],directions[i][1]);
+    Cellule NewCellule = terrain.cellule(d_position.x(),d_position.y());
+    modifieEstSur(NewCellule.contenu());;
     terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::MONSTRE);
+
     //std::cout<<d_position.x()<<"  "<<d_position.y();
 
 }

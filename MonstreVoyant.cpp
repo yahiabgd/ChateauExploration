@@ -23,11 +23,13 @@ void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
         }
 
         std::vector<Position> chemain = MonstreVoyant::cheminVersAventurier(aventurier, terrain);
-        std::cout<<chemain[1].x()<<"  "<<chemain[1].y();
-        terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
+        //std::cout<<chemain[1].x()<<"  "<<chemain[1].y();
+        terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
 
         d_position.deplacerEn( chemain[1].x(),chemain[1].y()) ;
-        std::cout<<" updated"<<d_position.x()<<"  "<<d_position.y();
+        //std::cout<<" updated"<<d_position.x()<<"  "<<d_position.y();
+        Cellule NewCellule = terrain.cellule(d_position.x(),d_position.y());
+        modifieEstSur(NewCellule.contenu());;
         terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::SMONSTRE);
         return;
     }
@@ -40,13 +42,23 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
     //                              up,     down,   left,    right
      const int directions[4][2] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
     int i=0;
+    int newX;
+    int newY;
+    Cellule NewCellule = terrain.cellule(newX,newY);
     do{
         i = rand() % 4;
-    }while(!terrain.positionValide(d_position.x()+directions[i][0],
-                                   d_position.y() + directions[i][1]));
-    terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
+        newX = d_position.x()+directions[i][0];
+        newY = d_position.y() + directions[i][1];
+        NewCellule = terrain.cellule(newX,newY);
+    }while(!terrain.positionValide(newX,
+                                   newY)
+           &&NewCellule.contenu() == Cellule::TypeCellule::MUR);
+
+    terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
     d_position.deplacerDe(directions[i][0],directions[i][1]);
-    terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::MONSTRE);
+    NewCellule = terrain.cellule(d_position.x(),d_position.y());
+    modifieEstSur(NewCellule.contenu());
+    terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::SMONSTRE);
 }
 
  std::vector<Position> MonstreVoyant::cheminVersAventurier(const Aventurier& aventurier, Terrain& terrain){

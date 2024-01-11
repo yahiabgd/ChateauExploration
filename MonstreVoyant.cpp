@@ -29,7 +29,7 @@ void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
         d_position.deplacerEn( chemain[1].x(),chemain[1].y()) ;
         //std::cout<<" updated"<<d_position.x()<<"  "<<d_position.y();
         Cellule NewCellule = terrain.cellule(d_position.x(),d_position.y());
-        modifieEstSur(NewCellule.contenu());;
+        modifieEstSur(NewCellule.contenu());
         terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::SMONSTRE);
         return;
     }
@@ -42,8 +42,8 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
     //                              up,     down,   left,    right
      const int directions[4][2] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
     int i=0;
-    int newX;
-    int newY;
+    int newX = 0;
+    int newY = 0;
     Cellule NewCellule = terrain.cellule(newX,newY);
     do{
         i = rand() % 4;
@@ -52,7 +52,7 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
         NewCellule = terrain.cellule(newX,newY);
     }while(!terrain.positionValide(newX,
                                    newY)
-           &&NewCellule.contenu() == Cellule::TypeCellule::MUR);
+           || NewCellule.contenu() == Cellule::TypeCellule::MUR || NewCellule.contenu() == Cellule::TypeCellule::MONSTRE || NewCellule.contenu() == Cellule::TypeCellule::SMONSTRE|| NewCellule.contenu() == Cellule::TypeCellule::HORS);
 
     terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
     d_position.deplacerDe(directions[i][0],directions[i][1]);
@@ -104,7 +104,7 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
 
             // Check if the new position is valid and has not been visited
             Cellule NewCellule = terrain.cellule(newX,newY);
-            if (terrain.positionValide(newX, newY)&& NewCellule.contenu() != Cellule::TypeCellule::MUR && !visited[newX][newY]) {
+            if (terrain.positionValide(newX, newY)&& NewCellule.contenu() != Cellule::TypeCellule::MUR &&NewCellule.contenu() != Cellule::TypeCellule::MONSTRE &&NewCellule.contenu() != Cellule::TypeCellule::SMONSTRE && NewCellule.contenu() != Cellule::TypeCellule::HORS  && !visited[newX][newY]) {
                 // Mark the neighbor as visited and enqueue it
                 q.push({newX, newY});
                 visited[newX][newY] = true;

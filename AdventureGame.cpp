@@ -134,7 +134,7 @@ void AdventureGame::DeplacerAventurier(const Position& position)
 char AdventureGame::InputLettre()
 {
     char lettre;
-    const std::string lettresvalide = "zqdsaewc";
+    const std::string lettresvalide = "zqdsaewcr";
 
     do {
         lettre = std::tolower(_getch());
@@ -172,6 +172,9 @@ void AdventureGame::ActeAventurier()
             break;
         case 'c' :
             New.deplacerDe(1,1);
+            break;
+        case 'r' :
+            d_aventurier.reparerEquipements();
             break;
         default:
             break;
@@ -309,6 +312,7 @@ void AdventureGame::ChangerTerrain(const AfficheurJeu& afficheur)
             try
             {
                 d_terrain = Terrain{fic};
+                d_finjeu = false;
 
             }
             catch(const std::exception& e)

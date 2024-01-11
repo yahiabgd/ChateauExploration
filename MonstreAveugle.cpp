@@ -47,6 +47,7 @@ void MonstreAveugle::deplacementAleatoire(Terrain& terrain){
         }
      }while(!terrain.positionValide(NewX,NewY)
             ||terrain.cellule( NewX , NewY ) == Cellule::TypeCellule::MUR
+            ||terrain.cellule( NewX , NewY ) == Cellule::TypeCellule::MONSTRE || terrain.cellule( NewX , NewY ) == Cellule::TypeCellule::SMONSTRE|| terrain.cellule( NewX , NewY ) == Cellule::TypeCellule::HORS
             || entreDeuxMur);
 
     terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());

@@ -17,6 +17,14 @@ Aventurier::Aventurier( const Position& position):Personnage{25, 100, position},
 {
 
 }
+void Aventurier::reparerEquipements()
+{
+    int pieces= d_bourse.pieceMonnaie();
+    int reste = pieces - pieces/2;
+    d_armure.reparer(reste);
+    d_epee.reparer(pieces/2);
+    d_bourse.enlever(pieces);
+}
 void Aventurier::RamasseAmulette()
 { d_amulette = true; }
 

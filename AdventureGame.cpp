@@ -175,8 +175,10 @@ void AdventureGame::ActeAventurier()
         }
         Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
         Cellule::TypeCellule typenouvelleCellule =nouvelleCellule.contenu();
+
         if(typenouvelleCellule != Cellule::TypeCellule::MUR && typenouvelleCellule != Cellule::TypeCellule::HORS )
         {
+            //Le joueur reste dans la meme case
             if (typenouvelleCellule == Cellule::TypeCellule::MONSTRE || typenouvelleCellule == Cellule::TypeCellule::SMONSTRE)
             {
                 int indiceMonstre = getMonstreIndiceParPosition(New);
@@ -188,7 +190,7 @@ void AdventureGame::ActeAventurier()
                 }
 
             }
-            else
+            else//Le joueur se deplace vers la case
             {
 
                 if (typenouvelleCellule == Cellule::TypeCellule::PIECE || typenouvelleCellule == Cellule::TypeCellule::AMULETTE)

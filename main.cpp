@@ -5,6 +5,7 @@
 #include "Terrain.h"
 #include "AdventureGame.h"
 #include "afficheurConsole.h"
+#include "MonstreVoyant.h"
 #include "MonstreAveugle.h"
 using namespace std;
 
@@ -29,22 +30,23 @@ void testterrain()
     }
 }
 
-void testConstructorAG()
-{
-    Aventurier av(100,100,Position{10,10},Armure{20},Epee{15},Bourse{0},false);
-    std::vector<Monstre> monstres;
-    for(int i=0 ; i<3 ; ++i)
-        monstres.push_back( MonstreAveugle(10,100,Position{10,5},10) );
-    Terrain t{"testmap.txt"};
-    AdventureGame ad{av,monstres,t};
-}
+
+//void testConstructorAG()
+//{
+//    Aventurier av(100,100,Position{10,10},Armure{20},Epee{15},Bourse{0},false);
+//    std::vector<Monstre> monstres;
+//    for(int i=0 ; i<3 ; ++i)
+//        monstres.push_back( MonstreAveugle(10,100,Position{10,5},10) );
+//    Terrain t{"testmap.txt"};
+//    AdventureGame ad{av,monstres,t};
+//}
 
 void testAdventureGame()
 {
-    Aventurier av(100,100,Position{12,2},Armure{20},Epee{15},Bourse{0},false);
-    std::vector<Monstre> monstres;
+    Aventurier av(100,100,Position{18,3},Armure{20},Epee{15},Bourse{0},false);
+    std::vector<std::shared_ptr<Monstre>> monstres;
     for(int i=0 ; i<1 ; ++i)
-        monstres.push_back(MonstreAveugle(10,100,Position{13,3},10));
+        monstres.push_back(make_shared<MonstreAveugle>(10,100,Position{10,2},10));
     Terrain t{"testmap.txt"};
     AdventureGame ad{av,monstres,t};
     AfficheurJeuConsole aff;

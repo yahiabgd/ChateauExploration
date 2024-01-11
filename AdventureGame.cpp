@@ -5,10 +5,11 @@
 #include "AdventureGame.h"
 #include "afficheur.h"
 #include "Aventurier.h"
-
+#include "TasDeMonnaie.h"
+#include "Amulette.h"
 #include "Cellule.h"
-
-
+#include "MonstreAveugle.h"
+#include "MonstreVoyant.h"
 AdventureGame::AdventureGame()
     :d_aventurier{ Aventurier{20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false} }, d_monstres(),d_terrain{DEFAUT_TERRAIN}
 {
@@ -17,6 +18,12 @@ AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std
                              std::vector<std::shared_ptr<ObjetRamassable>>&objets,const std::string& fichierTerrain)
     :d_aventurier{ aventurier }, d_monstres(monstres), d_terrain{fichierTerrain},d_objets{}
 {
+
+}
+AdventureGame::AdventureGame(const Terrain& terrain)
+        :d_monstres{}, d_terrain{terrain},d_objets{},d_aventurier{Position{0,0}}
+{
+    Initialiserlejeu();
 //    for(int i=0 ; i<monstres.size() ; ++i)
 //        d_monstres.push_back(std::move(monstres[i]));
 }
@@ -27,8 +34,51 @@ AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std
 //    for(int i=0 ; i<monstres.size() ; ++i)
 //        d_monstres.push_back(std::move(monstres[i]));
 }
+
 AdventureGame::~AdventureGame() {}
 
+void AdventureGame::Initialiserlejeu()
+{
+    for(int y=0;y<d_terrain.lignes();y++)
+    {
+        for(int x = 0; x<d_terrain.colonnes();x++)
+        {
+            Cellule cellule= d_terrain.cellule(x,y);
+            switch (cellule.contenu())
+            {
+                case Cellule::TypeCellule::JOUEUR:
+                {
+                    Aventurier av{Position{x, y}};
+                    d_aventurier = av; // Assuming there is an appropriate assignment operator or copy constructor
+                    break;
+                }
+                case Cellule::TypeCellule::PIECE:
+                {
+                    d_objets.push_back(std::make_shared<TasDeMonnaie>(Position{x, y}, 3));
+                    break;
+                }
+                case Cellule::TypeCellule::AMULETTE:
+                {
+                    d_objets.push_back(std::make_shared<Amulette>(Position{10, 1}));
+                    break;
+                }
+                case Cellule::TypeCellule::MONSTRE:
+                {
+                    d_monstres.push_back(std::make_shared<MonstreAveugle>(10, 100, Position{x, y}, 10));
+                    break;
+                }
+                case Cellule::TypeCellule::SMONSTRE:
+                {
+                    d_monstres.push_back(std::make_shared<MonstreVoyant>(25, 100, Position{x, y}, 10));
+                    break;
+                }
+                default:
+                    break;
+            }
+
+        }
+    }
+}
 int AdventureGame::getMonstreIndiceParPosition(const Position& position)
 {
     int i=0;

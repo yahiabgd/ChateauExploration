@@ -2,19 +2,13 @@
 
 
 Position::~Position()
-{
-    //dtor
-}
+{}
 
 Position::Position(): d_x{0}, d_y{0}
-{
-
-}
+{}
 
 Position::Position(int x, int y):d_x{x},d_y{y}
-{
-
-}
+{}
 
 void Position::deplacerEn(int x,int y){
     d_x=x;

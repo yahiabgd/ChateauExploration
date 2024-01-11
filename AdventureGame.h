@@ -16,8 +16,6 @@ class AfficheurJeu;
 
 class AdventureGame
 {
-    private:
-    enum EtatJeu {DEBUT , FIN };
     public:
         AdventureGame();
         AdventureGame(const Aventurier& aventurier, const std::vector<std::unique_ptr<Monstre>>& monstres , const std::string& fichierTerrain);
@@ -28,17 +26,20 @@ class AdventureGame
         bool finJeu() const;
 
 
+
     private:
+        void ActeAventurier();
+        void DeplacerAventurier(const Position& position);
         void ChangerTerrain(const AfficheurJeu& afficheur);
         void ConfigurerTerrain(const AfficheurJeu& afficheur);
-
+        int getMonstreIndiceParPosition(const Position& position);
 
         void commencerJeu(const AfficheurJeu& afficheur);
-    private:
+
         Aventurier d_aventurier;
         std::vector<std::unique_ptr<Monstre>> d_monstres;
         Terrain d_terrain;
-        static std::string DEFAUT_TERRAIN;
+        const std::string DEFAUT_TERRAIN{"testmain.txt"};
 };
 
 

@@ -89,13 +89,11 @@ TEST_SUITE("Test D'aventurier et les objets qui le compose (epée,bourse,armure)"
             int p_y = p.y();
             aventurier.deplacer(Direction::GAUCHE);
             REQUIRE_EQ(p_x-1,aventurier.position().x());
-            /*
             aventurier.deplacer(Direction::HAUT);
-            REQUIRE_EQ(p_y-1,p.y());
+            REQUIRE_EQ(p_y-1,aventurier.position().y());
             aventurier.deplacer(Direction::HAUTDROITE);
-            REQUIRE_EQ(p_x,p.x());
-            REQUIRE_EQ(p_y-2,p.y());
-            */
+            REQUIRE_EQ(p_x,aventurier.position().x());
+            REQUIRE_EQ(p_y-2,aventurier.position().y());
         }
     }
 }

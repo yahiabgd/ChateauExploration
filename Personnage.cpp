@@ -4,14 +4,10 @@ Personnage::Personnage(int pointForce, int pointVie, Position position):
     d_pointForce{pointForce},
     d_pointVie{pointVie},
     d_position{position}
-{
-    //ctor
-}
+{}
 
 Personnage::~Personnage()
-{
-    //dtor
-}
+{}
 
 int Personnage::pointForce() const
 { return d_pointForce; }

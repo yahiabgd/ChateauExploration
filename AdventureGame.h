@@ -2,7 +2,7 @@
 #define ADVENTUREGAME_H
 #include <vector>
 #include <memory>
-
+#include "ObjetRamassable.h"
 #include "Monstre.h"
 #include "Aventurier.h"
 #include "Terrain.h"
@@ -16,29 +16,30 @@ class AfficheurJeu;
 
 class AdventureGame
 {
-    private:
-    enum EtatJeu {DEBUT , FIN };
     public:
         AdventureGame();
-        AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const std::string& fichierTerrain);
-        AdventureGame(const Aventurier& aventurier, const std::vector<Monstre>& monstres , const Terrain& terrain);
+        AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres , const std::string& fichierTerrain);
+        AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres , const Terrain& terrain);
 
         virtual ~AdventureGame();
         void commencer(const AfficheurJeu& afficheur);
         bool finJeu() const;
 
 
+
     private:
+        void ActeAventurier();
+        void DeplacerAventurier(const Position& position);
         void ChangerTerrain(const AfficheurJeu& afficheur);
         void ConfigurerTerrain(const AfficheurJeu& afficheur);
-
-
+        int getMonstreIndiceParPosition(const Position& position);
         void commencerJeu(const AfficheurJeu& afficheur);
-    private:
-        std::unique_ptr<Aventurier> d_aventurier;
-        std::vector<std::unique_ptr<Monstre>> d_monstres;
+        int getObjetIndiceParPosition(const Position& position);
+        Aventurier d_aventurier;
+        std::vector<std::shared_ptr<Monstre>> d_monstres;
+        std::vector<std::unique_ptr<ObjetRamassable>> d_objets;
         Terrain d_terrain;
-        static std::string DEFAUT_TERRAIN;
+        const std::string DEFAUT_TERRAIN{"testmain.txt"};
 };
 
 

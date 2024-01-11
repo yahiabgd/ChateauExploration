@@ -13,19 +13,24 @@ MonstreAveugle::~MonstreAveugle()
 }
 
 void MonstreAveugle::deplacervers(Aventurier& aventurier,  Terrain& terrain) {
+    std::cout<<"monstre aveugle";
     if( aventurier.position().distance(d_position)<=sqrt(2) ) {
         // il va attaqué l'Aventurier
         Monstre::attaque(aventurier); // il manque traiter le cas lorsque l'aventurier est entre deux mur
+        return;
     }
+
     deplacementAleatoire(terrain);
 }
 
 void MonstreAveugle::deplacementAleatoire(Terrain& terrain){
     // il peut se déplacer en diagonale
-     const int directions[8][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
-     int i = 0;
+
+    const int directions[8][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+    int i = 0;
     int NewX;
     int NewY;
+    //std::cout<<d_position.x()<<"  "<<d_position.y();
     bool entreDeuxMur;
      do{
         entreDeuxMur = false;
@@ -41,11 +46,12 @@ void MonstreAveugle::deplacementAleatoire(Terrain& terrain){
                }
         }
      }while(!terrain.positionValide(NewX,NewY)
-                                    || entreDeuxMur);
+            ||terrain.cellule( NewX , NewY ) != Cellule::TypeCellule::VIDE
+            || entreDeuxMur);
 
     terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
     d_position.deplacerDe(directions[i][0],directions[i][1]);
     terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::MONSTRE);
-
+    std::cout<<d_position.x()<<"  "<<d_position.y();
 
 }

@@ -1,4 +1,5 @@
 #include <iomanip>
+#include <conio.h>
 
 #include "afficheurConsole.h"
 #include "Terrain.h"
@@ -42,6 +43,7 @@ std::string AfficheurJeuConsole::Input(const std::string& str ) const
 void AfficheurJeuConsole::Print(const std::string& str) const
 {
     std::cout<<str;
+    AttendAppuisSurBoutton('q');
 }
 void AfficheurJeuConsole::PrintError(const std::string& str) const
 {
@@ -51,8 +53,8 @@ void AfficheurJeuConsole::PrintError(const std::string& str) const
 
 void AfficheurJeuConsole::AttendAppuisSurBoutton(const char c) const
 {
-    std::cout<<c<<" : quitter";
-    while(getchar() != c)
+    std::cout<<c<<" : retoure";
+    while(_getch() != c)
     {
     }
 }

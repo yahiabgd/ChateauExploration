@@ -21,7 +21,8 @@ class Aventurier : public Personnage
         void recoitAttaque(int degats) override;
         void attaque(Monstre &monstre);
         bool amulette() const;
-        void deplacer(const Direction& Direction);
+        void deplacer(const Position& position);
+        void deplacer(const Direction& direction);
         int pieces()const;
         Armure armure()const;
         Epee epee() const;

@@ -3,6 +3,7 @@
 
 #include "afficheurConsole.h"
 #include"Aventurier.h"
+#include"Monstre.h"
 #include "Terrain.h"
 
 AfficheurJeuConsole::~AfficheurJeuConsole()
@@ -71,10 +72,15 @@ void AfficheurJeuConsole::AttendAppuisSurBoutton(const char c) const
         std::cout<<"Point de vie : " << aventurier.pointVie()<<"\n";
         std::cout<<"Point de force : " <<aventurier.pointForce()<<"\n";
         std::cout<<"Armure : " << aventurier.armure().pointSolidite()<<"         Epee : "<< aventurier.epee().pointSolidite()<<"\n";
-        std::cout<<"Amulette ramasser : " <<aventurier.amulette();
+        std::cout<<"Amulette ramasser : " <<aventurier.amulette() <<"\n";
+        std::cout<<"Bourse: " <<aventurier.pieces() <<"\n";
     }
 
-    void AfficheurJeuConsole::AffciherInfoMonstre(std::unique_ptr<Monstre>) const {
+    void AfficheurJeuConsole::AffciherInfoMonstre(const std::shared_ptr<Monstre>monstre) const {
+        std::cout<<"=== Information Monstre ===\n";
+        std::cout<<"Point de vie : " << monstre->pointVie()<<"\n";
+        std::cout<<"Point de force : " <<monstre->pointForce()<< "\n";
+        std::cout<<"habilete : " << monstre->habilete() <<" % \n";
 
     }
 

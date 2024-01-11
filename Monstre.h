@@ -13,6 +13,7 @@ class Monstre : public Personnage
         virtual ~Monstre();
         virtual void deplacervers(Aventurier& aventurier,Terrain& terrain);
         void attaque(Aventurier& ennemi);
+        int habilete()const;
         void recoitAttaque(int degats) override;
 
     private:

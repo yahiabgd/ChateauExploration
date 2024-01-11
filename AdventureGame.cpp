@@ -186,11 +186,17 @@ void AdventureGame::ActeAventurier()
 }
 void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 {
-    while(true)
+    while(!finJeu())
     {
         afficheur.AffciherTitre();
         afficheur.AffciherInfoAventurier(d_aventurier);
         afficheur.AffciherTerrain(d_terrain);
+        for(auto& m : d_monstres)
+        {
+            if(d_aventurier.position().distance(m->position())<=sqrt(2)){
+                afficheur.AffciherInfoMonstre(m);
+            }
+        }
 
         //Acte d'aventurier
         ActeAventurier();
@@ -199,8 +205,6 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
         for(auto& m : d_monstres)
         {
             m->deplacervers(d_aventurier,d_terrain);
-
-
         }
     }
 }

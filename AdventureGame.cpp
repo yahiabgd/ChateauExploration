@@ -68,12 +68,16 @@ void AdventureGame::Initialiserlejeu()
                 }
                 case Cellule::TypeCellule::MONSTRE:
                 {
-                    d_monstres.push_back(std::make_shared<MonstreAveugle>(10, 100, Position{x, y}, 80));
+
+                    d_monstres.push_back(std::make_shared<MonstreAveugle>(10, 100, Position{x, y}, 50));
+
                     break;
                 }
                 case Cellule::TypeCellule::SMONSTRE:
                 {
-                    d_monstres.push_back(std::make_shared<MonstreVoyant>(25, 100, Position{x, y}, 80));
+
+                    d_monstres.push_back(std::make_shared<MonstreVoyant>(25, 100, Position{x, y}, 50));
+
                     break;
                 }
                 default:
@@ -175,13 +179,22 @@ void AdventureGame::ActeAventurier()
         }
         Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
         Cellule::TypeCellule typenouvelleCellule =nouvelleCellule.contenu();
+
         if(typenouvelleCellule != Cellule::TypeCellule::MUR && typenouvelleCellule != Cellule::TypeCellule::HORS )
         {
+            //Le joueur reste dans la meme case
             if (typenouvelleCellule == Cellule::TypeCellule::MONSTRE || typenouvelleCellule == Cellule::TypeCellule::SMONSTRE)
             {
+                int indiceMonstre = getMonstreIndiceParPosition(New);
+                d_aventurier.attaque(*d_monstres[indiceMonstre]);
+                if(!d_monstres[indiceMonstre]->estVivant())
+                {
+                    d_terrain.miseajourcellule(New.x(),New.y(),d_monstres[indiceMonstre]->estSur());
+                    d_monstres.erase(d_monstres.begin() + indiceMonstre);
+                }
 
             }
-            else
+            else//Le joueur se deplace vers la case
             {
 
                 if (typenouvelleCellule == Cellule::TypeCellule::PIECE || typenouvelleCellule == Cellule::TypeCellule::AMULETTE)

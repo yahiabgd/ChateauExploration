@@ -18,8 +18,10 @@ class AdventureGame
 {
     public:
         AdventureGame();
-        AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres , const std::string& fichierTerrain);
-        AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres , const Terrain& terrain);
+        AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres
+                      ,std::vector<std::shared_ptr<ObjetRamassable>>&objets, const std::string& fichierTerrain);
+        AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres ,
+                      std::vector<std::shared_ptr<ObjetRamassable>>&objets, const Terrain& terrain);
 
         virtual ~AdventureGame();
         void commencer(const AfficheurJeu& afficheur);
@@ -37,7 +39,7 @@ class AdventureGame
         int getObjetIndiceParPosition(const Position& position);
         Aventurier d_aventurier;
         std::vector<std::shared_ptr<Monstre>> d_monstres;
-        std::vector<std::unique_ptr<ObjetRamassable>> d_objets;
+        std::vector<std::shared_ptr<ObjetRamassable>> d_objets;
         Terrain d_terrain;
         const std::string DEFAUT_TERRAIN{"testmain.txt"};
 };

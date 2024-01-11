@@ -11,14 +11,16 @@ AdventureGame::AdventureGame()
     :d_aventurier{ Aventurier{20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false} }, d_monstres(),d_terrain{DEFAUT_TERRAIN}
 {
 }
-AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres, const std::string& fichierTerrain)
-    :d_aventurier{ aventurier }, d_monstres(monstres), d_terrain{fichierTerrain}
+AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres,
+                             std::vector<std::shared_ptr<ObjetRamassable>>&objets,const std::string& fichierTerrain)
+    :d_aventurier{ aventurier }, d_monstres(monstres), d_terrain{fichierTerrain},d_objets{}
 {
 //    for(int i=0 ; i<monstres.size() ; ++i)
 //        d_monstres.push_back(std::move(monstres[i]));
 }
-AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres, const Terrain& terrain)
-    :d_aventurier{ aventurier}, d_monstres(monstres), d_terrain{terrain}
+AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres,
+                             std::vector<std::shared_ptr<ObjetRamassable>>&objets, const Terrain& terrain)
+    :d_aventurier{ aventurier}, d_monstres(monstres), d_terrain{terrain},d_objets{}
 {
 //    for(int i=0 ; i<monstres.size() ; ++i)
 //        d_monstres.push_back(std::move(monstres[i]));

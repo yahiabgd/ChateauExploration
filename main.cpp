@@ -4,7 +4,9 @@
 #include"Position.h"
 #include "Terrain.h"
 #include "AdventureGame.h"
+#include "ObjetRamassable.h"
 #include "afficheurConsole.h"
+#include "Amulette.h"
 #include "MonstreVoyant.h"
 #include "MonstreAveugle.h"
 using namespace std;
@@ -45,10 +47,14 @@ void testAdventureGame()
 {
     Aventurier av(100,100,Position{18,3},Armure{20},Epee{15},Bourse{0},false);
     std::vector<std::shared_ptr<Monstre>> monstres;
+    std::vector<std::shared_ptr<ObjetRamassable>> objets;
+
     for(int i=0 ; i<1 ; ++i)
         monstres.push_back(make_shared<MonstreAveugle>(10,100,Position{10,2},10));
+    objets.push_back(make_shared<Amulette>(Position{10,1}));
     Terrain t{"testmap.txt"};
-    AdventureGame ad{av,monstres,t};
+    Amulette amulette{{16,1}};
+    AdventureGame ad{av,monstres,objets,t};
     AfficheurJeuConsole aff;
     ad.commencer(aff);
 }

@@ -16,7 +16,7 @@ AdventureGame::AdventureGame()
 }
 AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres,
                              std::vector<std::shared_ptr<ObjetRamassable>>&objets,const std::string& fichierTerrain)
-    :d_aventurier{ aventurier }, d_monstres(monstres), d_terrain{fichierTerrain},d_objets{}
+    :d_aventurier{ aventurier }, d_monstres(monstres), d_terrain{fichierTerrain},d_objets{objets}
 {
 
 }
@@ -26,11 +26,13 @@ AdventureGame::AdventureGame(const Terrain& terrain)
     Initialiserlejeu();
 //    for(int i=0 ; i<monstres.size() ; ++i)
 //        d_monstres.push_back(std::move(monstres[i]));
+    inisialiserMap();
 }
 AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres,
                              std::vector<std::shared_ptr<ObjetRamassable>>&objets, const Terrain& terrain)
-    :d_aventurier{ aventurier}, d_monstres(monstres), d_terrain{terrain},d_objets{}
+    :d_aventurier{aventurier}, d_monstres(monstres), d_terrain{terrain},d_objets{objets}
 {
+     inisialiserMap();
 //    for(int i=0 ; i<monstres.size() ; ++i)
 //        d_monstres.push_back(std::move(monstres[i]));
 }
@@ -76,6 +78,16 @@ void AdventureGame::Initialiserlejeu()
                     break;
             }
 
+void AdventureGame::inisialiserMap(){
+    d_terrain.miseajourcellule(d_aventurier.position().x(),d_aventurier.position().y(),Cellule::TypeCellule::JOUEUR);
+    for(const auto& monstre : d_monstres){
+        d_terrain.miseajourcellule(monstre->position().x(),monstre->position().y(),Cellule::TypeCellule::MONSTRE);
+    }
+    for(const auto& objet : d_objets){
+        if(objet->Type()=="AMULETTE")
+            d_terrain.miseajourcellule(objet->position().x(),objet->position().y(),Cellule::TypeCellule::AMULETTE);
+        if(objet->Type()=="PIECE"){
+            d_terrain.miseajourcellule(objet->position().x(),objet->position().y(),Cellule::TypeCellule::PIECE);
         }
     }
 }
@@ -102,10 +114,10 @@ int AdventureGame::getObjetIndiceParPosition(const Position& position)
 }
 void AdventureGame::DeplacerAventurier(const Position& position)
 {
-    //Mise à jour du terrain
+    //Mise ï¿½ jour du terrain
     d_terrain.miseajourcellule(d_aventurier.position().x(),d_aventurier.position().y(),Cellule::TypeCellule::VIDE);
     d_terrain.miseajourcellule(position.x(),position.y(),Cellule::TypeCellule::JOUEUR);
-    //Mise à jour la position de l'objet aventurier
+    //Mise ï¿½ jour la position de l'objet aventurier
     d_aventurier.deplacer(position);
 }
 void AdventureGame::ActeAventurier()
@@ -163,6 +175,7 @@ void AdventureGame::ActeAventurier()
                     {
                     }
                 }
+
         }
 
 }
@@ -170,8 +183,9 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 {
     while(true)
     {
-
+        afficheur.AffciherTitre();
         afficheur.AffciherTerrain(d_terrain);
+
         //Acte d'aventurier
         ActeAventurier();
 

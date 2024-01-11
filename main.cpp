@@ -9,6 +9,7 @@
 #include "Amulette.h"
 #include "MonstreVoyant.h"
 #include "MonstreAveugle.h"
+#include "TasDeMonnaie.h"
 using namespace std;
 
 void testposition()
@@ -45,14 +46,16 @@ void testterrain()
 
 void testAdventureGame()
 {
-    Aventurier av(100,100,Position{18,3},Armure{20},Epee{15},Bourse{0},false);
+    Aventurier av(100,100,Position{18,3},Armure{20},Epee{15},Bourse{10},false);
     std::vector<std::shared_ptr<Monstre>> monstres;
     std::vector<std::shared_ptr<ObjetRamassable>> objets;
 
     for(int i=0 ; i<1 ; ++i)
         monstres.push_back(make_shared<MonstreAveugle>(10,100,Position{10,2},10));
-    objets.push_back(make_shared<Amulette>(Position{10,1}));
+    objets.push_back(make_shared<Amulette>(Position{12,2}));
+    objets.push_back(make_shared<TasDeMonnaie>(Position{20,2},4));
     Terrain t{"testmap.txt"};
+
     Amulette amulette{{16,1}};
     AdventureGame ad{av,monstres,objets,t};
     AfficheurJeuConsole aff;
@@ -85,10 +88,12 @@ void test_getch()
 }
 
 
+
 int main()
 {
 //    testterrain();
     testAdventureGame2();
+    //testType();
 //    test_getch();
     return 0;
 }

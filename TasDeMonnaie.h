@@ -10,6 +10,7 @@ class TasDeMonnaie : public ObjetRamassable
     public:
         TasDeMonnaie(const Position& position, int nombrePiece);
         int nombrePiece() const;
+        string Type()const override;
         void ramasser(Aventurier& aventurier) override;
 
     private:

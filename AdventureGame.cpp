@@ -6,7 +6,6 @@
 #include "afficheur.h"
 #include "Aventurier.h"
 
-std::string AdventureGame::DEFAUT_TERRAIN{"testmap.txt"};
 
 AdventureGame::AdventureGame()
     :d_aventurier{ Aventurier{20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false} }, d_monstres(),d_terrain{DEFAUT_TERRAIN}
@@ -184,10 +183,11 @@ bool AdventureGame::finJeu() const
     if(!d_aventurier.estVivant()) return true;
     else
     {
-        size_t i=0;
-        while(i<d_monstres.size() && !d_monstres[i]->estVivant())
-            ++i;
-        return i == d_monstres.size();
+        Position positionAventurier{d_aventurier.position()};
+        if(d_aventurier.Amulette() && d_terrain.cellule(positionAventurier.x(),positionAventurier.y())
+        {
+            return true;
+        }
+        return false;
     }
 }
-

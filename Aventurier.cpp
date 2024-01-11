@@ -2,8 +2,8 @@
 #include "Monstre.h"
 #include "Position.h"
 
-constexpr double UNQUART {1/4};
-constexpr double TROISQUART {3/4};
+constexpr double UNQUART {1.0/4.0};
+constexpr double TROISQUART {3.0/4.0};
 
 
 Aventurier::Aventurier(int pointForce, int pointVie, Position position,
@@ -22,10 +22,12 @@ void Aventurier::RamasseTasDePiece(int nombreDePiece) {
 
 void Aventurier::recoitAttaque(int degats) {
     int nb = static_cast<int>(UNQUART * degats);
-    if (nb <= d_armure.pointSolidite())
+    std::cout<<nb;
+    if (nb <= d_armure.pointSolidite()&& d_armure.pointSolidite()>0)
         d_armure.reduireSolidite(nb);
     else {
-        int reste = (UNQUART * degats) + (nb - d_armure.pointSolidite());
+        int reste =  (nb - d_armure.pointSolidite());
+        std::cout<<reste;
         d_pointVie -= reste;
     }
 }

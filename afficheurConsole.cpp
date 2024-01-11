@@ -2,6 +2,7 @@
 #include <conio.h>
 
 #include "afficheurConsole.h"
+#include"Aventurier.h"
 #include "Terrain.h"
 
 AfficheurJeuConsole::~AfficheurJeuConsole()
@@ -33,6 +34,7 @@ void AfficheurJeuConsole::AffciherTerrain(const Terrain& t) const
             std::cout << static_cast<char>(t.cellule(x,y));
         std::cout << std::endl;
     }
+
 }
 std::string AfficheurJeuConsole::Input(const std::string& str ) const
 {
@@ -61,11 +63,15 @@ void AfficheurJeuConsole::AttendAppuisSurBoutton(const char c) const
 }
     void AfficheurJeuConsole::AffciherTitre() const{
         system("cls");
-        std::cout<<"        ------Exploration de ruines de château------          \n";
+        std::cout<<"        ------Exploration de ruines de chateau------          \n";
     }
 
     void AfficheurJeuConsole::AffciherInfoAventurier(const Aventurier& aventurier) const {
-
+        std::cout<<"=== Information Aventurier ===\n";
+        std::cout<<"Point de vie : " << aventurier.pointVie()<<"\n";
+        std::cout<<"Point de force : " <<aventurier.pointForce()<<"\n";
+        std::cout<<"Armure : " << aventurier.armure().pointSolidite()<<"         Epee : "<< aventurier.epee().pointSolidite()<<"\n";
+        std::cout<<"Amulette ramasser : " <<aventurier.amulette();
     }
 
     void AfficheurJeuConsole::AffciherInfoMonstre(std::unique_ptr<Monstre>) const {

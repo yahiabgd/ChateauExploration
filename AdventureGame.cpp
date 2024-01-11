@@ -134,6 +134,7 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
     while(true)
     {
         afficheur.AffciherTitre();
+        afficheur.AffciherInfoAventurier(d_aventurier);
         afficheur.AffciherTerrain(d_terrain);
 
         //Acte d'aventurier

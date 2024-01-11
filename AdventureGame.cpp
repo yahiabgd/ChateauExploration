@@ -38,8 +38,8 @@ int AdventureGame::getMonstreIndiceParPosition(const Position& position)
 void AdventureGame::DeplacerAventurier(const Position& position)
 {
     //Mise à jour du terrain
-    d_terrain->miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
-    d_terrain->miseajourcellule(position.x(),position.y(),Cellule::TypeCellule::JOUEUR);
+    d_terrain.miseajourcellule(d_aventurier.position().x(),d_aventurier.position().y(),Cellule::TypeCellule::VIDE);
+    d_terrain.miseajourcellule(position.x(),position.y(),Cellule::TypeCellule::JOUEUR);
     //Mise à jour la position de l'objet aventurier
     d_aventurier.deplacer(position);
 }
@@ -80,8 +80,9 @@ void AdventureGame::ActeAventurier()
             if (nouvelleCellule.contenu() == Cellule::TypeCellule::MONSTRE || nouvelleCellule.contenu() == Cellule::TypeCellule::SMONSTRE)
             {
 
-            } else
-                {
+            }
+            else
+            {
                 DeplacerAventurier(New);
                 if (nouvelleCellule.contenu() == Cellule::TypeCellule::PIECE || nouvelleCellule.contenu() == Cellule::TypeCellule::AMULETTE)
                     {
@@ -90,6 +91,7 @@ void AdventureGame::ActeAventurier()
 
                 if (nouvelleCellule.contenu() == Cellule::TypeCellule::SORTIE)
                     {
+
                     }
                 else//case vide
                     {
@@ -105,7 +107,7 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 
         afficheur.AffciherTerrain(d_terrain);
         //Acte d'aventurier
-        DeplacerAventurier();
+        ActeAventurier();
 
         //Acte des monstres
 //        for(auto& m : d_monstres)
@@ -184,7 +186,7 @@ bool AdventureGame::finJeu() const
     else
     {
         Position positionAventurier{d_aventurier.position()};
-        if(d_aventurier.Amulette() && d_terrain.cellule(positionAventurier.x(),positionAventurier.y())
+        if(d_aventurier.amulette() && d_terrain.cellule(positionAventurier.x(),positionAventurier.y()))
         {
             return true;
         }

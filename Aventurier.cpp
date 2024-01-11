@@ -65,8 +65,7 @@ void Aventurier::deplacer(const Position& position){
             */
 //        if(terrain->cellule(d_aventurier->position.x(), d_aventurier->d_position.y()) != Cellule::TypeCellule::MUR)
 //        {
-//            d_terrain->miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
-//            d_terrain->miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::JOUEUR);
+//
 //        }
 
 }

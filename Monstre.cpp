@@ -20,9 +20,9 @@ void Monstre::attaque(Aventurier& ennemi){
     int force = d_pointForce*0.9;
     std::cout<< force;
 
-    //if(rand() % 100 < static_cast<int>(d_habilete) ){ // ?? not sure
+    if(rand() % 100 < static_cast<int>(d_habilete) ){ // ?? not sure
         ennemi.recoitAttaque(force);
-   // }
+    }
 
 }
 
@@ -38,4 +38,7 @@ void Monstre::deplacementAleatoire(Terrain& terrain){
 
 void Monstre::deplacervers( Aventurier& aventurier,Terrain& terrain){
 
+}
+int Monstre::habilete()const{
+    return d_habilete;
 }

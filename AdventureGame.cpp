@@ -200,6 +200,7 @@ void AdventureGame::ActeMonstre()
 }
 void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 {
+
     if(finJeu())
     {
         d_terrain=DEFAUT_TERRAIN;
@@ -207,16 +208,25 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 
     Initialiserlejeu();
     while(!finJeu() )
+
     {
         afficheur.AffciherTitre();
         afficheur.AffciherInfoAventurier(d_aventurier);
         afficheur.AffciherTerrain(d_terrain);
+        for(auto& m : d_monstres)
+        {
+            if(d_aventurier.position().distance(m->position())<=sqrt(2)){
+                afficheur.AffciherInfoMonstre(m);
+            }
+        }
 
             //Acte d'aventurier
         ActeAventurier();
 
+
             //Acte des monstres
         ActeMonstre();
+
     }
 }
 

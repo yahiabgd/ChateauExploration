@@ -32,6 +32,7 @@ void testterrain()
 void testConstructorAG()
 {
     Aventurier av(100,100,Position{10,10},Armure{20},Epee{15},Bourse{0},false);
+
     std::vector<Monstre> monstres;
     for(int i=0 ; i<3 ; ++i)
         monstres.push_back( MonstreAveugle(10,100,Position{10,5},10) );

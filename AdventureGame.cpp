@@ -35,6 +35,17 @@ int AdventureGame::getMonstreIndiceParPosition(const Position& position)
     }
     return i;
 }
+int AdventureGame::getObjetIndiceParPosition(const Position& position)
+{
+    int i=0;
+    for (const auto& objet : d_objets){
+        if(objet->position().x() == position.x() && objet->position().y() == position.y())
+            break;
+        i++;
+    }
+    return i;
+
+}
 void AdventureGame::DeplacerAventurier(const Position& position)
 {
     //Mise à jour du terrain
@@ -86,7 +97,8 @@ void AdventureGame::ActeAventurier()
                 DeplacerAventurier(New);
                 if (nouvelleCellule.contenu() == Cellule::TypeCellule::PIECE || nouvelleCellule.contenu() == Cellule::TypeCellule::AMULETTE)
                     {
-
+                        int idxObj = getObjetIndiceParPosition(New);
+                        d_objets[idxObj]->ramasser(d_aventurier);
                     }
 
                 if (nouvelleCellule.contenu() == Cellule::TypeCellule::SORTIE)

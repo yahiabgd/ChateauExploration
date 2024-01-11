@@ -73,7 +73,9 @@ void AfficheurJeuConsole::AttendAppuisSurBoutton(const char c) const
         std::cout<<"Point de force : " <<aventurier.pointForce()<<"\n";
         std::cout<<"Armure : " << aventurier.armure().pointSolidite()<<"         Epee : "<< aventurier.epee().pointSolidite()<<"\n";
         std::cout<<"Amulette ramasser : " <<aventurier.amulette() <<"\n";
-        std::cout<<"Bourse: " <<aventurier.pieces() <<"\n";
+        std::cout<<"Bourse: " <<aventurier.pieces() <<"\n" <<"\n";
+        /*std::cout<<"Position Player : " <<aventurier.position().x() << aventurier.position().y() <<"\n"; */
+
     }
 
     void AfficheurJeuConsole::AffciherInfoMonstre(const std::shared_ptr<Monstre>monstre) const {

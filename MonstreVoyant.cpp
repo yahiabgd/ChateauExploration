@@ -14,7 +14,7 @@ MonstreVoyant::~MonstreVoyant()
 
 
 void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
-    std::cout<<"deplcer vers";
+    //std::cout<<"deplcer vers";
     if(aventurier.position().distance(d_position)<=8){
         std::cout<<aventurier.position().distance(d_position);
         if(aventurier.position().distance(d_position)==1){
@@ -24,7 +24,6 @@ void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
 
         std::vector<Position> chemain = MonstreVoyant::cheminVersAventurier(aventurier, terrain);
         std::cout<<chemain[1].x()<<"  "<<chemain[1].y();
-        //cellules[d_position.x()][d_position.y()].changecontenu(Cellule::TypeCellule::VIDE);
         terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
 
         d_position.deplacerEn( chemain[1].x(),chemain[1].y()) ;
@@ -32,7 +31,7 @@ void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
         terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::MONSTRE);
         return;
     }
-     std::cout<<"deplcer fd";
+     //std::cout<<"deplcer fd";
     deplacementAleatoire(terrain);
 }
 
@@ -51,7 +50,7 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
 }
 
  std::vector<Position> MonstreVoyant::cheminVersAventurier(const Aventurier& aventurier, Terrain& terrain){
-     std::cout<<"chemain vers";
+     //std::cout<<"chemain vers";
     // Possible movement directions (4 directions: up, down, left, right)
     const int directions[4][2] = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
     // Position start = d_position;

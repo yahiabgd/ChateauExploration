@@ -13,7 +13,7 @@ MonstreAveugle::~MonstreAveugle()
 }
 
 void MonstreAveugle::deplacervers(Aventurier& aventurier,  Terrain& terrain) {
-    std::cout<<"monstre aveugle";
+    //std::cout<<"monstre aveugle";
     if( aventurier.position().distance(d_position)<=sqrt(2) ) {
         // il va attaqué l'Aventurier
         Monstre::attaque(aventurier); // il manque traiter le cas lorsque l'aventurier est entre deux mur
@@ -52,6 +52,6 @@ void MonstreAveugle::deplacementAleatoire(Terrain& terrain){
     terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::VIDE);
     d_position.deplacerDe(directions[i][0],directions[i][1]);
     terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::MONSTRE);
-    std::cout<<d_position.x()<<"  "<<d_position.y();
+    //std::cout<<d_position.x()<<"  "<<d_position.y();
 
 }

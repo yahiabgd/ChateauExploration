@@ -10,6 +10,7 @@ class Amulette : public ObjetRamassable
 {
     public:
         Amulette(const Position& position);
+        string Type()const override;
         void ramasser(Aventurier& aventurier) override;
 
     private:

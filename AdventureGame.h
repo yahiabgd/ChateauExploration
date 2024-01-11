@@ -31,6 +31,7 @@ class AdventureGame
 
     private:
         void ActeAventurier();
+        void inisialiserMap();
         void DeplacerAventurier(const Position& position);
         void ChangerTerrain(const AfficheurJeu& afficheur);
         void ConfigurerTerrain(const AfficheurJeu& afficheur);

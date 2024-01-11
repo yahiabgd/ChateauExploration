@@ -8,6 +8,9 @@ class AfficheurJeuConsole : public AfficheurJeu
 public:
     ~AfficheurJeuConsole();
     void AffciherTerrain(const Terrain& t) const override;
+    void AffciherTitre() const override;
+    void AffciherInfoAventurier(const Aventurier& aventurier) const override;
+    void AffciherInfoMonstre(std::unique_ptr<Monstre>) const override;
     int AfficherMenu(const std::vector<std::string>& menu)const override;
     std::string Input(const std::string& str = "") const override;
     void Print(const std::string& str) const override;

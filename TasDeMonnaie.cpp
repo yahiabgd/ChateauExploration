@@ -7,5 +7,9 @@ int TasDeMonnaie::nombrePiece() const
 { return d_nombrePiece; }
 
 void TasDeMonnaie::ramasser(Aventurier& aventurier) {
+
     aventurier.RamasseTasDePiece(nombrePiece());
+}
+string TasDeMonnaie::Type()const {
+    return "PIECE";
 }

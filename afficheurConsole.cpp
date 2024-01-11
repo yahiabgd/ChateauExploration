@@ -25,7 +25,8 @@ int AfficheurJeuConsole::AfficherMenu(const std::vector<std::string>& menu) cons
 
 void AfficheurJeuConsole::AffciherTerrain(const Terrain& t) const
 {
-    system("cls");
+
+
     for(int y =0; y< t.lignes() ; y++)
     {
         for(int x=0; x<t.colonnes(); x++)
@@ -58,4 +59,16 @@ void AfficheurJeuConsole::AttendAppuisSurBoutton(const char c) const
     {
     }
 }
+    void AfficheurJeuConsole::AffciherTitre() const{
+        system("cls");
+        std::cout<<"        ------Exploration de ruines de château------          \n";
+    }
+
+    void AfficheurJeuConsole::AffciherInfoAventurier(const Aventurier& aventurier) const {
+
+    }
+
+    void AfficheurJeuConsole::AffciherInfoMonstre(std::unique_ptr<Monstre>) const {
+
+    }
 

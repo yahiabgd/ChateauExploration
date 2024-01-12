@@ -9,6 +9,7 @@ public:
     ~AfficheurJeuConsole();
     void AffciherTerrain(const Terrain& t) const override;
     void AffciherTitre() const override;
+    void AfficherInstruction() const override;
     void AffciherInfoAventurier(const Aventurier& aventurier) const override;
     void AffciherInfoMonstre(const std::shared_ptr<Monstre>monstre) const override;
     int AfficherMenu(const std::vector<std::string>& menu)const override;

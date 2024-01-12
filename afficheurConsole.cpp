@@ -64,25 +64,34 @@ void AfficheurJeuConsole::AttendAppuisSurBoutton(const char c) const
 }
     void AfficheurJeuConsole::AffciherTitre() const{
         system("cls");
-        std::cout<<"        ------Exploration de ruines de chateau------          \n";
+        std::cout<<"\t\t\t  ==================================================================================\n";
+        std::cout<<"\t\t\t  =                 ------Exploration de ruines de chateau------                   =\n";
+        std::cout<<"\t\t\t  ==================================================================================\n";
+        //std::cout<<"\t\t\t ";
     }
 
     void AfficheurJeuConsole::AffciherInfoAventurier(const Aventurier& aventurier) const {
-        std::cout<<"=== Information Aventurier ===\n";
-        std::cout<<"Point de vie : " << aventurier.pointVie()<<"\n";
-        std::cout<<"Point de force : " <<aventurier.pointForce()<<"\n";
-        std::cout<<"Armure : " << aventurier.armure().pointSolidite()<<"         Epee : "<< aventurier.epee().pointSolidite()<<"\n";
-        std::cout<<"Amulette ramasser : " <<aventurier.amulette() <<"\n";
-        std::cout<<"Bourse: " <<aventurier.pieces() <<"\n" <<"\n";
+        std::cout<<"\t\t\t\t\t================ Information Aventurier ================\n";
+        std::cout<<"\t\t\t\t\t=            Point de vie : " << aventurier.pointVie()<<"\n";
+        std::cout<<"\t\t\t\t\t=            Point de force : " <<aventurier.pointForce()<<"        \n";
+        std::cout<<"\t\t\t\t\t=            Armure : " << aventurier.armure().pointSolidite()<<"         Epee : "<< aventurier.epee().pointSolidite()<<"\n";
+        std::cout<<"\t\t\t\t\t=            Amulette ramasser : " <<aventurier.amulette() <<"\n";
+        std::cout<<"\t\t\t\t\t=            Bourse: " <<aventurier.pieces() <<"\n";
+        std::cout<<"\t\t\t\t\t=========================================================\n";
         /*std::cout<<"Position Player : " <<aventurier.position().x() << aventurier.position().y() <<"\n"; */
 
     }
+void AfficheurJeuConsole::AfficherInstruction() const{
+    std::cout<<"***********************************************************\n";
+    std::cout<<"|      Pour reparer vos equipements, cliquez sur R        |\n";
+    std::cout<<"***********************************************************\n";
+}
 
-    void AfficheurJeuConsole::AffciherInfoMonstre(const std::shared_ptr<Monstre>monstre) const {
-        std::cout<<"=== Information Monstre ===\n";
-        std::cout<<"Point de vie : " << monstre->pointVie()<<"\n";
-        std::cout<<"Point de force : " <<monstre->pointForce()<< "\n";
-        std::cout<<"habilete : " << monstre->habilete() <<" % \n";
+void AfficheurJeuConsole::AffciherInfoMonstre(const std::shared_ptr<Monstre>monstre) const {
+    std::cout<<"\t\t\t\t\t================ Information Monstre ================\n";
+    std::cout<<"\t\t\t\t\t            Point de vie : " << monstre->pointVie()<<"\n";
+    std::cout<<"\t\t\t\t\t            Point de force : " <<monstre->pointForce()<< "\n";
+    std::cout<<"\t\t\t\t\t            habilete : " << monstre->habilete() <<" % \n";
 
-    }
+}
 

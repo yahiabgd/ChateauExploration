@@ -243,6 +243,7 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
     {
         afficheur.AffciherTitre();
         afficheur.AffciherInfoAventurier(d_aventurier);
+        afficheur.AfficherInstruction();
         afficheur.AffciherTerrain(d_terrain);
         for(auto& m : d_monstres)
         {

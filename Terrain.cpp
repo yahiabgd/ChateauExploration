@@ -1,6 +1,6 @@
 #include "Terrain.h"
 
-Terrain::Terrain(int colonnes,int lignes):d_lignes{lignes},d_colonnes{colonnes}
+Terrain::Terrain(int lignes,int colonnes):d_lignes{lignes},d_colonnes{colonnes}
 {
     d_terrain = vector<vector<Cellule>>(d_colonnes, vector<Cellule>(d_lignes, Cellule::TypeCellule::HORS));
 

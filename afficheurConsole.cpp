@@ -65,36 +65,38 @@ void AfficheurJeuConsole::AttendAppuisSurBoutton(const char c) const
     {
     }
 }
-    void AfficheurJeuConsole::AffciherTitre() const{
+void AfficheurJeuConsole::AffciherTitre() const{
         system("cls");
-        std::cout<<"        ------Exploration de ruines de chateau------          \n";
+        std::cout<<"\t\t\t\t\t   ***********************************************************\n";
+        std::cout<<"\t\t\t\t\t   *              Exploration de ruines de chateau           *     \n";
+        std::cout<<"\t\t\t\t\t   ***********************************************************\n";
     }
 
-    void AfficheurJeuConsole::AffciherInfoAventurier(const Aventurier& aventurier) const {
-        std::cout<<"\t\t\t\t\t================ Information Aventurier ================\n";
-        std::cout<<"\t\t\t\t\t=            Point de vie : " << aventurier.pointVie()<<"\n";
-        std::cout<<"\t\t\t\t\t=            Point de force : " <<aventurier.pointForce()<<"        \n";
-        std::cout<<"\t\t\t\t\t=            Armure : " << aventurier.armure().pointSolidite()<<"         Epee : "<< aventurier.epee().pointSolidite()<<"\n";
-        std::cout<<"\t\t\t\t\t=            Amulette ramasser : " <<aventurier.amulette() <<"\n";
-        std::cout<<"\t\t\t\t\t=            Bourse: " <<aventurier.pieces() <<"\n";
-        std::cout<<"\t\t\t\t\t=========================================================\n";
+void AfficheurJeuConsole::AffciherInfoAventurier(const Aventurier& aventurier) const {
+        std::cout<<"\t\t\t\t\t   ================ Information Aventurier ===================\n";
+        std::cout<<"\t\t\t\t\t   |            Point de vie : " << aventurier.pointVie()<<"\t\t\t     |\n";
+        std::cout<<"\t\t\t\t\t   |            Point de force : " <<aventurier.pointForce()<<"\t\t\t     |\n";
+        std::cout<<"\t\t\t\t\t   |            Armure : " << aventurier.armure().pointSolidite()<<"         Epee : "<< aventurier.epee().pointSolidite()<<"\t\t     |\n";
+        std::cout<<"\t\t\t\t\t   |            Amulette ramasser : " <<aventurier.amulette() <<"\t\t\t     |\n";
+        std::cout<<"\t\t\t\t\t   |            Bourse: " <<aventurier.pieces() <<"\t\t\t\t     |\n";
+        std::cout<<"\t\t\t\t\t   ===========================================================\n";
         /*std::cout<<"Position Player : " <<aventurier.position().x() << aventurier.position().y() <<"\n"; */
 
     }
-void AfficheurJeuConsole::AfficherInstruction() const{
-    std::cout<<"***********************************************************\n";
-    std::cout<<"|      Pour reparer vos equipements, cliquez sur R        |\n";
-    std::cout<<"***********************************************************\n";
+    void AfficheurJeuConsole::AfficherInstruction() const{
+    std::cout<<"\t\t\t\t\t   ***********************************************************\n";
+    std::cout<<"\t\t\t\t\t   |      Pour reparer vos equipements, cliquez sur R        |\n";
+    std::cout<<"\t\t\t\t\t   ***********************************************************\n";
 }
 
 void AfficheurJeuConsole::AffciherInfoMonstre(const std::shared_ptr<Monstre>monstre) const {
-    std::cout<<"\t\t\t\t\t================ Information Monstre ================\n";
-    std::cout<<"\t\t\t\t\t            Point de vie : " << monstre->pointVie()<<"\n";
-    std::cout<<"\t\t\t\t\t            Point de force : " <<monstre->pointForce()<< "\n";
-    std::cout<<"\t\t\t\t\t            habilete : " << monstre->habilete() <<" % \n";
-
+    std::cout<<"\t\t\t\t\t   =================== Information Monstre ==================\n";
+    std::cout<<"\t\t\t\t\t   |            Point de vie : " << monstre->pointVie()<<"\t\t\t     |\n";
+    std::cout<<"\t\t\t\t\t   |            Point de force : " <<monstre->pointForce()<< "\t\t\t     |\n";
+    std::cout<<"\t\t\t\t\t   |            habilete : " << monstre->habilete() <<" \t\t\t\t     | \n";
+    std::cout<<"\t\t\t\t\t   ===========================================================\n";
 }
-    Position AfficheurJeuConsole::getPositionCurseur() const
+Position AfficheurJeuConsole::getPositionCurseur() const
     {
         POINT positionPoint ;
         GetCursorPos(&positionPoint);

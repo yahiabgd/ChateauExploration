@@ -5,7 +5,7 @@ TEST_CASE("Monstre Aveugle fonctionne correctment"){
 
     SUBCASE("Constructeur et Getters correct"){
         //(int pointForce, int pointVie, Position position, int habilete):
-        MonstreVoyant m{10,100,{10,2},80}
+        MonstreVoyant m{10,100,{10,2},80};
         REQUIRE_EQ(10,m.pointForce());
         REQUIRE_EQ(100,m.pointVie());
         REQUIRE_EQ(10,m.position().x());
@@ -14,16 +14,17 @@ TEST_CASE("Monstre Aveugle fonctionne correctment"){
     }
     SUBCASE("réduire point de vie correct"){
         MonstreVoyant m{10,100,{10,2},80};
-        p.reduirePointVie(10);
-        REQUIRE_EQ(90,p.ponitVie());
+        m.reduirePointVie(10);
+        REQUIRE_EQ(90,m.pointVie());
     }
     SUBCASE("fonction estsur correct "){
         MonstreVoyant m{10,100,{10,2},80};
-        REQUIRE_EQ(p.estSur(),Cellule::TypeCellule::VIDE);
+        REQUIRE_EQ(m.estSur(),Cellule::TypeCellule::VIDE);
     }
     SUBCASE("fonction modifieEstSur est correct "){
         MonstreVoyant m{10,100,{10,2},80};
-        p.modifieEstSur(Cellule::TypeCellule::SORTIE)
-        REQUIRE_EQ(p.estSur(),Cellule::TypeCellule::SORTIE);
+        m.modifieEstSur(Cellule::TypeCellule::SORTIE);
+        REQUIRE_EQ(m.estSur(),Cellule::TypeCellule::SORTIE);
     }
 
+}

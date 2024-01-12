@@ -15,7 +15,7 @@ TEST_SUITE("Test du terrain et cellule")
     TEST_CASE("Terrain fonctionne correctment"){
         int nblignes {10};
         int nbcolonnes {5};
-        Terrain T{nbcolonnes,nblignes};
+        Terrain T{nblignes,nbcolonnes};
         SUBCASE("Constructeur et Getters correct"){
             REQUIRE_EQ(T.lignes(),nblignes);
             REQUIRE_EQ(T.colonnes(),nbcolonnes);

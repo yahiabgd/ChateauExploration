@@ -3,6 +3,8 @@
 #include<memory>
 #include "afficheur.h"
 
+class Position;
+
 class AfficheurJeuConsole : public AfficheurJeu
 {
 public:
@@ -16,7 +18,11 @@ public:
     std::string Input(const std::string& str = "") const override;
     void Print(const std::string& str) const override;
     void PrintError(const std::string& str) const override;
+    void effacer() const override ;
     void AttendAppuisSurBoutton(const char c)const ;
+    void MiseAJourContenuTerrain(Terrain& t);
+    Position getPositionCurseur() const override;
+    void setPositionCursor(const Position& p) const override;
 
 };
 

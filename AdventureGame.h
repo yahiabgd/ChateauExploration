@@ -32,7 +32,6 @@ class AdventureGame
 
     private:
         char InputLettre();
-        bool d_finjeu;
         void ActeAventurier();
         void ActeMonstre();
         void inisialiserMap();
@@ -42,11 +41,19 @@ class AdventureGame
         int getMonstreIndiceParPosition(const Position& position);
         void commencerJeu(const AfficheurJeu& afficheur);
         int getObjetIndiceParPosition(const Position& position);
+
+        void changementContenuTerrain(const AfficheurJeu& afficheur);
+        void creerTerrain(const AfficheurJeu& afficheur);
+        void ImportTerrain(const AfficheurJeu& afficheur);
+    private:
         Aventurier d_aventurier;
         std::vector<std::shared_ptr<Monstre>> d_monstres;
         std::vector<std::shared_ptr<ObjetRamassable>> d_objets;
         Terrain d_terrain;
-        const std::string DEFAUT_TERRAIN{"testmap.txt"};
+        std::string d_fichierSauvegarde;
+        const std::string TERRAIN_PAR_DEFAUT{"testmap.txt"};
+        const std::string SAUVEGARDE_PAR_DEFAUT{"restor.txt"};
+        bool d_finjeu;
 };
 
 

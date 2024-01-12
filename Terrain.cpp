@@ -2,7 +2,7 @@
 
 Terrain::Terrain(int colonnes,int lignes):d_lignes{lignes},d_colonnes{colonnes}
 {
-    d_terrain = vector<vector<Cellule>>(d_colonnes, vector<Cellule>(d_lignes, Cellule::TypeCellule::VIDE));
+    d_terrain = vector<vector<Cellule>>(d_colonnes, vector<Cellule>(d_lignes, Cellule::TypeCellule::HORS));
 
 }
 Terrain::Terrain(const string& nomfichier)

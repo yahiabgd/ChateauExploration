@@ -11,29 +11,28 @@
 #include "MonstreAveugle.h"
 #include "MonstreVoyant.h"
 AdventureGame::AdventureGame()
-    :d_aventurier{ Aventurier{20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false} }, d_monstres(),d_terrain{DEFAUT_TERRAIN}
+    :d_aventurier{ Aventurier{20,100,Position{0,0},Armure{100},Epee{100},Bourse{0},false} }, d_monstres(),d_terrain{TERRAIN_PAR_DEFAUT}
 {
+    d_fichierSauvegarde = SAUVEGARDE_PAR_DEFAUT;
 }
 AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres,
                              std::vector<std::shared_ptr<ObjetRamassable>>&objets,const std::string& fichierTerrain)
     :d_aventurier{ aventurier }, d_monstres(monstres), d_terrain{fichierTerrain},d_objets{objets},d_finjeu{false}
 {
+    d_fichierSauvegarde = SAUVEGARDE_PAR_DEFAUT;
 
 }
 AdventureGame::AdventureGame(const Terrain& terrain)
         :d_monstres{}, d_terrain{terrain},d_objets{},d_aventurier{Position{0,0}},d_finjeu{false}
 {
-//    for(int i=0 ; i<monstres.size() ; ++i)
-//        d_monstres.push_back(std::move(monstres[i]));
-    //inisialiserMap();
+        d_fichierSauvegarde = SAUVEGARDE_PAR_DEFAUT;
 }
 AdventureGame::AdventureGame(const Aventurier& aventurier, const std::vector<std::shared_ptr<Monstre>>& monstres,
                              std::vector<std::shared_ptr<ObjetRamassable>>&objets, const Terrain& terrain)
     :d_aventurier{aventurier}, d_monstres(monstres), d_terrain{terrain},d_objets{objets},d_finjeu{false}
 {
      inisialiserMap();
-//    for(int i=0 ; i<monstres.size() ; ++i)
-//        d_monstres.push_back(std::move(monstres[i]));
+     d_fichierSauvegarde = SAUVEGARDE_PAR_DEFAUT;
 }
 
 AdventureGame::~AdventureGame() {}
@@ -180,45 +179,48 @@ void AdventureGame::ActeAventurier()
             break;
 
         }
-        Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
-        Cellule::TypeCellule typenouvelleCellule =nouvelleCellule.contenu();
-
-        if(typenouvelleCellule != Cellule::TypeCellule::MUR && typenouvelleCellule != Cellule::TypeCellule::HORS )
+        if (New.x() != d_aventurier.position().x() || New.y() != d_aventurier.position().y())
         {
-            //Le joueur reste dans la meme case
-            if (typenouvelleCellule == Cellule::TypeCellule::MONSTRE || typenouvelleCellule == Cellule::TypeCellule::SMONSTRE)
+            Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
+            Cellule::TypeCellule typenouvelleCellule =nouvelleCellule.contenu();
+
+            if(typenouvelleCellule != Cellule::TypeCellule::MUR && typenouvelleCellule != Cellule::TypeCellule::HORS )
             {
-                int indiceMonstre = getMonstreIndiceParPosition(New);
-                d_aventurier.attaque(*d_monstres[indiceMonstre]);
-                if(!d_monstres[indiceMonstre]->estVivant())
+                //Le joueur reste dans la meme case
+                if (typenouvelleCellule == Cellule::TypeCellule::MONSTRE || typenouvelleCellule == Cellule::TypeCellule::SMONSTRE)
                 {
-                    d_terrain.miseajourcellule(New.x(),New.y(),d_monstres[indiceMonstre]->estSur());
-                    d_monstres.erase(d_monstres.begin() + indiceMonstre);
+                    int indiceMonstre = getMonstreIndiceParPosition(New);
+                    d_aventurier.attaque(*d_monstres[indiceMonstre]);
+                    if(!d_monstres[indiceMonstre]->estVivant())
+                    {
+                        d_terrain.miseajourcellule(New.x(),New.y(),d_monstres[indiceMonstre]->estSur());
+                        d_monstres.erase(d_monstres.begin() + indiceMonstre);
+                    }
+
+                }
+                else//Le joueur se deplace vers la case
+                {
+
+                    if (typenouvelleCellule == Cellule::TypeCellule::PIECE || typenouvelleCellule == Cellule::TypeCellule::AMULETTE)
+                        {
+                            int idxObj = getObjetIndiceParPosition(New);
+                            d_objets[idxObj]->ramasser(d_aventurier);
+                            typenouvelleCellule = Cellule::TypeCellule::VIDE;
+                        }
+
+                    if(typenouvelleCellule == Cellule::TypeCellule::SORTIE)
+                        {
+                            if(d_aventurier.amulette())
+                                d_finjeu = true;
+                        }
+                    else//case vide
+                        {
+                        }
+                DeplacerAventurier(New);
+                d_aventurier.modifieEstSur(typenouvelleCellule);
                 }
 
             }
-            else//Le joueur se deplace vers la case
-            {
-
-                if (typenouvelleCellule == Cellule::TypeCellule::PIECE || typenouvelleCellule == Cellule::TypeCellule::AMULETTE)
-                    {
-                        int idxObj = getObjetIndiceParPosition(New);
-                        d_objets[idxObj]->ramasser(d_aventurier);
-                        typenouvelleCellule = Cellule::TypeCellule::VIDE;
-                    }
-
-                if(typenouvelleCellule == Cellule::TypeCellule::SORTIE)
-                    {
-                        if(d_aventurier.amulette())
-                            d_finjeu = true;
-                    }
-                else//case vide
-                    {
-                    }
-            DeplacerAventurier(New);
-            d_aventurier.modifieEstSur(typenouvelleCellule);
-            }
-
         }
 
 }
@@ -234,7 +236,7 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 
     if(finJeu())
     {
-        d_terrain=DEFAUT_TERRAIN;
+        d_terrain=d_fichierSauvegarde;
     }
 
     Initialiserlejeu();
@@ -261,132 +263,130 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
 
     }
 }
-
-void AdventureGame::ChangerTerrain(const AfficheurJeu& afficheur)
+void AdventureGame::changementContenuTerrain(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu = {"Creer Terrain","Importer un nouveau terrain","Retour"};
-    int choix = afficheur.AfficherMenu(menu);
-    while(choix != menu.size() )
-    {
-        switch(choix)
-            {
-            case 1 :
-                {
-                    try{
-                //Creer Terrain
-                Terrain tmp=d_terrain;
-                int ligne = std::stoi(afficheur.Input("Entrer le nouveau nombre nombre de ligne : "));
-                int colonne= std::stoi(afficheur.Input("Entrer le nouveau nombre nombre de colenne : "));
-                tmp.changenbcolonnes(colonne);
-                tmp.changenblignes(ligne);
-                for(int x=0 ; x<ligne ; ++x)
-                {
-                    for(int y=0; y<colonne ; ++y)
-                    {
-        //            Cellule contenu= afficheur.Input("Entrer le nouveau contenu:");
-    //                tmp.miseajourcellule(x,y,contenu));
-                    }
-                }
-                if(tmp.estvalide())
-                {
-                    d_terrain=tmp;
-//                    try
-//                    {
-                        d_terrain.sauvegarder("terrain.txt");
+//    char choix = afficheur.Input("");
+//    while( choix != "q")
+    Terrain tmp = d_terrain;
+    do{
 
-//                    }catch(const std::exception& e)
-//                    {
-//                        afficheur.PrintError(e.what());
-//                    }
-                }
-                else
-                    afficheur.PrintError("Terrain n'est pas valide");
-                break;
-                    }catch(const std::exception& e)
-                {
-                    afficheur.PrintError(e.what());
-                }
-            }
-        case 2 :
-            std::string fic;
-            fic = afficheur.Input("Entrer le nom du fichier qui contient le terrain : ");
+                afficheur.effacer();
+                    afficheur.AffciherTerrain(d_terrain);
+
+                    int x= std::stoi(afficheur.Input("Entrer l'indice de ligne: "));
+                    int y= std::stoi(afficheur.Input("Entrer l'indice de colonne: "));
+                    //get cursor position
+//                    HANDLE handle;
+//                    COORD coordinates;
+//                    handle = GetStdHandle(STD_OUTPUT_HANDLE);
+//                    Position pos = afficheur.getPositionCurseur();
+//                    coordinates.X = x;
+//                    coordinates.Y = y;
+
+                    if(d_terrain.positionValide(x,y))
+                    {
+
+                        //set Position curseur
+//                        SetConsoleCursorPosition(handle, coordinates);
+                        afficheur.setPositionCursor(Position{x,y});
+                        string contenu = afficheur.Input("");
+                        d_terrain.miseajourcellule(x,y,toTypeCellule(contenu[0]));
+                        afficheur.effacer();
+
+                    }
+                    else{
+                        afficheur.PrintError("Position non valide\n");
+                    }
+
+
+    }while( afficheur.Input("q :quiter\n appuyer sur une touche :continuer\n") != "q");
+    if(d_terrain.estvalide())
+    {
+            d_terrain.sauvegarder(d_fichierSauvegarde);
+            afficheur.Print("Terrain Sauvegarde\n");
+    }
+    else{
+            d_terrain = tmp;
+            afficheur.PrintError("Terrain n'est pas valide\n");
+
+    }
+}
+void AdventureGame::creerTerrain(const AfficheurJeu& afficheur)
+{
+            int ligne = std::stoi(afficheur.Input("Entrer le nouveau nombre nombre de ligne : "));
+                int colonne= std::stoi(afficheur.Input("Entrer le nouveau nombre nombre de colenne : "));
+                d_terrain = Terrain{ligne,colonne};
+                afficheur.AffciherTerrain(d_terrain);
+}
+void AdventureGame::ImportTerrain(const AfficheurJeu& afficheur)
+{
+    std::string fic;
+    fic = afficheur.Input("Entrer le nom du fichier qui contient le terrain : ");
             try
             {
                 d_terrain = Terrain{fic};
-                d_finjeu = false;
+                d_fichierSauvegarde=fic;
+                afficheur.Print("Terrain Importe");
 
             }
             catch(const std::exception& e)
             {
                 afficheur.PrintError(e.what());
             }
-            break;
-        }
-        choix = afficheur.AfficherMenu(menu);
-
-    }
-
 }
-
 void AdventureGame::ConfigurerTerrain(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu = {"Changer contenu", "Retoure"};
+    std::vector<string> menu = {"Changer contenu","Creer Terrain","Importer un nouveau terrain", "Retoure"};
     int choix = afficheur.AfficherMenu(menu);
     while(choix != menu.size())
     {
+        try
+        {
+
+
         switch(choix)
         {
         case 1:
             {
-                try
+                    //changement de contenu
+                    changementContenuTerrain(afficheur);
+                break;
+            }
+            case 2 :
                 {
-
-                //changement de contenu
-                int x= std::stoi(afficheur.Input("Entrer l'indice de ligne: "));
-                int y= std::stoi(afficheur.Input("Entrer l'indice de colonne: "));
-    //            Cellule contenu= afficheur.Input("Entrer le nouveau contenu:");
-                Terrain tmp = d_terrain;
-                if(tmp.positionValide(x,y))
-                {
-    //                tmp.miseajourcellule(x,y,contenu));
-                }
-                else{
-                    afficheur.PrintError("Position non valide");
-                }
-                if(tmp.estvalide())
-                    d_terrain = tmp;
-                else{
-                    afficheur.PrintError("Terrain n'est pas valide");
-                }
-                }catch(const std::exception& e)
+                //Creer Terrain
+                creerTerrain(afficheur);
+                //appel changemetn du contenu de terrain
+                changementContenuTerrain(afficheur);
+                break;
+            }
+        case 3 :
+            ImportTerrain(afficheur);
+            break;
+        }
+        choix = afficheur.AfficherMenu(menu);
+    }catch(const std::exception& e)
                 {
                     afficheur.PrintError(e.what());
                 }
-                break;
-            }
-        }
-        choix = afficheur.AfficherMenu(menu);
     }
 }
 void AdventureGame::commencer(const AfficheurJeu& afficheur)
 {
-    std::vector<string> menu = {"Changer le terrain","Configurer le terrain","Commencer le jeu","Info de jeu", "Quitter"};
+    std::vector<string> menu = {"Configurer le terrain","Commencer le jeu","Info de jeu", "Quitter"};
     int choix=afficheur.AfficherMenu(menu);
     while( choix != menu.size())
     {
         switch(choix)
         {
         case 1 :
-            ChangerTerrain(afficheur);
-            break;
-        case 2:
             ConfigurerTerrain(afficheur);
             break;
-        case 3 :
+        case 2 :
             commencerJeu(afficheur);
             break;
-        case 4 :
-            afficheur.Print("Infos : \nz: Haut, s: Bas, q:Gauche, d:Droite\n");
+        case 3 :
+            afficheur.Print("Infos : \nz: Haut, s: Bas, q:Gauche, d:Droite, a:Haut Gauche, e:Haut Droite, w:Bas Gauche, c:Bas Droite\n");
             break;
         default:
             break;

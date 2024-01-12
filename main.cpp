@@ -63,7 +63,7 @@ void testAdventureGame()
 }
 void testAdventureGame2()
 {
-    Terrain t{"testmap.txt"};
+    Terrain t{"impossible.txt"};
     AdventureGame ad{t};
     AfficheurJeuConsole aff;
     ad.commencer(aff);

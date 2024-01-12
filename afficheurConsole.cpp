@@ -1,10 +1,12 @@
 #include <iomanip>
 #include <conio.h>
+#include <windows.h>
 
 #include "afficheurConsole.h"
 #include"Aventurier.h"
 #include"Monstre.h"
 #include "Terrain.h"
+#include "Position.h"
 
 AfficheurJeuConsole::~AfficheurJeuConsole()
 {
@@ -89,4 +91,22 @@ void AfficheurJeuConsole::AffciherInfoMonstre(const std::shared_ptr<Monstre>mons
     std::cout<<"habilete : " << monstre->habilete() <<" % \n";
 
 }
+    Position AfficheurJeuConsole::getPositionCurseur() const
+    {
+        POINT positionPoint ;
+        GetCursorPos(&positionPoint);
+        Position res {positionPoint.x,positionPoint.y };
+    }
+    void AfficheurJeuConsole::setPositionCursor(const Position& p) const
+    {
+        HANDLE handle;
+        handle = GetStdHandle(STD_OUTPUT_HANDLE);
+        COORD coordinates;
+        coordinates.X = p.x();
+        coordinates.Y = p.y();
+        handle = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleCursorPosition(handle, coordinates);
+
+
+    }
 

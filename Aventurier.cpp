@@ -12,10 +12,18 @@ Aventurier::Aventurier(int pointForce, int pointVie, const Position& position,
     Personnage{pointForce, pointVie, position},
     d_armure{armure}, d_epee{epee}, d_bourse{bourse}, d_amulette{amulette}
 {}
-Aventurier::Aventurier( const Position& position):Personnage{100, 100, position},
+Aventurier::Aventurier( const Position& position):Personnage{25, 100, position},
     d_armure{20}, d_epee{15}, d_bourse{0}, d_amulette{false}
 {
 
+}
+void Aventurier::reparerEquipements()
+{
+    int pieces= d_bourse.pieceMonnaie();
+    int reste = pieces - pieces/2;
+    d_armure.reparer(reste);
+    d_epee.reparer(pieces/2);
+    d_bourse.enlever(pieces);
 }
 void Aventurier::RamasseAmulette()
 { d_amulette = true; }

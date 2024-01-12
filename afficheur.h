@@ -6,6 +6,7 @@
 class Terrain;
 class Aventurier;
 class Monstre;
+class Position;
 
 class AfficheurJeu
 {
@@ -20,6 +21,8 @@ public:
     virtual void Print(const std::string& str) const =0;
     virtual void PrintError(const std::string& str) const =0;
     virtual void effacer() const =0 ;
+    virtual Position getPositionCurseur() const =0;
+    virtual void setPositionCursor(const Position& p) const =0;
 
 };
 

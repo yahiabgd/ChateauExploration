@@ -20,6 +20,7 @@ class Aventurier : public Personnage
         void RamasseAmulette();
         void RamasseTasDePiece(int nombreDePiece);
         void recoitAttaque(int degats) override;
+        void reparerEquipements();
         void attaque(Monstre &monstre);
         bool amulette() const;
         void deplacer(const Position& position);

@@ -67,12 +67,16 @@ void AdventureGame::Initialiserlejeu()
                 }
                 case Cellule::TypeCellule::MONSTRE:
                 {
-                    d_monstres.push_back(std::make_shared<MonstreAveugle>(10, 100, Position{x, y}, 10));
+
+                    d_monstres.push_back(std::make_shared<MonstreAveugle>(10, 100, Position{x, y}, 50));
+
                     break;
                 }
                 case Cellule::TypeCellule::SMONSTRE:
                 {
-                    d_monstres.push_back(std::make_shared<MonstreVoyant>(25, 100, Position{x, y}, 10));
+
+                    d_monstres.push_back(std::make_shared<MonstreVoyant>(25, 100, Position{x, y}, 50));
+
                     break;
                 }
                 default:
@@ -129,7 +133,7 @@ void AdventureGame::DeplacerAventurier(const Position& position)
 char AdventureGame::InputLettre()
 {
     char lettre;
-    const std::string lettresvalide = "zqdsaewc";
+    const std::string lettresvalide = "zqdsaewcr";
 
     do {
         lettre = std::tolower(_getch());
@@ -168,40 +172,55 @@ void AdventureGame::ActeAventurier()
         case 'c' :
             New.deplacerDe(1,1);
             break;
+        case 'r' :
+            d_aventurier.reparerEquipements();
+            break;
         default:
             break;
 
         }
-        Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
-        Cellule::TypeCellule typenouvelleCellule =nouvelleCellule.contenu();
-        if(typenouvelleCellule != Cellule::TypeCellule::MUR && typenouvelleCellule != Cellule::TypeCellule::HORS )
+        if (New.x() != d_aventurier.position().x() || New.y() != d_aventurier.position().y())
         {
-            if (typenouvelleCellule == Cellule::TypeCellule::MONSTRE || typenouvelleCellule == Cellule::TypeCellule::SMONSTRE)
+            Cellule nouvelleCellule{d_terrain.cellule(New.x(),New.y())};
+            Cellule::TypeCellule typenouvelleCellule =nouvelleCellule.contenu();
+
+            if(typenouvelleCellule != Cellule::TypeCellule::MUR && typenouvelleCellule != Cellule::TypeCellule::HORS )
             {
+                //Le joueur reste dans la meme case
+                if (typenouvelleCellule == Cellule::TypeCellule::MONSTRE || typenouvelleCellule == Cellule::TypeCellule::SMONSTRE)
+                {
+                    int indiceMonstre = getMonstreIndiceParPosition(New);
+                    d_aventurier.attaque(*d_monstres[indiceMonstre]);
+                    if(!d_monstres[indiceMonstre]->estVivant())
+                    {
+                        d_terrain.miseajourcellule(New.x(),New.y(),d_monstres[indiceMonstre]->estSur());
+                        d_monstres.erase(d_monstres.begin() + indiceMonstre);
+                    }
+
+                }
+                else//Le joueur se deplace vers la case
+                {
+
+                    if (typenouvelleCellule == Cellule::TypeCellule::PIECE || typenouvelleCellule == Cellule::TypeCellule::AMULETTE)
+                        {
+                            int idxObj = getObjetIndiceParPosition(New);
+                            d_objets[idxObj]->ramasser(d_aventurier);
+                            typenouvelleCellule = Cellule::TypeCellule::VIDE;
+                        }
+
+                    if(typenouvelleCellule == Cellule::TypeCellule::SORTIE)
+                        {
+                            if(d_aventurier.amulette())
+                                d_finjeu = true;
+                        }
+                    else//case vide
+                        {
+                        }
+                DeplacerAventurier(New);
+                d_aventurier.modifieEstSur(typenouvelleCellule);
+                }
 
             }
-            else
-            {
-
-                if (typenouvelleCellule == Cellule::TypeCellule::PIECE || typenouvelleCellule == Cellule::TypeCellule::AMULETTE)
-                    {
-                        int idxObj = getObjetIndiceParPosition(New);
-                        d_objets[idxObj]->ramasser(d_aventurier);
-                        typenouvelleCellule = Cellule::TypeCellule::VIDE;
-                    }
-
-                if(typenouvelleCellule == Cellule::TypeCellule::SORTIE)
-                    {
-                        if(d_aventurier.amulette())
-                            d_finjeu = true;
-                    }
-                else//case vide
-                    {
-                    }
-            DeplacerAventurier(New);
-            d_aventurier.modifieEstSur(typenouvelleCellule);
-            }
-
         }
 
 }
@@ -253,20 +272,22 @@ void AdventureGame::changementContenuTerrain(const AfficheurJeu& afficheur)
                 afficheur.effacer();
                     afficheur.AffciherTerrain(d_terrain);
 
-                    //get cursor position
-                    HANDLE handle;
-                    COORD coordinates;
-                    handle = GetStdHandle(STD_OUTPUT_HANDLE);
-
                     int x= std::stoi(afficheur.Input("Entrer l'indice de ligne: "));
                     int y= std::stoi(afficheur.Input("Entrer l'indice de colonne: "));
-                    coordinates.X = x;
-                    coordinates.Y = y;
-                    if(tmp.positionValide(x,y))
+                    //get cursor position
+//                    HANDLE handle;
+//                    COORD coordinates;
+//                    handle = GetStdHandle(STD_OUTPUT_HANDLE);
+//                    Position pos = afficheur.getPositionCurseur();
+//                    coordinates.X = x;
+//                    coordinates.Y = y;
+
+                    if(d_terrain.positionValide(x,y))
                     {
-                        POINT oldPos ;
-                        GetCursorPos(&oldPos);
-                        SetConsoleCursorPosition(handle, coordinates);
+
+                        //set Position curseur
+//                        SetConsoleCursorPosition(handle, coordinates);
+                        afficheur.setPositionCursor(Position{x,y});
                         string contenu = afficheur.Input("");
                         d_terrain.miseajourcellule(x,y,toTypeCellule(contenu[0]));
                         afficheur.effacer();
@@ -332,7 +353,6 @@ void AdventureGame::ConfigurerTerrain(const AfficheurJeu& afficheur)
             }
             case 2 :
                 {
-                    Terrain oldTerrain = d_terrain;
                 //Creer Terrain
                 creerTerrain(afficheur);
                 //appel changemetn du contenu de terrain

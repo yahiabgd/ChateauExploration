@@ -24,5 +24,6 @@ class Cellule
     private:
         TypeCellule d_contenu;
 };
+Cellule::TypeCellule toTypeCellule(const char c);
 
 #endif // CELLULE_H

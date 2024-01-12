@@ -15,6 +15,7 @@ public:
     std::string Input(const std::string& str = "") const override;
     void Print(const std::string& str) const override;
     void PrintError(const std::string& str) const override;
+    void effacer() const override ;
     void AttendAppuisSurBoutton(const char c)const ;
 
 };

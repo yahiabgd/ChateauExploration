@@ -19,6 +19,8 @@ public:
     virtual std::string Input(const std::string& str = "") const =0;
     virtual void Print(const std::string& str) const =0;
     virtual void PrintError(const std::string& str) const =0;
+    virtual void effacer() const =0 ;
+
 };
 
 

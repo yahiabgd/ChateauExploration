@@ -24,13 +24,15 @@ void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
 
         std::vector<Position> chemain = MonstreVoyant::cheminVersAventurier(aventurier, terrain);
         //std::cout<<chemain[1].x()<<"  "<<chemain[1].y();
-        terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
+        if(chemain.size()!=0){
+            terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
+            d_position.deplacerEn( chemain[1].x(),chemain[1].y()) ;
+            //std::cout<<" updated"<<d_position.x()<<"  "<<d_position.y();
+            Cellule NewCellule = terrain.cellule(d_position.x(),d_position.y());
+            modifieEstSur(NewCellule.contenu());
+            terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::SMONSTRE);
+        }
 
-        d_position.deplacerEn( chemain[1].x(),chemain[1].y()) ;
-        //std::cout<<" updated"<<d_position.x()<<"  "<<d_position.y();
-        Cellule NewCellule = terrain.cellule(d_position.x(),d_position.y());
-        modifieEstSur(NewCellule.contenu());
-        terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::SMONSTRE);
         return;
     }
      //std::cout<<"deplcer fd";

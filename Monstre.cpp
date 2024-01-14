@@ -18,7 +18,7 @@ void Monstre::attaque(Aventurier& ennemi){
     // calculer la force de l'attaque;
 
     int force = d_pointForce*0.9;
-    std::cout<< force;
+    //std::cout<< force;
 
     if(rand() % 100 < static_cast<int>(d_habilete) ){
         ennemi.recoitAttaque(force);

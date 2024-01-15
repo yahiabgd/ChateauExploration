@@ -31,8 +31,7 @@ class AdventureGame
 
 
     private:
-        char InputLettre();
-        void ActeAventurier();
+        void ActeAventurier(const AfficheurJeu& afficheur);
         void ActeMonstre();
         void inisialiserMap();
         void DeplacerAventurier(const Position& position);

@@ -9,6 +9,7 @@ class AfficheurJeuConsole : public AfficheurJeu
 {
 public:
     ~AfficheurJeuConsole();
+    AfficheurJeuConsole();
     void AffciherTerrain(const Terrain& t) const override;
     void AffciherTitre() const override;
     void AfficherInstruction() const override;
@@ -16,6 +17,7 @@ public:
     void AffciherInfoMonstre(const std::shared_ptr<Monstre>monstre) const override;
     int AfficherMenu(const std::vector<std::string>& menu)const override;
     std::string Input(const std::string& str = "") const override;
+    char InputLettre(const std::string& str = "") const override;
     void Print(const std::string& str) const override;
     void PrintError(const std::string& str) const override;
     void effacer() const override ;

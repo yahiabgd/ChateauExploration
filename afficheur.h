@@ -19,6 +19,8 @@ public:
     virtual void AffciherInfoMonstre(const std::shared_ptr<Monstre>monstre) const =0;
     virtual int AfficherMenu(const std::vector<std::string>& menu)const =0;
     virtual std::string Input(const std::string& str = "") const =0;
+    virtual char InputLettre(const std::string& str = "") const =0 ;
+
     virtual void Print(const std::string& str) const =0;
     virtual void PrintError(const std::string& str) const =0;
     virtual void effacer() const =0 ;

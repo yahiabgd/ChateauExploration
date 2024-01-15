@@ -130,23 +130,12 @@ void AdventureGame::DeplacerAventurier(const Position& position)
     //Mise � jour la position de l'objet aventurier
     d_aventurier.deplacer(position);
 }
-char AdventureGame::InputLettre()
-{
-    char lettre;
-    const std::string lettresvalide = "zqdsaewcr";
 
-    do {
-        lettre = std::tolower(_getch());
-    } while (lettresvalide.find(lettre) == std::string::npos);
-
-    return lettre;
-}
-
-void AdventureGame::ActeAventurier()
+void AdventureGame::ActeAventurier(const AfficheurJeu& afficheur)
 {
         Direction d;
         Position New = d_aventurier.position();
-        switch(InputLettre())
+        switch(afficheur.InputLettre())
         {
         case 'z' :
             New.deplacerDe(0,-1);
@@ -255,7 +244,7 @@ void AdventureGame::commencerJeu(const AfficheurJeu& afficheur)
         }
 
             //Acte d'aventurier
-        ActeAventurier();
+        ActeAventurier(afficheur);
 
 
             //Acte des monstres

@@ -12,6 +12,10 @@ AfficheurJeuConsole::~AfficheurJeuConsole()
 {
 
 }
+AfficheurJeuConsole::AfficheurJeuConsole() : AfficheurJeu{}
+{
+
+}
 void AfficheurJeuConsole::effacer() const
 {
     system("cls");
@@ -46,6 +50,17 @@ std::string AfficheurJeuConsole::Input(const std::string& str ) const
     std::cout<<str;
     std::cin>>res;
     return res;
+}
+char AfficheurJeuConsole::InputLettre(const std::string& str) const
+{
+    char lettre;
+    const std::string lettresvalide = "zqdsaewcr";
+
+    do {
+        lettre = std::tolower(_getch());
+    } while (lettresvalide.find(lettre) == std::string::npos);
+
+    return lettre;
 }
 void AfficheurJeuConsole::Print(const std::string& str) const
 {

@@ -262,8 +262,8 @@ void AdventureGame::changementContenuTerrain(const AfficheurJeu& afficheur)
                 afficheur.effacer();
                     afficheur.AffciherTerrain(d_terrain);
 
-                    int x= std::stoi(afficheur.Input("Entrer l'indice de ligne: "));
-                    int y= std::stoi(afficheur.Input("Entrer l'indice de colonne: "));
+                    int y= std::stoi(afficheur.Input("Entrer l'indice de ligne: "));
+                    int x= std::stoi(afficheur.Input("Entrer l'indice de colonne: "));
                     //get cursor position
 //                    HANDLE handle;
 //                    COORD coordinates;

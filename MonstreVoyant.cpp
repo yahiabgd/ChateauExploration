@@ -21,16 +21,17 @@ void MonstreVoyant::deplacervers( Aventurier& aventurier, Terrain& terrain){
             attaque(aventurier);
             return;
         }
-
         std::vector<Position> chemain = MonstreVoyant::cheminVersAventurier(aventurier, terrain);
         //std::cout<<chemain[1].x()<<"  "<<chemain[1].y();
-        terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
+        if(chemain.size()!=0){
+            terrain.miseajourcellule(d_position.x(),d_position.y(),estSur());
+            d_position.deplacerEn( chemain[1].x(),chemain[1].y()) ;
+            //std::cout<<" updated"<<d_position.x()<<"  "<<d_position.y();
+            Cellule NewCellule = terrain.cellule(d_position.x(),d_position.y());
+            modifieEstSur(NewCellule.contenu());
+            terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::SMONSTRE);
+        }
 
-        d_position.deplacerEn( chemain[1].x(),chemain[1].y()) ;
-        //std::cout<<" updated"<<d_position.x()<<"  "<<d_position.y();
-        Cellule NewCellule = terrain.cellule(d_position.x(),d_position.y());
-        modifieEstSur(NewCellule.contenu());
-        terrain.miseajourcellule(d_position.x(),d_position.y(),Cellule::TypeCellule::SMONSTRE);
         return;
     }
      //std::cout<<"deplcer fd";
@@ -104,7 +105,9 @@ void MonstreVoyant::deplacementAleatoire(Terrain& terrain){
 
             // Check if the new position is valid and has not been visited
             Cellule NewCellule = terrain.cellule(newX,newY);
-            if (terrain.positionValide(newX, newY)&& NewCellule.contenu() != Cellule::TypeCellule::MUR &&NewCellule.contenu() != Cellule::TypeCellule::MONSTRE &&NewCellule.contenu() != Cellule::TypeCellule::SMONSTRE && NewCellule.contenu() != Cellule::TypeCellule::HORS  && !visited[newX][newY]) {
+            if (terrain.positionValide(newX, newY)&& NewCellule.contenu() != Cellule::TypeCellule::MUR
+                &&NewCellule.contenu() != Cellule::TypeCellule::MONSTRE &&NewCellule.contenu() != Cellule::TypeCellule::SMONSTRE
+                && NewCellule.contenu() != Cellule::TypeCellule::HORS  && !visited[newX][newY]) {
                 // Mark the neighbor as visited and enqueue it
                 q.push({newX, newY});
                 visited[newX][newY] = true;
